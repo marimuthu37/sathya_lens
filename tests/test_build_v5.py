@@ -212,3 +212,85 @@ class TestSealStateCheck:
             assert tc.is_sealed(REPO / "data" / "frozen_test_v5.csv")
             with pytest.raises(tc.SealedDataError):
                 tc.load_dataset(REPO / "data" / "frozen_test_v5.csv")
+
+
+# ---------------------------------------------------------------------------
+# Repeated --seal: refuse before ANY write (build report included)
+# ---------------------------------------------------------------------------
+
+class TestRepeatedSealRefused:
+    OUTPUTS = ("reports/build_v5/build_report.json", "data/training_pool_v5.csv",
+               "data/training_pool_v5.provenance.json", "data/frozen_test_v5.csv",
+               "data/v5_build.excluded.csv", "reports/frozen_test_v5_manifest.json")
+
+    @pytest.fixture()
+    def tmp_layout(self, b5, tmp_path, monkeypatch):
+        for name, val in (("REPO", tmp_path), ("POOL_OUT", tmp_path / "data" / "training_pool_v5.csv"),
+                          ("EXCLUDED_OUT", tmp_path / "data" / "v5_build.excluded.csv"),
+                          ("REPORT_DIR", tmp_path / "reports" / "build_v5"),
+                          ("MANIFEST", tmp_path / "reports" / "frozen_test_v5_manifest.json")):
+            monkeypatch.setattr(b5, name, val)
+        return tmp_path
+
+    def _sealed(self, root):
+        for rel in self.OUTPUTS:
+            f = root / rel
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_bytes(f"sealed content of {rel}\n".encode())
+        return {rel: ((root / rel).read_bytes(), (root / rel).stat().st_mtime_ns) for rel in self.OUTPUTS}
+
+    def _unchanged(self, root, before):
+        for rel, (data, mtime) in before.items():
+            assert (root / rel).read_bytes() == data, rel
+            assert (root / rel).stat().st_mtime_ns == mtime, rel
+
+    def test_second_seal_refuses_before_reading_sources_and_changes_nothing(self, b5, tmp_layout, monkeypatch):
+        before = self._sealed(tmp_layout)
+
+        def must_not_run(*a, **k):
+            raise AssertionError("a repeated seal must refuse before loading the protocol or sources")
+
+        monkeypatch.setattr(b5, "load_protocol", must_not_run)
+        monkeypatch.setattr(b5.v4, "verify_sources", must_not_run)
+        with pytest.raises(b5.StopBuild, match="already exists; refusing to overwrite"):
+            b5.build(seal=True)
+        self._unchanged(tmp_layout, before)
+
+    def test_cli_second_seal_exits_3_and_changes_nothing(self, b5, tmp_layout, capsys):
+        before = self._sealed(tmp_layout)
+        assert b5.main(["--seal"]) == 3
+        assert "already exists" in capsys.readouterr().err
+        self._unchanged(tmp_layout, before)
+
+    def test_manifest_appearing_mid_run_is_caught_before_the_first_write(self, b5, tmp_layout, monkeypatch):
+        """Fast stubs for the build steps; the manifest is created during assignment."""
+        manifest = tmp_layout / "reports" / "frozen_test_v5_manifest.json"
+        empty_overlap = {"exact_normalised": [], "skeleton": [], "token_jaccard": [], "total": 0}
+
+        def assign_and_create_manifest(rows, salt, fraction):
+            manifest.parent.mkdir(parents=True, exist_ok=True)
+            manifest.write_text("{}", encoding="utf-8")
+            return {}
+
+        for mod, name, val in (
+                (b5.v4, "verify_sources", lambda p: {}), (b5.v3, "load_imc25", lambda p, ex: ([], {})),
+                (b5.v4, "load_mendeley", lambda p, ex: []), (b5.v3, "load_donations", lambda ex: []),
+                (b5.v3, "load_mwoz", lambda *a: []), (b5.v3, "load_r115", lambda p, ex: []),
+                (b5.v3, "load_syn", lambda: []), (b5.v3, "privacy_check", lambda rows: None),
+                (b5.tc, "load_evaluation_dataset", lambda path, **k: []),
+                (b5.tc, "find_training_overlap", lambda rows, prot: dict(empty_overlap)),
+                (b5.v4, "dedupe", lambda rows, ex: rows), (b5.v4, "atomic_units", lambda rows: {}),
+                (b5.v4, "assign", assign_and_create_manifest), (b5.v4, "purge", lambda rows, ex: {}),
+                (b5.v3, "coverage", lambda p, test: {"met": False}), (b5.v4, "_token_rates", lambda rows: {})):
+            monkeypatch.setattr(mod, name, val)
+        with pytest.raises(b5.StopBuild, match="already exists; refusing to overwrite"):
+            b5.build(seal=True)
+        for rel in self.OUTPUTS[:-1]:
+            assert not (tmp_layout / rel).exists(), rel           # nothing written, build report included
+        assert manifest.read_text(encoding="utf-8") == "{}"         # the existing manifest is untouched
+
+    def test_check_precedes_every_write_in_source(self):
+        src = (REPO / "scripts" / "build_pool_and_test_v5.py").read_text(encoding="utf-8")
+        body = src[src.index("def build(seal: bool)"):src.index("def _write_outputs(")]
+        assert body.index("_refuse_if_sealed()") < body.index("load_protocol()")
+        assert body.rindex("_refuse_if_sealed()") < body.index("REPORT_DIR.mkdir")

@@ -77,7 +77,15 @@ def sealing_paths(p: Dict) -> Dict[str, str]:
     return {"test_file": s["test_file"].split(" ")[0], **{k: m.group(1) for k, m in found.items()}}
 
 
+def _refuse_if_sealed() -> None:
+    """A second --seal must change nothing: refuse BEFORE any output (report included) is written."""
+    if MANIFEST.exists():
+        raise StopBuild("A v5 sealed manifest already exists; refusing to overwrite.")
+
+
 def build(seal: bool) -> Dict:
+    if seal:
+        _refuse_if_sealed()                          # fail fast, before reading any source
     p = load_protocol()
     paths = sealing_paths(p)
     hashes = v4.verify_sources(p)
@@ -145,12 +153,12 @@ def build(seal: bool) -> Dict:
         "placeholder_token_rates_pool": v4._token_rates(train),
         "privacy_check": "no >= 4-digit runs in any anonymised row",
     }
+    if seal:
+        _refuse_if_sealed()                          # re-check before the first write (manifest may have appeared)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     (REPORT_DIR / ("build_report.json" if seal else "build_report_dry_run.json")).write_text(
         json.dumps(report, indent=2), encoding="utf-8")
     if seal:
-        if MANIFEST.exists():
-            raise StopBuild("A v5 sealed manifest already exists; refusing to overwrite.")
         _write_outputs(p, paths, train, test, excluded, report)
     return report
 
