@@ -1,0 +1,32 @@
+# =============================================================================
+# SatyaLens Analysis Package — Dependency Requirements
+# =============================================================================
+#
+# CORE (always required — OCR + context analysis)
+# ------------------------------------------------
+pytesseract>=0.3.10
+Pillow>=10.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# TESTING
+# -------
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# =============================================================================
+# OPTIONAL: Audio deepfake detection
+# =============================================================================
+# Install these ONLY if you want audio analysis.
+# They are large (~1–2 GB for torch alone) and require a compatible GPU/CPU.
+#
+#   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+#   pip install transformers>=4.35.0 huggingface_hub>=0.19.0
+#
+# The package handles their absence gracefully:
+#   - If missing, audio component returns status='unavailable'.
+#   - This NEVER implies the audio is genuine.
+#
+# Alternatively install all audio extras at once:
+#   pip install -e ".[audio]"
+# =============================================================================
