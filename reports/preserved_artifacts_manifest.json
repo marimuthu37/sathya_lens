@@ -1,0 +1,21 @@
+{
+  "purpose": "SHA-256 of models, reports and datasets that must not change. Verified by tests/test_rule_engine_behaviour.py::TestPreservedArtifacts (files absent on a machine are skipped).",
+  "recorded_utc": "2026-10-24",
+  "deployed_model_status": "v1 deployed and advisory-only; candidate v2 NOT promoted",
+  "files": {
+    "satyalens_analysis/models/text_classifier.joblib": "66bab05fd2452b221b9c0d1a75213c1e508cad5beeaf53aa803a72c2fb0288ee",
+    "satyalens_analysis/models/text_classifier.meta.json": "11ca18895cbec931f5c5309ae1b0066b8bda82a663b314dc22c7b9be62c06976",
+    "satyalens_analysis/models/candidates/v2/text_classifier.joblib": "a0753aa43caf3c10a7ab725a950d4aff07828cb537742c30a76649c32245dd72",
+    "satyalens_analysis/models/candidates/v2/text_classifier.meta.json": "d757a1aa3b3d7c3949554cc25a99a01ed589c1088a17925889e357611abd6fa1",
+    "reports/real_world_test_v1_evaluation/evaluation.json": "9807d2415506dadb65d6bbf51f95db0cb91872435d1c42c631d3d4494e16d485",
+    "reports/real_world_test_v1_evaluation/summary.md": "afbbc52c70c869fa4bcc618f195d6fe43acc111b27bb0d40133700ef4f13d59a",
+    "reports/real_world_test_v1_evaluation_v2_candidate/evaluation.json": "59b83ba5a0763d667796c79e820fd9d04540ca2e0b5f63094e65ffb5fc8495d6",
+    "reports/real_world_test_v1_evaluation_v2_candidate/summary.md": "e0cc45ac87375ea4f8e52c3358cba86577c3fce2907c235332e2ea19795c6187",
+    "reports/model_selection_v2/selection.json": "c046f592bfa723b1230267772abb2041aa8c1c9594be58c75454795cee8efd09",
+    "reports/model_selection_v2/summary.md": "8f206dfd5e13b4744d5ca6d3d6ed00a4317d021179f65157e4e533a5e0ca5397",
+    "data/real_world_test_v1.csv": "f83b8c309d9ae508fc669ffbdc9809506c65e4729bd2b211dd9ae137969468b8",
+    "data/training_pool_v2.csv": "deb9be285df68e8e709bfab44b47480388a517c84bd2f0df830f8d2ab06da88d",
+    "data/challenge_suite_v1.csv": "dff63186ccdc2bc9bf03f46b5c61ec93972122eb454e8d9e1edffc09a85d7bcc",
+    "data/synthetic_financial_messages_v1.csv": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840"
+  }
+}

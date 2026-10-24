@@ -56,6 +56,47 @@ venv.bak/
 *.swp
 *.swo
 
+# Trained model artifacts (regenerate with:
+#   python -m satyalens_analysis.text_classifier train --data data/synthetic_financial_messages_v1.csv)
+satyalens_analysis/models/*.joblib
+satyalens_analysis/models/*.meta.json
+satyalens_analysis/models/**/*.joblib
+satyalens_analysis/models/**/*.meta.json
+*.joblib.tmp
+
+# Team-supplied raw datasets (IMC25 copy, Mendeley, Phish360 5.3 GB zip) —
+# never committed; inventory hashes live in reports/dataset_inspection/
+dataset/
+
+# Raw third-party downloads (re-fetched and SHA-256-verified by
+#   python scripts/prepare_real_world_test.py)
+data/raw/
+
+# Generated datasets containing third-party text, and exclusion logs that keep
+# unmasked source text (phone numbers etc.). Regenerate with the scripts in
+# scripts/; each provenance JSON records the expected csv_sha256.
+data/real_world_test_v1.csv
+data/training_pool_v2.csv
+data/*.excluded.csv
+
+# Protocol v3 data: donated messages + consent ledger, pool v3 and the sealed
+# frozen test v3 (never committed; see docs/protocol_v3.json)
+data/donations/
+*.review.csv
+# Progress reports list pseudonymous donor codes (linkable offline) -> not committed
+reports/donations/
+data/training_pool_v3.csv
+data/frozen_test_v3.csv
+
+# Protocol v4 / v5 pools and sealed frozen tests (never committed; protocol
+# commit_policy). Per-row evaluation predictions carry test labels -> never committed.
+# The manifests, evaluation logs and metrics-only reports ARE committed (v5 sealing.commit_record).
+data/training_pool_v4.csv
+data/frozen_test_v4.csv
+data/training_pool_v5.csv
+data/frozen_test_v5.csv
+reports/frozen_test_v*_evaluation/predictions.csv
+
 # OS files
 .DS_Store
 Thumbs.db

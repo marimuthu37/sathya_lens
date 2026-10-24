@@ -1,0 +1,14 @@
+# Hash-pinned protocol records, datasets and reports are stored and checked out
+# byte-for-byte (no end-of-line conversion), so their SHA-256 pins hold on every
+# clone regardless of core.autocrlf. See tests/test_protocol_v5.py::TestGitattributes.
+docs/protocol_v*.json -text
+docs/protocol_v*.sha256 -text
+docs/PROTOCOL_V*_PROPOSAL.md -text
+scripts/*_v3.py -text
+scripts/*_v4.py -text
+tests/test_*_v3.py -text
+tests/test_*_v4.py -text
+tests/test_protocol_v4_draft.py -text
+reports/** -text
+data/*.csv -text
+data/*.json -text

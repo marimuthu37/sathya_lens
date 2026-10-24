@@ -33,9 +33,20 @@ class TestRunAnalysisNoInputs:
         assert loaded["schema_version"] == "1.0"
 
     def test_all_required_top_level_keys(self):
+        # Contract change (schema 1.0, additive): 'text_classifier' added.
         result = run_analysis()
-        required_keys = {"schema_version", "case_id", "audio", "payment", "context", "errors"}
+        required_keys = {"schema_version", "case_id", "audio", "payment", "context",
+                         "text_classifier", "errors"}
         assert required_keys == set(result.keys())
+
+    def test_original_six_keys_still_present(self):
+        """Regression: every pre-existing top-level key is retained unchanged."""
+        result = run_analysis()
+        for key in ("schema_version", "case_id", "audio", "payment", "context", "errors"):
+            assert key in result
+        assert set(result["payment"].keys()) == {"status", "raw_text", "fields", "mismatches", "limitations"}
+        assert set(result["context"].keys()) == {"status", "flags", "findings", "limitations"}
+        assert set(result["audio"].keys()) == {"status", "reason"}
 
 
 class TestRunAnalysisWithContext:

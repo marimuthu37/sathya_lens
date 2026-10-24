@@ -28,6 +28,12 @@ Reliability values (audio only)
   moderate  — Standard benchmark quality; interpret with caution.
   (field absent when no model ran)
 
+Predicted class values (text_classifier only)
+---------------------------------------------
+  suspicious  — Classifier output favours the 'suspicious' training label.
+  legitimate  — Classifier output favours the 'legitimate' training label.
+  (field absent unless status is 'analysed')
+
 IMPORTANT: A status of 'failed' or 'unavailable' NEVER implies the
 media is genuine or the request is safe.
 """
@@ -169,6 +175,39 @@ class ContextResult:
         }
 
 
+@dataclass
+class TextClassifierResult:
+    """Result returned by the ML text classifier (TF-IDF + Logistic Regression)."""
+    status: ComponentStatus
+    # 'suspicious' | 'legitimate' — present only when status == ANALYSED.
+    predicted_class: Optional[str] = None
+    # LogisticRegression.predict_proba() for the 'suspicious' class.
+    # UNCALIBRATED — NOT a fraud probability. Present only when status == ANALYSED.
+    raw_score: Optional[float] = None
+    model_version: Optional[str] = None
+    training_data: Optional[str] = None
+    reason: str = ""
+    # Terms that most influenced the score: {"term": str, "weight": float};
+    # positive weight pushes toward 'suspicious', negative toward 'legitimate'.
+    top_terms: List[Dict[str, Any]] = field(default_factory=list)
+    limitations: List[str] = field(default_factory=list)
+
+    def to_dict(self) -> Dict[str, Any]:
+        d: Dict[str, Any] = {"status": self.status.value}
+        if self.predicted_class is not None:
+            d["predicted_class"] = self.predicted_class
+        if self.raw_score is not None:
+            d["raw_score"] = round(self.raw_score, 6)
+        if self.model_version is not None:
+            d["model_version"] = self.model_version
+        if self.training_data is not None:
+            d["training_data"] = self.training_data
+        d["reason"] = self.reason
+        d["top_terms"] = self.top_terms
+        d["limitations"] = self.limitations
+        return d
+
+
 # ---------------------------------------------------------------------------
 # Top-level result
 # ---------------------------------------------------------------------------
@@ -185,6 +224,8 @@ class AnalysisResult:
     audio          : AudioResult
     payment        : PaymentResult
     context        : ContextResult
+    text_classifier: TextClassifierResult (additive key; same message text
+                     as context, so the two findings are correlated)
     errors         : List of error strings that did NOT abort the run.
     """
     schema_version: str = "1.0"
@@ -201,6 +242,10 @@ class AnalysisResult:
         status=ComponentStatus.NOT_APPLICABLE,
         limitations=["No message text provided."],
     ))
+    text_classifier: TextClassifierResult = field(default_factory=lambda: TextClassifierResult(
+        status=ComponentStatus.NOT_APPLICABLE,
+        reason="No message text provided.",
+    ))
     errors: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -210,6 +255,7 @@ class AnalysisResult:
             "audio": self.audio.to_dict(),
             "payment": self.payment.to_dict(),
             "context": self.context.to_dict(),
+            "text_classifier": self.text_classifier.to_dict(),
             "errors": self.errors,
         }
 
@@ -260,4 +306,15 @@ def context_failed(reason: str) -> ContextResult:
         status=ComponentStatus.FAILED,
         findings=[],
         limitations=[reason, "Context analysis could not complete."],
+    )
+
+
+def text_classifier_failed(reason: str) -> TextClassifierResult:
+    """Convenience: build a TextClassifierResult for a runtime failure."""
+    return TextClassifierResult(
+        status=ComponentStatus.FAILED,
+        reason=reason,
+        limitations=[
+            "Classification failed. This does NOT indicate the message is legitimate."
+        ],
     )

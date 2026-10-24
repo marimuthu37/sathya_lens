@@ -57,6 +57,27 @@ class _Rule:
     severity: str   # 'low' | 'medium' | 'high'
     patterns: List[str]
     explanation_template: str   # Use {match} as placeholder for matched text
+    # When True, a match is ignored if its verb is directly negated
+    # ("do not share", "never send", "don't ever give").
+    skip_if_negated: bool = False
+
+
+# A negation directly governing the matched verb, optionally with one word
+# between them ("do not share", "never share", "do not ever share").
+_NEGATED_BEFORE = re.compile(
+    r"\b(?:do\s+not|don['’]?t|never|not|won['’]?t|will\s+never|should\s+not|"
+    r"must\s+not|no\s+need\s+to)\s+(?:\w+\s+)?$"
+)
+
+_CRED_VERBS = (
+    r"(?:share|sharing|send|sending|tell|telling|give|giving|forward|read|provide|"
+    r"enter|entering|type|confirm|disclose|reply\s+with|reply\s+back\s+with)"
+)
+_CRED_NOUNS = (
+    r"(?:otp|one[\s-]time\s+pass(?:word|code)?|code|upi\s+pin|pin|password|passcode|cvv|cvc|"
+    r"security\s+code|card\s+number|card\s+details|expiry(?:\s+date)?|"
+    r"(?:\d\s*)?digit\s+(?:number|code)|netbanking\s+(?:user\s*id|password))"
+)
 
 
 _RULES: List[_Rule] = [
@@ -65,7 +86,9 @@ _RULES: List[_Rule] = [
         label="Extreme Urgency / Time Pressure",
         severity="high",
         patterns=[
-            r"\b(act\s+now|immediately|urgent|urgently|right\s+now|within\s+\d+\s+(minute|hour|second|min|hr)s?|last\s+chance|deadline\s+today|expires?\s+(today|tonight|in\s+\d+)|do\s+it\s+now|no\s+time\s+to\s+wait)\b",
+            # Routine expiry wording ("OTP expires in 5 minutes", "offer expires
+            # today") is deliberately NOT a trigger on its own.
+            r"\b(act\s+now|immediately|urgent|urgently|right\s+now|within\s+\d+\s+(minute|hour|second|min|hr)s?|last\s+chance|deadline\s+today|do\s+it\s+now|no\s+time\s+to\s+wait)\b",
         ],
         explanation_template=(
             'Phrase "{match}" creates artificial urgency. Legitimate '
@@ -89,21 +112,27 @@ _RULES: List[_Rule] = [
         rule_id="CREDENTIAL_REQUEST",
         label="Credential / OTP / PIN Request",
         severity="high",
+        # A request verb followed (within 5 words) by a credential noun.
+        # A bare mention of "OTP" — e.g. a genuine "Your OTP is 1234, do not
+        # share it" delivery — does NOT fire.
         patterns=[
-            r"\b(otp|one[\s-]time\s+pass(word|code)?|share\s+(your\s+)?(pin|password|cvv|cvc|security\s+code)|send\s+(me\s+)?(the\s+)?(otp|code|pin|password)|give\s+(me\s+)?(your\s+)?(otp|pin|password|cvv))\b",
+            rf"\b{_CRED_VERBS}\b(?:\W+\w+){{0,5}}?\W+{_CRED_NOUNS}\b",
+            # Hinglish: credential noun followed by the request verb.
+            r"\b(?:otp|pin|password|cvv|code)\s+(?:\w+\s+){0,2}(?:bhejo|batao|bhej\s+do|bata\s+do|share\s+karo|share\s+kare|send\s+karo)\b",
         ],
         explanation_template=(
             '"{match}" requests sensitive authentication credentials. '
             "No legitimate bank, payment provider or government body "
             "will ever ask for OTPs, PINs or passwords."
         ),
+        skip_if_negated=True,
     ),
     _Rule(
         rule_id="GIFT_CARD_PAYMENT",
         label="Gift Card as Payment",
         severity="high",
         patterns=[
-            r"\b(gift\s+card|amazon\s+card|itunes\s+card|google\s+play\s+card|steam\s+card|vanilla\s+card|prepaid\s+card|scratch\s+card)\b",
+            r"\b((?:amazon\s+)?gift\s+cards?|amazon\s+cards?|itunes\s+cards?|google\s+play\s+cards?|steam\s+cards?|vanilla\s+cards?|prepaid\s+cards?|scratch\s+cards?)\b",
         ],
         explanation_template=(
             '"{match}" requests payment via gift card. Gift cards are '
@@ -231,7 +260,7 @@ def analyse_context(text: str) -> ContextResult:
 
         for rule in _RULES:
             for pattern in rule.patterns:
-                match = re.search(pattern, normalised, re.IGNORECASE)
+                match = _first_match(rule, pattern, normalised)
                 if match:
                     matched_text = match.group(0).strip()
                     explanation = rule.explanation_template.format(match=matched_text)
@@ -266,6 +295,15 @@ def analyse_context(text: str) -> ContextResult:
     except Exception as exc:  # noqa: BLE001
         logger.exception("context_analyser: unexpected error.")
         return context_failed(f"Context analysis error: {exc}")
+
+
+def _first_match(rule: _Rule, pattern: str, text: str):
+    """First match of *pattern*, skipping directly negated ones when the rule asks."""
+    for match in re.finditer(pattern, text, re.IGNORECASE):
+        if rule.skip_if_negated and _NEGATED_BEFORE.search(text[:match.start()]):
+            continue
+        return match
+    return None
 
 
 def _build_findings(flags: List[ContextFlag]) -> List[str]:

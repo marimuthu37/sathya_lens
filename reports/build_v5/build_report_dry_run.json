@@ -1,0 +1,316 @@
+{
+  "protocol": "v5",
+  "protocol_sha256": "3889099d1da7fa6cdc987685a2dacda4592508339bd8cedb91a99fa29f25f3ee",
+  "anonymiser": "anon-v2",
+  "built_utc": "2026-10-24T15:26:02+00:00",
+  "dry_run": true,
+  "source_hashes": {
+    "data/raw/imc25_smishing/final_dataset_output.csv": "1bbd1e9e82c3ea023112207b80da268a5c4a07d2353c2b0898360ab037fa9a64",
+    "dataset/message_detection/Financial scams detection dataset.csv": "58ec802e4de8768643e3be0badbaedb3ae5017a273e8f3898e72f6a29cbc96ad",
+    "data/raw/ridham115_indian_scam_sms/synthetic_audited.csv": "45bde5f156a1a42698bab209e32bcd41b3639013d772f644cc3208ed39fb61e2",
+    "data/raw/multiwoz_2_2/dialogues_001.json": "895a8109bf01fa5ecf15ccdbd2dfe1628bd923f6b61dcd2e26b10ee5076a1596",
+    "data/raw/multiwoz_2_2/dialogues_017.json": "b6ab2cd9b6e8983364526845b7cbec1749338209bf7ac2313c25e1e2226ebab5"
+  },
+  "loaded_counts": {
+    "IMC25": {
+      "suspicious": 20386
+    },
+    "MWOZ_TEST": {
+      "legitimate": 300
+    },
+    "MWOZ_TRAIN": {
+      "legitimate": 600
+    },
+    "R115": {
+      "suspicious": 357,
+      "legitimate": 343
+    },
+    "SYN": {
+      "suspicious": 142,
+      "legitimate": 177
+    },
+    "MENDELEY": {
+      "suspicious": 250,
+      "legitimate": 172
+    }
+  },
+  "imc25_long_digit_investigation": {
+    "rows_with_10plus_digit_runs": 191,
+    "runs_by_kind": {
+      "zero_prefixed_landline_or_uk_mobile": 68,
+      "other_id_or_number": 124,
+      "plus_country_code": 1,
+      "indian_mobile_10_digit": 19
+    }
+  },
+  "mendeley_rows_with_10plus_digit_runs": 1,
+  "excluded_outcomes": {
+    "excluded_language": 11360,
+    "ambiguous": 2123,
+    "excluded_script": 101,
+    "excluded_generator": 880,
+    "rejected": 5,
+    "retired_or_challenge_overlap": 177,
+    "duplicate": 6443,
+    "purged_near_test": 2130
+  },
+  "excluded_by_source_and_outcome": {
+    "IMC25|ambiguous": 2123,
+    "IMC25|duplicate": 6368,
+    "IMC25|excluded_language": 11360,
+    "IMC25|purged_near_test": 2080,
+    "IMC25|rejected": 5,
+    "IMC25|retired_or_challenge_overlap": 172,
+    "MENDELEY|duplicate": 6,
+    "MENDELEY|excluded_script": 101,
+    "MENDELEY|purged_near_test": 1,
+    "MENDELEY|retired_or_challenge_overlap": 5,
+    "MWOZ_TRAIN|duplicate": 7,
+    "MWOZ_TRAIN|purged_near_test": 45,
+    "R115|excluded_generator": 880,
+    "R115|purged_near_test": 4,
+    "SYN|duplicate": 62
+  },
+  "grouping_G4": {
+    "atomic_units": {
+      "IMC25": {
+        "rows": 13841,
+        "units": 9472,
+        "singletons": 8102,
+        "largest_10_units": [
+          806,
+          162,
+          154,
+          107,
+          80,
+          56,
+          39,
+          28,
+          28,
+          25
+        ]
+      },
+      "MWOZ_TEST": {
+        "rows": 300,
+        "units": 150,
+        "singletons": 0,
+        "largest_10_units": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "MWOZ_TRAIN": {
+        "rows": 593,
+        "units": 292,
+        "singletons": 7,
+        "largest_10_units": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          2,
+          2
+        ]
+      },
+      "MENDELEY": {
+        "rows": 411,
+        "units": 400,
+        "singletons": 390,
+        "largest_10_units": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "R115": {
+        "rows": 700,
+        "units": 39,
+        "singletons": 1,
+        "largest_10_units": [
+          46,
+          42,
+          41,
+          40,
+          35,
+          34,
+          34,
+          31,
+          30,
+          28
+        ]
+      },
+      "SYN": {
+        "rows": 257,
+        "units": 73,
+        "singletons": 0,
+        "largest_10_units": [
+          9,
+          8,
+          7,
+          7,
+          7,
+          6,
+          6,
+          6,
+          6,
+          5
+        ]
+      }
+    },
+    "assignment": {
+      "IMC25": {
+        "giant_cap_rows": 138,
+        "forced_train_units": 3,
+        "forced_train_rows": 1122
+      }
+    },
+    "purge": {
+      "purged_rows_by_source": {
+        "IMC25": 2080,
+        "MWOZ_TRAIN": 45,
+        "MENDELEY": 1,
+        "R115": 4
+      },
+      "purged_rows_total": 2130,
+      "final_cross_split_pairs_jaccard_ge_0_6": 0,
+      "final_exact_or_skeleton_matches": 0
+    },
+    "largest_test_unit_rows": 39,
+    "largest_test_unit_share_of_test": 0.0143,
+    "imc25_test_share_of_rows_after_dedup": 0.1749
+  },
+  "pool_counts": {
+    "IMC25": {
+      "suspicious": 9340
+    },
+    "MWOZ_TRAIN": {
+      "legitimate": 548
+    },
+    "R115": {
+      "suspicious": 353,
+      "legitimate": 343
+    },
+    "SYN": {
+      "suspicious": 109,
+      "legitimate": 148
+    },
+    "MENDELEY": {
+      "suspicious": 246,
+      "legitimate": 164
+    }
+  },
+  "pool_units": 7874,
+  "test_counts": {
+    "IMC25": {
+      "suspicious": 2421
+    },
+    "MWOZ_TEST": {
+      "legitimate": 300
+    }
+  },
+  "test_units": 2012,
+  "test_india_linked_suspicious": 548,
+  "test_hey_mum_dad_rows": 14,
+  "coverage": {
+    "test_donated_messages": 0,
+    "test_donors": 0,
+    "test_categories": {},
+    "requirement": "Frozen test must contain >= 150 donated messages from >= 5 donors, with >= 3 categories having >= 25 messages each.",
+    "met": false,
+    "L1_status": "NOT EVALUABLE"
+  },
+  "placeholder_token_rates_pool": {
+    "IMC25|suspicious": {
+      "urltoken": 0.4276,
+      "phonetoken": 0.1289,
+      "emailtoken": 0.0271,
+      "upitoken": 0.0021,
+      "datetoken": 0.3889,
+      "numtoken": 0.2527,
+      "handletoken": 0.0029
+    },
+    "MENDELEY|legitimate": {
+      "urltoken": 0.0061,
+      "phonetoken": 0.0,
+      "emailtoken": 0.0,
+      "upitoken": 0.0,
+      "datetoken": 0.0061,
+      "numtoken": 0.2073,
+      "handletoken": 0.0
+    },
+    "MENDELEY|suspicious": {
+      "urltoken": 0.0244,
+      "phonetoken": 0.0,
+      "emailtoken": 0.0,
+      "upitoken": 0.0,
+      "datetoken": 0.0,
+      "numtoken": 0.0854,
+      "handletoken": 0.0
+    },
+    "MWOZ_TRAIN|legitimate": {
+      "urltoken": 0.0,
+      "phonetoken": 0.042,
+      "emailtoken": 0.0,
+      "upitoken": 0.0,
+      "datetoken": 0.0858,
+      "numtoken": 0.0274,
+      "handletoken": 0.0
+    },
+    "R115|legitimate": {
+      "urltoken": 0.3003,
+      "phonetoken": 0.0671,
+      "emailtoken": 0.0087,
+      "upitoken": 0.0087,
+      "datetoken": 0.1574,
+      "numtoken": 0.3761,
+      "handletoken": 0.0
+    },
+    "R115|suspicious": {
+      "urltoken": 0.4844,
+      "phonetoken": 0.3003,
+      "emailtoken": 0.0,
+      "upitoken": 0.0085,
+      "datetoken": 0.0255,
+      "numtoken": 0.3938,
+      "handletoken": 0.0057
+    },
+    "SYN|legitimate": {
+      "urltoken": 0.0338,
+      "phonetoken": 0.0405,
+      "emailtoken": 0.0,
+      "upitoken": 0.0203,
+      "datetoken": 0.4324,
+      "numtoken": 0.5,
+      "handletoken": 0.0
+    },
+    "SYN|suspicious": {
+      "urltoken": 0.2202,
+      "phonetoken": 0.0826,
+      "emailtoken": 0.0,
+      "upitoken": 0.1193,
+      "datetoken": 0.0092,
+      "numtoken": 0.0367,
+      "handletoken": 0.0
+    }
+  },
+  "privacy_check": "no >= 4-digit runs in any anonymised row"
+}

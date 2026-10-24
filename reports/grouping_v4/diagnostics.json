@@ -1,0 +1,318 @@
+{
+  "rows_after_v4_mapping_anon_v2_dedup": 13909,
+  "pairs_jaccard_ge_0_6": 108287,
+  "pairs_jaccard_ge_0_8": 25934,
+  "policies": {
+    "P0_v3_rarest3_0.6": {
+      "groups": 7797,
+      "singletons": 6471,
+      "groups_ge_100": 4,
+      "largest_10_sizes": [
+        1641,
+        534,
+        325,
+        225,
+        93,
+        76,
+        68,
+        49,
+        45,
+        42
+      ],
+      "largest_share_of_rows": 0.118,
+      "largest_share_of_expected_20pct_test_if_drawn": 0.4008,
+      "cross_group_pairs_jaccard_ge_0_8": 77,
+      "cross_group_pairs_jaccard_0_6_to_0_8": 1281,
+      "diagnostic_salt_test_share": 0.155
+    },
+    "P1_single_link_0.6": {
+      "groups": 7594,
+      "singletons": 6273,
+      "groups_ge_100": 4,
+      "largest_10_sizes": [
+        1685,
+        594,
+        335,
+        228,
+        96,
+        84,
+        74,
+        50,
+        46,
+        43
+      ],
+      "largest_share_of_rows": 0.1211,
+      "largest_share_of_expected_20pct_test_if_drawn": 0.408,
+      "cross_group_pairs_jaccard_ge_0_8": 0,
+      "cross_group_pairs_jaccard_0_6_to_0_8": 0,
+      "diagnostic_salt_test_share": 0.2867
+    },
+    "P2_single_link_0.8": {
+      "groups": 9484,
+      "singletons": 8108,
+      "groups_ge_100": 4,
+      "largest_10_sizes": [
+        806,
+        162,
+        154,
+        107,
+        94,
+        56,
+        39,
+        28,
+        28,
+        25
+      ],
+      "largest_share_of_rows": 0.0579,
+      "largest_share_of_expected_20pct_test_if_drawn": 0.2352,
+      "cross_group_pairs_jaccard_ge_0_8": 0,
+      "cross_group_pairs_jaccard_0_6_to_0_8": 26804,
+      "diagnostic_salt_test_share": 0.1845
+    },
+    "P3_leader_0.6": {
+      "groups": 8316,
+      "singletons": 6592,
+      "groups_ge_100": 3,
+      "largest_10_sizes": [
+        190,
+        167,
+        111,
+        87,
+        77,
+        74,
+        73,
+        61,
+        59,
+        51
+      ],
+      "largest_share_of_rows": 0.0137,
+      "largest_share_of_expected_20pct_test_if_drawn": 0.0648,
+      "cross_group_pairs_jaccard_ge_0_8": 8801,
+      "cross_group_pairs_jaccard_0_6_to_0_8": 43523,
+      "diagnostic_salt_test_share": 0.2058
+    }
+  },
+  "giant_components": {
+    "P0_v3_rarest3_0.6": {
+      "size": 1641,
+      "scam_types": {
+        "banking": 1640,
+        "others": 1
+      },
+      "distinct_named_entities": 18,
+      "top_named_entities": [
+        [
+          "State Bank of India",
+          1211
+        ],
+        [
+          "HDFC Bank",
+          334
+        ],
+        [
+          "Paytm",
+          26
+        ],
+        [
+          "ICICI Bank",
+          20
+        ],
+        [
+          "Kotak Mahindra Bank",
+          17
+        ],
+        [
+          "state bank",
+          13
+        ],
+        [
+          "<none>",
+          5
+        ],
+        [
+          "idfc bank",
+          3
+        ]
+      ],
+      "sampled_internal_jaccard": {
+        "pairs": 3000,
+        "median": 0.333,
+        "share_below_0_2": 0.102,
+        "share_ge_0_6": 0.053
+      },
+      "mean_tokens": 18.8
+    },
+    "P1_single_link_0.6": {
+      "size": 1685,
+      "scam_types": {
+        "banking": 1684,
+        "others": 1
+      },
+      "distinct_named_entities": 22,
+      "top_named_entities": [
+        [
+          "State Bank of India",
+          1232
+        ],
+        [
+          "HDFC Bank",
+          344
+        ],
+        [
+          "Paytm",
+          30
+        ],
+        [
+          "ICICI Bank",
+          22
+        ],
+        [
+          "Kotak Mahindra Bank",
+          18
+        ],
+        [
+          "state bank",
+          13
+        ],
+        [
+          "<none>",
+          5
+        ],
+        [
+          "india post payment bank",
+          3
+        ]
+      ],
+      "sampled_internal_jaccard": {
+        "pairs": 3000,
+        "median": 0.333,
+        "share_below_0_2": 0.096,
+        "share_ge_0_6": 0.053
+      },
+      "mean_tokens": 18.8
+    },
+    "P2_single_link_0.8": {
+      "size": 806,
+      "scam_types": {
+        "banking": 806
+      },
+      "distinct_named_entities": 6,
+      "top_named_entities": [
+        [
+          "State Bank of India",
+          627
+        ],
+        [
+          "HDFC Bank",
+          160
+        ],
+        [
+          "Kotak Mahindra Bank",
+          13
+        ],
+        [
+          "ICICI Bank",
+          4
+        ],
+        [
+          "Paytm",
+          1
+        ],
+        [
+          "indusind bank",
+          1
+        ]
+      ],
+      "sampled_internal_jaccard": {
+        "pairs": 1612,
+        "median": 0.423,
+        "share_below_0_2": 0.034,
+        "share_ge_0_6": 0.163
+      },
+      "mean_tokens": 18.9
+    },
+    "P3_leader_0.6": {
+      "size": 190,
+      "scam_types": {
+        "banking": 190
+      },
+      "distinct_named_entities": 3,
+      "top_named_entities": [
+        [
+          "State Bank of India",
+          178
+        ],
+        [
+          "HDFC Bank",
+          10
+        ],
+        [
+          "Paytm",
+          2
+        ]
+      ],
+      "sampled_internal_jaccard": {
+        "pairs": 380,
+        "median": 0.609,
+        "share_below_0_2": 0.0,
+        "share_ge_0_6": 0.545
+      },
+      "mean_tokens": 20.0
+    }
+  },
+  "giant_P1_split_by_0_8_components": {
+    "components": 358,
+    "largest_10": [
+      806,
+      107,
+      21,
+      16,
+      16,
+      15,
+      15,
+      13,
+      13,
+      13
+    ]
+  },
+  "P4_proposed_policy_diagnostic_salt": {
+    "giant_cap_rows": 139,
+    "forced_train_units": 3,
+    "forced_train_rows": 1122,
+    "test_rows": 2566,
+    "test_share_of_rows": 0.1845,
+    "test_units": 1944,
+    "largest_test_unit": 28,
+    "largest_test_unit_share_of_test": 0.0109,
+    "train_rows_purged_for_0_6_similarity": 2229,
+    "train_rows_after_purge": 9114,
+    "cross_split_pairs_jaccard_ge_0_6_after_purge": 0
+  },
+  "P4_salt_sensitivity": {
+    "salt_0": {
+      "test_share_of_rows": 0.1733,
+      "largest_test_unit_share_of_test": 0.0087,
+      "train_rows_purged_for_0_6_similarity": 2129
+    },
+    "salt_1": {
+      "test_share_of_rows": 0.1819,
+      "largest_test_unit_share_of_test": 0.0221,
+      "train_rows_purged_for_0_6_similarity": 1956
+    },
+    "salt_2": {
+      "test_share_of_rows": 0.1771,
+      "largest_test_unit_share_of_test": 0.0158,
+      "train_rows_purged_for_0_6_similarity": 2106
+    },
+    "salt_3": {
+      "test_share_of_rows": 0.1704,
+      "largest_test_unit_share_of_test": 0.0118,
+      "train_rows_purged_for_0_6_similarity": 2076
+    },
+    "salt_4": {
+      "test_share_of_rows": 0.1902,
+      "largest_test_unit_share_of_test": 0.0355,
+      "train_rows_purged_for_0_6_similarity": 2113
+    }
+  }
+}

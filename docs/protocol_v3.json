@@ -1,0 +1,155 @@
+{
+  "protocol_id": "satyalens-text-classifier-v3",
+  "protocol_version": "1.0",
+  "written_utc": "2026-10-24",
+  "status": "Fixed BEFORE training pool v3 and frozen test v3 exist. Any change after hashing requires protocol_version 2.0 and a NEW test set.",
+
+  "scope": {
+    "component": "satyalens_analysis.text_classifier (TF-IDF + LogisticRegression)",
+    "role": "Advisory only. A classifier output must never by itself produce a definitive high-risk / fraud decision. Person 2's decision engine is not modified.",
+    "labels": {"positive": "suspicious", "negative": "legitimate"},
+    "retired_benchmark": "data/real_world_test_v1.csv is retired from all selection and tuning; it may be evaluated once for the final selected model AFTER the sealed evaluation, reported separately as historical."
+  },
+
+  "sources": {
+    "IMC25": {
+      "title": "Fishing for Smishing (Agarwal, Papasavva, Suarez-Tangil, Vasek; ACM IMC 2025; doi:10.1145/3730567.3764431)",
+      "repository": "https://github.com/reportsmishing/Smishing-Dataset-IMC25",
+      "commit": "a6175560b57387199871e51fbef6bc523d2516b4",
+      "file": "dataset/final_dataset_output.csv",
+      "file_sha256": "1bbd1e9e82c3ea023112207b80da268a5c4a07d2353c2b0898360ab037fa9a64",
+      "licence": "CC BY 4.0 (LICENSE.txt sha256 7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661; README; paper Appendix B)",
+      "attribution": "Agarwal, S., Papasavva, A., Suarez-Tangil, G., Vasek, M. (2025). Fishing for Smishing: Understanding SMS Phishing Infrastructure and Strategies by Mining Public User Reports. IMC '25. Dataset: github.com/reportsmishing/Smishing-Dataset-IMC25 (CC BY 4.0). Modified: anonymised (anon-v1), filtered, deduplicated.",
+      "real": true,
+      "label_mapping": {"banking": "suspicious", "delivery": "suspicious", "government": "suspicious", "telecom": "suspicious", "others": "suspicious"},
+      "excluded_as_ambiguous": ["spam", "wrong number", "<empty scam_type>", "any other value"],
+      "language_filter": "language == 'English' only (legitimate sources are English; other languages would become a label shortcut)",
+      "india_linked_definition": "original_network_country == 'IND' OR named_entity in INDIAN_INSTITUTIONS",
+      "INDIAN_INSTITUTIONS": ["State Bank of India", "SBI", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra Bank", "Punjab National Bank", "Bank of Baroda", "Canara Bank", "Union Bank of India", "IndusInd Bank", "Yes Bank", "IDFC First Bank", "Paytm", "PhonePe", "Google Pay", "BHIM", "India Post", "Income Tax Department", "UIDAI", "Aadhaar", "Airtel", "Jio", "Reliance Jio", "BSNL", "Vodafone Idea", "TRAI", "NPCI"],
+      "long_digit_investigation": "Before masking, every run of >= 10 digits is classified (10-digit mobile / 0-prefixed landline / +country code / other id) and counted in the build report; all are then masked by anon-v1.",
+      "roles": ["train", "test"]
+    },
+    "DONATION": {
+      "description": "Voluntarily donated genuine institutional messages (CONSENT-v1, docs/donation/), masked locally by scripts/donate_messages.py and reviewed by the donor.",
+      "real": true,
+      "label": "legitimate",
+      "files": "data/donations/donation_<donor_id>.csv (gitignored); withdrawn donors excluded via consent_ledger.csv status",
+      "roles": ["train", "test"]
+    },
+    "MWOZ_TRAIN": {
+      "title": "MultiWOZ 2.2 (MIT, Copyright (c) 2019 Pawel Budzianowski)",
+      "repository": "https://github.com/budzianowski/multiwoz", "commit": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+      "file": "data/MultiWOZ_2.2/train/dialogues_001.json",
+      "file_sha256": "895a8109bf01fa5ecf15ccdbd2dfe1628bd923f6b61dcd2e26b10ee5076a1596",
+      "sampling": "300 dialogues (sorted by id, shuffled with seed 20261024), one USER and one SYSTEM turn of >= 5 words each",
+      "label": "legitimate", "real": true, "roles": ["train"]
+    },
+    "MWOZ_TEST": {
+      "file": "data/MultiWOZ_2.2/train/dialogues_017.json (same commit; never sampled for training)",
+      "file_sha256": "recorded in the build report at download time",
+      "sampling": "150 dialogues (sorted by id, shuffled with seed 20261025), one USER and one SYSTEM turn of >= 5 words each",
+      "label": "legitimate", "real": true, "roles": ["test"]
+    },
+    "R115": {
+      "title": "Ridham115/indian-scam-sms-synthetic-audited (CC BY 4.0)", "revision": "45e92c38ba20e973ef3ff5d1893a0a710f622018",
+      "file_sha256": "45bde5f156a1a42698bab209e32bcd41b3639013d772f644cc3208ed39fb61e2",
+      "generators_used": ["groq/openai/gpt-oss-120b"],
+      "label_mapping": {"scam": "suspicious", "safe": "legitimate"},
+      "real": false, "roles": ["train"]
+    },
+    "SYN": {"file": "data/synthetic_financial_messages_v1.csv", "real": false, "roles": ["train"]}
+  },
+
+  "anonymisation": {
+    "module": "satyalens_analysis/anonymise.py",
+    "version": "anon-v1",
+    "applied_to": "Every row of every source, both classes, train and test. Models trained under this protocol record preprocessing='anon-v1' in metadata and classify_text() must apply anonymise() before vectorising (implemented and tested before final evaluation).",
+    "check": "Build report lists, per source and label, the rate of each placeholder token (urltoken, phonetoken, emailtoken, upitoken, datetoken, numtoken) so remaining asymmetries are visible."
+  },
+
+  "build_order": [
+    "1. Download pinned sources; verify SHA-256; never modify raw files.",
+    "2. Map labels; exclude ambiguous labels and non-English IMC25 rows; log every exclusion with reason.",
+    "3. Investigate and count >= 10-digit runs (IMC25), then anonymise all rows with anon-v1.",
+    "4. Remove rows overlapping the retired benchmark (data/real_world_test_v1.csv) or the challenge suite: exact normalised, skeleton, or skeleton-token Jaccard >= 0.8 (compared after anonymising both sides). Includes the 199 known IMC25 skeleton overlaps.",
+    "5. Exact normalised de-duplication across all sources, keeping the first by source priority DONATION > IMC25 > MWOZ_TEST > MWOZ_TRAIN > R115 > SYN; identical text with conflicting labels -> all copies excluded.",
+    "6. Grouping (see grouping).",
+    "7. Deterministic test assignment (see test_assignment).",
+    "8. Cross-split leakage check between test and train rows (exact normalised, skeleton, Jaccard >= 0.8). Any hit removes the TRAIN group(s) containing it; the test set is never altered by this step. Repeat until zero hits.",
+    "9. Coverage check (see minimum_legitimate_coverage).",
+    "10. Write pool and test; seal (see sealing). Build report contains counts only, never test message text."
+  ],
+
+  "grouping": {
+    "base_keys": {
+      "IMC25": "none (template clustering only)",
+      "DONATION": "donor_id + sender_type",
+      "MWOZ_TRAIN": "dialogue_id", "MWOZ_TEST": "dialogue_id",
+      "R115": "label:topic:language", "SYN": "template family (existing group column)"
+    },
+    "template_clustering": "Within each source, rows are linked when the token sets of skeleton_text(anonymised text) have Jaccard >= 0.6. Candidate pairs are restricted to rows sharing at least one of their 3 rarest tokens (document frequency within the source). Groups = connected components of base-key links and template links (union-find).",
+    "group_id": "<source>:<smallest stable row key in the component> (IMC25 row number, donation id, dialogue id, R115 row_id, SYN line)"
+  },
+
+  "test_assignment": {
+    "salt": "satyalens-protocol-v3-2026-10-24",
+    "rule": "For IMC25 and DONATION groups: u = int(sha256(salt + '|' + group_id).hexdigest()[:8], 16) / 2**32; the group is TEST if u < 0.20, otherwise TRAIN. MWOZ_TEST rows are all TEST; MWOZ_TRAIN, R115 and SYN rows are all TRAIN.",
+    "properties": "No model output, metric or manual choice influences assignment. The frozen test contains real sources only (IMC25, DONATION, MWOZ_TEST)."
+  },
+
+  "minimum_legitimate_coverage": {
+    "collection_target": ">= 750 approved donated messages from >= 10 donors (expected ~150 in test at 20%).",
+    "test_requirement": "Frozen test must contain >= 150 donated messages from >= 5 donors, with >= 3 categories having >= 25 messages each.",
+    "if_not_met": "Criterion L1 is reported as NOT EVALUABLE; the model can at most be reported as 'scam recall evaluated; false positives on genuine Indian financial alerts NOT validated'. No synthetic or substitute data may be presented as real genuine alerts."
+  },
+
+  "model_selection": {
+    "data": "Pool v3 TRAIN rows only. The frozen test is never read (enforced by the sealed-file guard in text_classifier.load_dataset / load_evaluation_dataset).",
+    "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) over pool groups",
+    "input_text": "anon-v1 anonymised text",
+    "candidates": {
+      "A_v1_config": "word 1-2-grams, letters-only tokens, sublinear TF, C=1.0, class_weight=balanced",
+      "C_stopwords_unigram": "as A + stop_words='english', ngram_range=(1,1)",
+      "E_stopwords_C3": "as A + stop_words='english', C=3.0",
+      "G_char_wb_3_5": "char_wb 3-5-grams, min_df=2, sublinear TF, C=1.0, class_weight=balanced",
+      "H_char_wb_3_5_C3": "as G with C=3.0"
+    },
+    "rule": "Maximise pooled out-of-fold macro-F1 among candidates whose out-of-fold false-positive rate on DONATION rows is <= 0.10 (constraint applied only if the pool has >= 50 DONATION rows). Ties within 0.005 macro-F1 -> lower out-of-fold legitimate FPR -> alphabetical.",
+    "reported_baselines": ["majority class", "rule engine (any context flag -> suspicious)", "deployed v1 artifact", "candidate v2 artifact"],
+    "final_training": "Selected configuration trained with text_classifier.train on pool v3 (its internal grouped 25% holdout is reported) into satyalens_analysis/models/candidates/v3/. The deployed artifact is not replaced by this protocol."
+  },
+
+  "acceptance_criteria": {
+    "evaluated_on": "Sealed frozen test v3, once.",
+    "conventions": "Inconclusive suspicious rows count as MISSES (not detected); inconclusive legitimate rows count as NOT false positives. Each criterion reports numerator and denominator.",
+    "S1": "Suspicious recall on IMC25 test rows >= 0.80",
+    "S2": "Suspicious recall on India-linked IMC25 test rows >= 0.80",
+    "L1": "False-positive rate on DONATION test rows <= 0.10 (requires minimum coverage, else NOT EVALUABLE)",
+    "L2": "False-positive rate on MWOZ_TEST rows <= 0.05",
+    "M1": "Macro-F1 on the full test >= 0.80",
+    "B1": "Macro-F1 on the full test strictly greater than both the rule-engine baseline and the majority-class baseline on the same test",
+    "verdict": "VALIDATED only if S1, S2, L1, L2, M1 and B1 all pass. If L1 is NOT EVALUABLE: at most 'PARTIALLY EVALUATED — not validated for genuine financial alerts'. Any failure: 'NOT VALIDATED'. Even if VALIDATED, the classifier remains advisory-only."
+  },
+
+  "sealing": {
+    "test_file": "data/frozen_test_v3.csv (gitignored)",
+    "manifest": "reports/frozen_test_v3_manifest.json with sealed_files [{path, sha256}], protocol_file 'docs/protocol_v3.json', protocol_sha256, evaluation_log 'reports/frozen_test_v3_evaluations.jsonl', row/group/label counts per source.",
+    "guard": "Once the manifest exists, text_classifier.load_dataset and load_evaluation_dataset raise SealedDataError for the sealed file or any byte-identical copy (SHA-256), unless called by evaluate(final_sealed=True).",
+    "one_shot": "evaluate --final-sealed-evaluation refuses to run if the protocol hash differs from the manifest, if the sealed file changed, or if the evaluation log already has an entry.",
+    "script_rule": "Selection and training scripts must load data only through the package loaders and must not reference frozen_test_v3.csv; enforced by tests.",
+    "after_evaluation": "Results are reported against the criteria as-is. No tuning against the test. A further evaluation requires protocol 2.0 and a new test set."
+  },
+
+  "withdrawal": {
+    "before_sealing": "Remove the donor's rows and rebuild.",
+    "after_sealing_before_evaluation": "Delete the rows, rebuild pool and test under the same protocol (same salt), write a new manifest; record the reseal in the build report.",
+    "after_evaluation": "Delete the rows and any copies; keep published aggregates; annotate the report that a donor withdrew."
+  },
+
+  "deviations": "Any deviation from this protocol (sources, anonymiser, thresholds, candidates, selection rule, assignment) after hashing must be recorded with reason; it requires a new protocol version and a new frozen test set if made after the test exists.",
+
+  "commit_policy": {
+    "never_commit": ["data/raw/", "data/donations/", "*.review.csv", "data/training_pool_v3.csv", "data/frozen_test_v3.csv", "data/*.excluded.csv", "model artifacts"],
+    "commit": ["scripts", "this protocol and its hash", "provenance and build reports (counts only)", "manifest", "evaluation reports (metrics only)"]
+  }
+}

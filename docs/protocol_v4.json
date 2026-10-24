@@ -1,0 +1,190 @@
+{
+  "protocol_id": "satyalens-text-classifier-v4",
+  "protocol_version": "4.0",
+  "approved_utc": "2026-10-24",
+  "status": "Approved and hashed 2026-10-24 (docs/protocol_v4.sha256). Fixed BEFORE pool v4 and frozen test v4 exist. Any change requires protocol 5.0 and, if a v4 test exists, a new test set.",
+  "supersedes": "protocol v3 (docs/protocol_v3.json, SHA-256 e97171dadedf57083265fc6bb38306942da5df41df32d079439bc11331d79e7e), which was never executed. v3 files, scripts and hash stay unchanged as a record.",
+  "draft_record": "docs/protocol_v4_DRAFT.json (review draft, kept unchanged)",
+
+  "decisions": {
+    "Q1": "IMC25 'hey mum/dad' included as suspicious (family-impersonation fraud); its recall is reported separately.",
+    "Q2": "Mendeley: Latin-script rows only.",
+    "Q3": "Mendeley ham included as supplementary non-scam TRAINING data only; never counted toward donation coverage; never described as verified genuine financial alerts.",
+    "Q4": "Grouping policy G4 (see grouping): atomic near-duplicate units at Jaccard >= 0.8, giant units forced to TRAIN, row-level purge of TRAIN rows within Jaccard >= 0.6 of any TEST row. Chosen from counts-only diagnostics with a diagnostic salt (reports/grouping_v4/diagnostics.json); no model result was used.",
+    "Q5": "All v3 targets and acceptance thresholds unchanged (20 % test assignment, donation collection target, test-coverage requirement, S1/S2/L1/L2/M1/B1)."
+  },
+
+  "scope": {
+    "component": "satyalens_analysis.text_classifier (TF-IDF + LogisticRegression)",
+    "role": "Advisory only. A classifier output must never by itself produce a definitive high-risk / fraud decision. Person 2's decision engine is not modified.",
+    "labels": {"positive": "suspicious", "negative": "legitimate"},
+    "retired_benchmark": "data/real_world_test_v1.csv is retired from all selection and tuning; used only to remove overlapping rows; may be evaluated once for the final selected model after the sealed evaluation, reported separately.",
+    "out_of_scope": "Website-screenshot phishing detection (Phish360; licence/access handled separately in docs/PHISH360_ACCESS.md) and payment-receipt verification (payment_ocr.py)."
+  },
+
+  "sources": {
+    "IMC25": {
+      "repository": "https://github.com/reportsmishing/Smishing-Dataset-IMC25",
+      "commit": "a6175560b57387199871e51fbef6bc523d2516b4",
+      "file": "data/raw/imc25_smishing/final_dataset_output.csv (team copy dataset/message_detection/final_dataset_output.csv is byte-identical)",
+      "file_sha256": "1bbd1e9e82c3ea023112207b80da268a5c4a07d2353c2b0898360ab037fa9a64",
+      "licence": "CC BY 4.0",
+      "attribution": "Agarwal, S., Papasavva, A., Suarez-Tangil, G., Vasek, M. (2025). Fishing for Smishing: Understanding SMS Phishing Infrastructure and Strategies by Mining Public User Reports. IMC '25. doi:10.1145/3730567.3764431. Dataset: github.com/reportsmishing/Smishing-Dataset-IMC25 (CC BY 4.0). Modified: anonymised (anon-v2), filtered, deduplicated.",
+      "real": true,
+      "label_mapping": {"banking": "suspicious", "delivery": "suspicious", "government": "suspicious", "telecom": "suspicious", "others": "suspicious", "hey mum/dad": "suspicious"},
+      "excluded_as_ambiguous": ["spam", "wrong number", "<empty scam_type>", "any other value"],
+      "language_filter": "language == 'English' only",
+      "india_linked_definition": "original_network_country == 'IND' OR named_entity in INDIAN_INSTITUTIONS",
+      "INDIAN_INSTITUTIONS": ["State Bank of India", "SBI", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra Bank", "Punjab National Bank", "Bank of Baroda", "Canara Bank", "Union Bank of India", "IndusInd Bank", "Yes Bank", "IDFC First Bank", "Paytm", "PhonePe", "Google Pay", "BHIM", "India Post", "Income Tax Department", "UIDAI", "Aadhaar", "Airtel", "Jio", "Reliance Jio", "BSNL", "Vodafone Idea", "TRAI", "NPCI"],
+      "long_digit_investigation": "Before masking, every run of >= 10 digits is classified (10-digit mobile / 0-prefixed / +country code / other id) and counted.",
+      "roles": ["train", "test"]
+    },
+    "MENDELEY": {
+      "title": "Financial scams detection dataset",
+      "authors": ["Al Rafi Ahmed", "Gazi Faizul Islam"],
+      "url": "https://data.mendeley.com/datasets/znsk27yk3h/2",
+      "doi": "10.17632/znsk27yk3h.2 (v1, 10.17632/znsk27yk3h.1, contains the identical file)",
+      "file": "dataset/message_detection/Financial scams detection dataset.csv",
+      "file_sha256": "58ec802e4de8768643e3be0badbaedb3ae5017a273e8f3898e72f6a29cbc96ad",
+      "licence": "CC BY 4.0 (Mendeley public API, v1 and v2)",
+      "attribution": "Ahmed, A. R., Islam, G. F. (2025). Financial scams detection dataset. Mendeley Data, V2. doi:10.17632/znsk27yk3h.2 (CC BY 4.0). Modified: anonymised (anon-v2), filtered, deduplicated.",
+      "real": "claimed real by the authors (forms, handwritten submissions, observation, with consent); not independently verifiable",
+      "label_mapping": {"scam": "suspicious", "ham": "legitimate"},
+      "label_limitations": "'ham' is general non-scam text, Bangladesh-centred and partly re-typed from handwriting; only about 56 of 213 ham rows look like notifications by keyword heuristic. It is supplementary non-scam training text and is NEVER treated, counted or reported as verified genuine bank/UPI alerts.",
+      "script_filter": "Latin-script rows only (rows with any Bengali or Devanagari letters excluded)",
+      "roles": ["train"],
+      "restrictions": ["never in the frozen test", "never counted toward minimum_legitimate_coverage", "never used in the DONATION false-positive constraint", "reported as its own source in every report"]
+    },
+    "DONATION": {
+      "description": "Voluntarily donated genuine institutional messages (CONSENT-v1, docs/donation/), masked locally by scripts/donate_messages.py (anon-v1 at finalise), reviewed by the donor, validated by scripts/donation_progress.py. The build re-applies anon-v2 (a superset of anon-v1).",
+      "real": true, "label": "legitimate", "roles": ["train", "test"]
+    },
+    "MWOZ_TRAIN": {
+      "title": "MultiWOZ 2.2 (MIT, Copyright (c) 2019 Pawel Budzianowski)",
+      "repository": "https://github.com/budzianowski/multiwoz", "commit": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+      "file": "data/MultiWOZ_2.2/train/dialogues_001.json",
+      "file_sha256": "895a8109bf01fa5ecf15ccdbd2dfe1628bd923f6b61dcd2e26b10ee5076a1596",
+      "sampling": "300 dialogues (sorted by id, shuffled with seed 20261024), one USER and one SYSTEM turn of >= 5 words each",
+      "label": "legitimate", "real": true, "roles": ["train"]
+    },
+    "MWOZ_TEST": {
+      "file": "data/MultiWOZ_2.2/train/dialogues_017.json (same commit; never sampled for training)",
+      "file_sha256": "b6ab2cd9b6e8983364526845b7cbec1749338209bf7ac2313c25e1e2226ebab5",
+      "sampling": "150 dialogues (sorted by id, shuffled with seed 20261025), one USER and one SYSTEM turn of >= 5 words each",
+      "label": "legitimate", "real": true, "roles": ["test"]
+    },
+    "R115": {
+      "title": "Ridham115/indian-scam-sms-synthetic-audited (CC BY 4.0)", "revision": "45e92c38ba20e973ef3ff5d1893a0a710f622018",
+      "file_sha256": "45bde5f156a1a42698bab209e32bcd41b3639013d772f644cc3208ed39fb61e2",
+      "generators_used": ["groq/openai/gpt-oss-120b"],
+      "label_mapping": {"scam": "suspicious", "safe": "legitimate"},
+      "real": false, "roles": ["train"]
+    },
+    "SYN": {"file": "data/synthetic_financial_messages_v1.csv", "real": false, "roles": ["train"]}
+  },
+
+  "anonymisation": {
+    "module": "satyalens_analysis/anonymise.py", "function": "anonymise_v2", "version": "anon-v2",
+    "definition": "anon-v1 unchanged, then @handles (letter/underscore start, <= 30 chars) -> handletoken; residual e-mail fragments with a letter on both sides of '@' and dangling local parts -> emailtoken. Rates/prices and standalone '@' kept.",
+    "regression_tests": "tests/test_anonymiser_versions.py (anon-v1 golden outputs frozen; anon-v2 behaviour)",
+    "applied_to": "Every row of every source, both classes, train and test. Models trained under v4 record preprocessing='anon-v2' and classify_text() applies it before vectorising."
+  },
+
+  "build_order": [
+    "1. Verify this protocol's SHA-256; verify pinned source hashes; never modify raw files.",
+    "2. Map labels; exclude ambiguous IMC25 labels, non-English IMC25 rows and non-Latin Mendeley rows; log every exclusion with reason (no text).",
+    "3. Investigate >= 10-digit runs (IMC25, Mendeley); anonymise all rows with anon-v2; STOP if any >= 4-digit run remains.",
+    "4. Remove rows overlapping the retired benchmark or the challenge suite (exact normalised, skeleton, Jaccard >= 0.8, both sides anonymised with anon-v2).",
+    "5. Exact normalised de-duplication, priority DONATION > IMC25 > MWOZ_TEST > MWOZ_TRAIN > MENDELEY > R115 > SYN; identical text with conflicting labels -> all copies excluded.",
+    "6. Grouping G4 step 1: atomic units.",
+    "7. Grouping G4 steps 2-3: giant-unit rule and deterministic test assignment.",
+    "8. Grouping G4 step 4: purge TRAIN rows within the purge threshold of any TEST row; STOP if any cross-split pair remains.",
+    "9. Coverage check (DONATION only).",
+    "10. Write pool and test; seal. Reports are counts only."
+  ],
+
+  "grouping": {
+    "policy_id": "G4",
+    "step_1_atomic_units": "Within each source, link rows whose skeleton_text(anon-v2) token sets have Jaccard >= 0.8 (exact similarity join, text_classifier.jaccard_pairs), plus base-key links. Atomic unit = connected component. Units are never split: splitting one would place a Jaccard >= 0.8 pair (the leakage definition) across the split.",
+    "base_keys": {"IMC25": "none", "MENDELEY": "none", "DONATION": "donor_id + sender_type", "MWOZ_TRAIN": "dialogue_id", "MWOZ_TEST": "dialogue_id", "R115": "label:topic:language", "SYN": "template family"},
+    "unit_id": "<source>:<smallest stable row key in the unit>",
+    "step_2_giant_units": "For test-eligible sources (IMC25, DONATION): a unit with more rows than max(50, floor(0.01 x rows of that source after step 5)) is assigned to TRAIN, never TEST. Deterministic, size-based, independent of labels and model output.",
+    "step_3_assignment": "Other IMC25 and DONATION units: TEST if int(sha256(salt + '|' + unit_id).hexdigest()[:8], 16) / 2**32 < 0.20, else TRAIN. MWOZ_TEST rows all TEST; MWOZ_TRAIN, MENDELEY, R115, SYN all TRAIN.",
+    "step_4_purge": "Every TRAIN row (any source) that has exact-normalised equality, skeleton equality, or skeleton-token Jaccard >= 0.6 with ANY TEST row is removed from the pool (row level). TEST is never altered. Final verification: zero cross-split pairs at Jaccard >= 0.6, zero exact and skeleton matches.",
+    "rationale": "Counts-only diagnostics (reports/grouping_v4/diagnostics.json) showed single-link at 0.6 chains distinct campaigns into one 1,685-row unit (22 institutions; sampled internal median Jaccard 0.33; 9.6 % of pairs < 0.2) that could be ~41 % of the test if drawn. Single-link at 0.8 is the smallest leakage-safe unit (largest 806). Forcing giant units to TRAIN bounds test domination (largest test unit 0.9-3.6 % of test across six diagnostic salts) without splitting units; the 0.6 purge removes near-template variants of test rows from training, stricter than v3's 0.8 leakage check.",
+    "trade_offs": [
+      "The largest template families (diagnostics: 3 IMC25 units, 1,122 rows, SBI/HDFC KYC-style) are never in the test, so S1/S2 do not measure them.",
+      "Hash assignment stays at 20 % of eligible units; the realised TEST share of IMC25 rows is lower (diagnostics: 17-19 %).",
+      "Purging removes roughly 2,000-2,200 IMC25 TRAIN rows (diagnostics).",
+      "Atomic 0.8 units can still be internally heterogeneous (806-row unit: sampled median Jaccard 0.42), but cannot be split without violating the leakage definition."
+    ],
+    "reporting": "Report unit-size distribution per source, forced-TRAIN units/rows, test share of rows, largest test unit and its share of the test, purged rows per source, and the final cross-split check."
+  },
+
+  "test_assignment": {"salt": "satyalens-protocol-v4-2026-10-24", "fraction": 0.20},
+
+  "minimum_legitimate_coverage": {
+    "collection_target": ">= 750 approved donated messages from >= 10 donors.",
+    "test_requirement": "Frozen test must contain >= 150 donated messages from >= 5 donors, with >= 3 categories having >= 25 messages each.",
+    "if_not_met": "Criterion L1 is NOT EVALUABLE; the model can at most be reported as 'scam recall evaluated; false positives on genuine Indian financial alerts NOT validated'. MENDELEY rows never count toward this requirement."
+  },
+
+  "model_selection": {
+    "data": "Pool v4 TRAIN rows only; the frozen test is never read (sealed-file guard).",
+    "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42) over pool units",
+    "input_text": "anon-v2 anonymised text",
+    "candidates": {
+      "A_v1_config": "word 1-2-grams, letters-only tokens, sublinear TF, C=1.0, class_weight=balanced",
+      "C_stopwords_unigram": "as A + stop_words='english', ngram_range=(1,1)",
+      "E_stopwords_C3": "as A + stop_words='english', C=3.0",
+      "G_char_wb_3_5": "char_wb 3-5-grams, min_df=2, sublinear TF, C=1.0, class_weight=balanced",
+      "H_char_wb_3_5_C3": "as G with C=3.0"
+    },
+    "rule": "Maximise pooled out-of-fold macro-F1 among candidates whose out-of-fold FPR on DONATION rows is <= 0.10 (applied only if the pool has >= 50 DONATION rows). Ties within 0.005 -> lower out-of-fold legitimate FPR -> alphabetical.",
+    "reported_baselines": ["majority class", "rule engine (any context flag -> suspicious)", "deployed v1 artifact", "candidate v2 artifact"],
+    "reporting": "Per-source OOF metrics including MENDELEY.",
+    "final_training": "Selected configuration trained with text_classifier.train(preprocessing='anon-v2') on pool v4 into satyalens_analysis/models/candidates/v4/. The deployed artifact is not replaced by this protocol."
+  },
+
+  "acceptance_criteria": {
+    "evaluated_on": "Sealed frozen test v4, once.",
+    "conventions": "Inconclusive suspicious rows count as MISSES; inconclusive legitimate rows count as NOT false positives. Each criterion reports numerator and denominator.",
+    "S1": "Suspicious recall on IMC25 test rows >= 0.80",
+    "S2": "Suspicious recall on India-linked IMC25 test rows >= 0.80",
+    "L1": "False-positive rate on DONATION test rows <= 0.10 (requires minimum coverage, else NOT EVALUABLE)",
+    "L2": "False-positive rate on MWOZ_TEST rows <= 0.05",
+    "M1": "Macro-F1 on the full test >= 0.80",
+    "B1": "Macro-F1 on the full test strictly greater than both the rule-engine baseline and the majority-class baseline on the same test",
+    "reported_not_gating": ["S1 restricted to IMC25 'hey mum/dad' test rows (numerator/denominator)"],
+    "verdict": "VALIDATED only if S1, S2, L1, L2, M1 and B1 all pass. If L1 is NOT EVALUABLE: at most 'PARTIALLY EVALUATED — not validated for genuine financial alerts'. Any failure: 'NOT VALIDATED'. Even if VALIDATED, the classifier remains advisory-only."
+  },
+
+  "sealing": {
+    "test_file": "data/frozen_test_v4.csv (gitignored)",
+    "manifest": "reports/frozen_test_v4_manifest.json with sealed_files [{path, sha256}], protocol_file 'docs/protocol_v4.json', protocol_sha256, evaluation_log 'reports/frozen_test_v4_evaluations.jsonl', counts.",
+    "guard": "text_classifier loaders refuse files listed in the v4 (and v3, if it ever exists) manifest or any byte-identical copy, unless evaluate(final_sealed=True).",
+    "one_shot": "evaluate --final-sealed-evaluation refuses if the protocol hash differs, the sealed file changed, or the evaluation log already has an entry.",
+    "script_rule": "Selection and training scripts load data only through the package loaders and never reference frozen_test_v4.csv; enforced by tests."
+  },
+
+  "required_code_changes": {
+    "before_dry_run": [
+      "text_classifier: preprocessing 'anon-v2'; jaccard_pairs; sealed-manifest guard recognises the v4 manifest (v3 still recognised).",
+      "scripts/build_pool_and_test_v4.py (new; v3 builder unchanged) implementing build_order and G4."
+    ],
+    "before_selection_and_evaluation": [
+      "select/acceptance scripts for v4 (v4 paths, anon-v2, MENDELEY per-source reporting, 'hey mum/dad' subset)."
+    ]
+  },
+
+  "withdrawal": {
+    "before_sealing": "Remove the donor's rows and rebuild.",
+    "after_sealing_before_evaluation": "Delete the rows, rebuild pool and test under this protocol (same salt), write a new manifest; record the reseal.",
+    "after_evaluation": "Delete the rows and any copies; keep published aggregates; annotate the report."
+  },
+  "deviations": "Any deviation after hashing must be recorded with reason and requires a new protocol version (and a new test set if made after the v4 test exists).",
+  "commit_policy": {
+    "never_commit": ["dataset/", "data/raw/", "data/donations/", "*.review.csv", "data/training_pool_v4.csv", "data/frozen_test_v4.csv", "data/*.excluded.csv", "reports/donations/", "model artifacts"],
+    "commit": ["scripts", "this protocol and its hash", "counts-only build, inspection and grouping reports", "manifest", "metrics-only evaluation reports"]
+  }
+}

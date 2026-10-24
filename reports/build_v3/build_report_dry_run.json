@@ -1,0 +1,181 @@
+{
+  "protocol_sha256": "e97171dadedf57083265fc6bb38306942da5df41df32d079439bc11331d79e7e",
+  "anonymiser": "anon-v1",
+  "built_utc": "2026-10-24T08:38:48+00:00",
+  "dry_run": true,
+  "source_hashes": {
+    "data\\raw\\imc25_smishing\\final_dataset_output.csv": "1bbd1e9e82c3ea023112207b80da268a5c4a07d2353c2b0898360ab037fa9a64",
+    "data\\raw\\ridham115_indian_scam_sms\\synthetic_audited.csv": "45bde5f156a1a42698bab209e32bcd41b3639013d772f644cc3208ed39fb61e2",
+    "data\\raw\\multiwoz_2_2\\dialogues_001.json": "895a8109bf01fa5ecf15ccdbd2dfe1628bd923f6b61dcd2e26b10ee5076a1596",
+    "data\\raw\\multiwoz_2_2\\dialogues_017.json": "b6ab2cd9b6e8983364526845b7cbec1749338209bf7ac2313c25e1e2226ebab5"
+  },
+  "loaded_counts": {
+    "IMC25": {
+      "suspicious": 20309
+    },
+    "MWOZ_TEST": {
+      "legitimate": 300
+    },
+    "MWOZ_TRAIN": {
+      "legitimate": 600
+    },
+    "R115": {
+      "suspicious": 357,
+      "legitimate": 343
+    },
+    "SYN": {
+      "suspicious": 142,
+      "legitimate": 177
+    }
+  },
+  "imc25_long_digit_investigation": {
+    "rows_with_10plus_digit_runs": 191,
+    "runs_by_kind": {
+      "zero_prefixed_landline_or_uk_mobile": 68,
+      "other_id_or_number": 124,
+      "plus_country_code": 1,
+      "indian_mobile_10_digit": 19
+    }
+  },
+  "excluded_outcomes": {
+    "excluded_language": 11174,
+    "ambiguous": 2386,
+    "excluded_generator": 880,
+    "rejected": 5,
+    "retired_or_challenge_overlap": 172,
+    "duplicate": 6415,
+    "train_group_removed_for_leakage": 2117
+  },
+  "excluded_by_source_and_outcome": {
+    "IMC25|ambiguous": 2386,
+    "IMC25|duplicate": 6346,
+    "IMC25|excluded_language": 11174,
+    "IMC25|rejected": 5,
+    "IMC25|retired_or_challenge_overlap": 172,
+    "IMC25|train_group_removed_for_leakage": 1975,
+    "MWOZ_TRAIN|duplicate": 7,
+    "MWOZ_TRAIN|train_group_removed_for_leakage": 36,
+    "R115|excluded_generator": 880,
+    "R115|train_group_removed_for_leakage": 106,
+    "SYN|duplicate": 62
+  },
+  "grouping": {
+    "IMC25": {
+      "rows": 13786,
+      "groups": 7753,
+      "template_links": 6033
+    },
+    "MWOZ_TEST": {
+      "rows": 300,
+      "groups": 133,
+      "template_links": 17
+    },
+    "MWOZ_TRAIN": {
+      "rows": 593,
+      "groups": 252,
+      "template_links": 48
+    },
+    "R115": {
+      "rows": 700,
+      "groups": 30,
+      "template_links": 12
+    },
+    "SYN": {
+      "rows": 257,
+      "groups": 73,
+      "template_links": 0
+    }
+  },
+  "leakage": {
+    "train_groups_removed": 16,
+    "train_rows_removed": 2117,
+    "rounds": 2,
+    "final_test_train_overlap": 0
+  },
+  "pool_counts": {
+    "IMC25": {
+      "suspicious": 9591
+    },
+    "MWOZ_TRAIN": {
+      "legitimate": 557
+    },
+    "R115": {
+      "suspicious": 294,
+      "legitimate": 300
+    },
+    "SYN": {
+      "suspicious": 109,
+      "legitimate": 148
+    }
+  },
+  "pool_groups": 6501,
+  "test_counts": {
+    "IMC25": {
+      "suspicious": 2220
+    },
+    "MWOZ_TEST": {
+      "legitimate": 300
+    }
+  },
+  "test_groups": 1724,
+  "test_india_linked_suspicious": 303,
+  "coverage": {
+    "test_donated_messages": 0,
+    "test_donors": 0,
+    "test_categories": {},
+    "requirement": "Frozen test must contain >= 150 donated messages from >= 5 donors, with >= 3 categories having >= 25 messages each.",
+    "met": false,
+    "L1_status": "NOT EVALUABLE"
+  },
+  "placeholder_token_rates_pool": {
+    "IMC25|suspicious": {
+      "urltoken": 0.4211,
+      "phonetoken": 0.1408,
+      "emailtoken": 0.0245,
+      "upitoken": 0.0024,
+      "datetoken": 0.3966,
+      "numtoken": 0.2758
+    },
+    "MWOZ_TRAIN|legitimate": {
+      "urltoken": 0.0,
+      "phonetoken": 0.0431,
+      "emailtoken": 0.0,
+      "upitoken": 0.0,
+      "datetoken": 0.0862,
+      "numtoken": 0.0269
+    },
+    "R115|legitimate": {
+      "urltoken": 0.3067,
+      "phonetoken": 0.0733,
+      "emailtoken": 0.01,
+      "upitoken": 0.01,
+      "datetoken": 0.15,
+      "numtoken": 0.3933
+    },
+    "R115|suspicious": {
+      "urltoken": 0.5034,
+      "phonetoken": 0.2993,
+      "emailtoken": 0.0,
+      "upitoken": 0.0068,
+      "datetoken": 0.0204,
+      "numtoken": 0.3912
+    },
+    "SYN|legitimate": {
+      "urltoken": 0.0338,
+      "phonetoken": 0.0405,
+      "emailtoken": 0.0,
+      "upitoken": 0.0203,
+      "datetoken": 0.4324,
+      "numtoken": 0.5
+    },
+    "SYN|suspicious": {
+      "urltoken": 0.2202,
+      "phonetoken": 0.0826,
+      "emailtoken": 0.0,
+      "upitoken": 0.1193,
+      "datetoken": 0.0092,
+      "numtoken": 0.0367
+    }
+  },
+  "privacy_check": "no >= 4-digit runs in any anonymised row"
+}

@@ -1,0 +1,320 @@
+id,text,label,group
+S01_kyc_suspension-0-0000,"Dear customer, your Deccan Finance Bank account will be suspended today as your KYC is incomplete. Update now at secure-update-bank.example/login",suspicious,S01_kyc_suspension
+S01_kyc_suspension-0-0001,"Dear customer, your Ganga Gramin Bank account will be suspended today as your KYC is incomplete. Update now at bnb-kyc-verify.example/u",suspicious,S01_kyc_suspension
+S01_kyc_suspension-0-0002,"Dear customer, your Coastal Co-op Bank account will be suspended today as your KYC is incomplete. Update now at bnb-kyc-verify.example/u",suspicious,S01_kyc_suspension
+S01_kyc_suspension-1-0003,SHYB ALERT: KYC pending. Your account will be blocked within 2 hours. Click rewards-redeem.example/pts to verify PAN details.,suspicious,S01_kyc_suspension
+S01_kyc_suspension-1-0004,BNB ALERT: KYC pending. Your account will be blocked within 12 hours. Click rewards-redeem.example/pts to verify PAN details.,suspicious,S01_kyc_suspension
+S01_kyc_suspension-1-0005,GGB ALERT: KYC pending. Your account will be blocked within 12 hours. Click bit-ly.example/kyc8 to verify PAN details.,suspicious,S01_kyc_suspension
+S01_kyc_suspension-2-0006,Your Deccan Finance Bank netbanking is temporarily restricted. Complete e-KYC immediately using secure-update-bank.example/login to avoid permanent closure.,suspicious,S01_kyc_suspension
+S01_kyc_suspension-2-0007,Your Sahyadri Bank netbanking is temporarily restricted. Complete e-KYC immediately using bit-ly.example/kyc8 to avoid permanent closure.,suspicious,S01_kyc_suspension
+S01_kyc_suspension-2-0008,Your Unity Bank netbanking is temporarily restricted. Complete e-KYC immediately using bit-ly.example/kyc8 to avoid permanent closure.,suspicious,S01_kyc_suspension
+S02_account_blocked_call-0-0009,Your Deccan Finance Bank debit card has been blocked due to suspicious activity. Call our officer on 70000 33333 immediately to reactivate.,suspicious,S02_account_blocked_call
+S02_account_blocked_call-0-0010,Your Coastal Co-op Bank debit card has been blocked due to suspicious activity. Call our officer on 70000 33333 immediately to reactivate.,suspicious,S02_account_blocked_call
+S02_account_blocked_call-1-0011,"ATTENTION: Bharat National Bank account XX1234 frozen. To unfreeze, call 1800 000 0000 and verify your card details right now.",suspicious,S02_account_blocked_call
+S02_account_blocked_call-1-0012,"ATTENTION: Bharat National Bank account XX5521 frozen. To unfreeze, call 70000 33333 and verify your card details right now.",suspicious,S02_account_blocked_call
+S02_account_blocked_call-1-0013,"ATTENTION: Ganga Gramin Bank account XX7764 frozen. To unfreeze, call 80000 22222 and verify your card details right now.",suspicious,S02_account_blocked_call
+S03_share_otp_cancel-0-0014,"Sir, a payment of Rs 2,000 is being processed from your account by mistake. Please tell me the OTP you just received so I can cancel it.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-1-0015,"This is Coastal Co-op Bank fraud desk. To stop the unauthorised transaction of Rs 4,999, share the OTP sent to your mobile with me now.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-1-0016,"This is Ganga Gramin Bank fraud desk. To stop the unauthorised transaction of Rs 1,20,000, share the OTP sent to your mobile with me now.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-1-0017,"This is Bharat National Bank fraud desk. To stop the unauthorised transaction of Rs 75,000, share the OTP sent to your mobile with me now.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-2-0018,"Hello Suresh, I sent you a code by mistake, please forward the 6 digit OTP to this number, it is urgent.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-2-0019,"Hello Fatima, I sent you a code by mistake, please forward the 6 digit OTP to this number, it is urgent.",suspicious,S03_share_otp_cancel
+S03_share_otp_cancel-2-0020,"Hello Kavya, I sent you a code by mistake, please forward the 6 digit OTP to this number, it is urgent.",suspicious,S03_share_otp_cancel
+S04_electricity_disconnection-0-0021,"Dear consumer, your electricity power will be disconnected tonight at 9.30 pm because your previous month bill was not updated. Please contact electricity officer 90000 11111 immediately.",suspicious,S04_electricity_disconnection
+S04_electricity_disconnection-0-0022,"Dear consumer, your electricity power will be disconnected tonight at 9.30 pm because your previous month bill was not updated. Please contact electricity officer 1800 000 0000 immediately.",suspicious,S04_electricity_disconnection
+S04_electricity_disconnection-1-0023,"CityPower Electricity: Your connection will be cut today due to pending bill. Pay Rs 1,250 at bit-ly.example/kyc8 or call 1800 000 0000 within 10 minutes.",suspicious,S04_electricity_disconnection
+S04_electricity_disconnection-1-0024,MetroGas: Your connection will be cut today due to pending bill. Pay Rs 499 at bit-ly.example/kyc8 or call 80000 22222 within 30 minutes.,suspicious,S04_electricity_disconnection
+S04_electricity_disconnection-1-0025,"HomeFibre Broadband: Your connection will be cut today due to pending bill. Pay Rs 4,999 at bnb-kyc-verify.example/u or call 90000 11111 within 10 minutes.",suspicious,S04_electricity_disconnection
+S05_lottery_fee-0-0026,"Congratulations! Your mobile number has won Rs 25 lakh in the Unity Bank lucky draw. Pay processing fee of Rs 1,250 to claim your prize.",suspicious,S05_lottery_fee
+S05_lottery_fee-0-0027,"Congratulations! Your mobile number has won Rs 25 lakh in the Coastal Co-op Bank lucky draw. Pay processing fee of Rs 75,000 to claim your prize.",suspicious,S05_lottery_fee
+S05_lottery_fee-0-0028,"Congratulations! Your mobile number has won Rs 25 lakh in the Sahyadri Bank lucky draw. Pay processing fee of Rs 2,000 to claim your prize.",suspicious,S05_lottery_fee
+S05_lottery_fee-1-0029,You are selected winner of KBC lottery. To release prize money transfer Rs 499 registration charge to anil.pay@dfb.,suspicious,S05_lottery_fee
+S05_lottery_fee-1-0030,"You are selected winner of KBC lottery. To release prize money transfer Rs 75,000 registration charge to shop.fresh@bnb.",suspicious,S05_lottery_fee
+S05_lottery_fee-1-0031,"You are selected winner of KBC lottery. To release prize money transfer Rs 1,20,000 registration charge to meena22@ccb.",suspicious,S05_lottery_fee
+S06_job_task_deposit-0-0032,"Earn Rs 3000 daily from home! Just like YouTube videos. Pay a refundable joining deposit of Rs 25,000 to start. Limited seats.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-1-0033,"Hi Meena, part time job offer: complete simple tasks and earn commission. First recharge your task wallet with Rs 7,500 to unlock high paying tasks.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-1-0034,"Hi Anil, part time job offer: complete simple tasks and earn commission. First recharge your task wallet with Rs 4,999 to unlock high paying tasks.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-1-0035,"Hi Rahul, part time job offer: complete simple tasks and earn commission. First recharge your task wallet with Rs 75,000 to unlock high paying tasks.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-2-0036,"HR from Nila Textiles here. You are shortlisted for online work. Security deposit of Rs 49,999 required before onboarding, fully refundable.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-2-0037,"HR from Skyline Logistics here. You are shortlisted for online work. Security deposit of Rs 75,000 required before onboarding, fully refundable.",suspicious,S06_job_task_deposit
+S06_job_task_deposit-2-0038,"HR from Greenleaf Traders here. You are shortlisted for online work. Security deposit of Rs 7,500 required before onboarding, fully refundable.",suspicious,S06_job_task_deposit
+S07_wrong_upi_transfer-0-0039,"Hello, I transferred Rs 2,000 to your UPI by mistake. Please send it back to shop.fresh@bnb, it was for my mother's hospital bill.",suspicious,S07_wrong_upi_transfer
+S07_wrong_upi_transfer-0-0040,"Hello, I transferred Rs 2,000 to your UPI by mistake. Please send it back to kavya.s@ggb, it was for my mother's hospital bill.",suspicious,S07_wrong_upi_transfer
+S07_wrong_upi_transfer-1-0041,"Bhai galti se aapke number pe 25,000 chala gaya, please wapas bhej do rahul.k@unitybank pe, bahut zaruri hai.",suspicious,S07_wrong_upi_transfer
+S07_wrong_upi_transfer-1-0042,"Bhai galti se aapke number pe 2,000 chala gaya, please wapas bhej do kavya.s@ggb pe, bahut zaruri hai.",suspicious,S07_wrong_upi_transfer
+S07_wrong_upi_transfer-1-0043,"Bhai galti se aapke number pe 49,999 chala gaya, please wapas bhej do shop.fresh@bnb pe, bahut zaruri hai.",suspicious,S07_wrong_upi_transfer
+S08_overpayment_refund-0-0044,"We accidentally paid you Rs 25,000 extra for the order. Kindly send back the excess amount to our new account today.",suspicious,S08_overpayment_refund
+S08_overpayment_refund-1-0045,"Our accounts team made an accidental transfer of Rs 49,999 to you. Refund the difference to anil.pay@dfb to avoid legal issues.",suspicious,S08_overpayment_refund
+S08_overpayment_refund-1-0046,"Our accounts team made an accidental transfer of Rs 2,000 to you. Refund the difference to meena22@ccb to avoid legal issues.",suspicious,S08_overpayment_refund
+S09_customs_parcel-0-0047,"Your international parcel is held at customs. Pay clearance charge of Rs 12,500 at refund-claim-now.example/r or it will be returned.",suspicious,S09_customs_parcel
+S09_customs_parcel-0-0048,"Your international parcel is held at customs. Pay clearance charge of Rs 7,500 at rewards-redeem.example/pts or it will be returned.",suspicious,S09_customs_parcel
+S09_customs_parcel-1-0049,"Courier notice: package with your name contains restricted items. Pay penalty Rs 1,250 to customs officer via shop.fresh@bnb to avoid case.",suspicious,S09_customs_parcel
+S09_customs_parcel-1-0050,"Courier notice: package with your name contains restricted items. Pay penalty Rs 4,999 to customs officer via kavya.s@ggb to avoid case.",suspicious,S09_customs_parcel
+S09_customs_parcel-1-0051,"Courier notice: package with your name contains restricted items. Pay penalty Rs 75,000 to customs officer via rahul.k@unitybank to avoid case.",suspicious,S09_customs_parcel
+S10_digital_arrest-0-0052,"This is CBI cyber cell. A parcel with drugs was booked on your Aadhaar. Stay on video call, do not inform anyone, and transfer Rs 1,250 for verification or you will be arrested.",suspicious,S10_digital_arrest
+S10_digital_arrest-1-0053,"Mumbai police: an FIR is registered against your number for money laundering. Pay security amount Rs 25,000 immediately or police will come to arrest you today.",suspicious,S10_digital_arrest
+S11_tax_refund_link-0-0054,"Income Tax Dept: You are eligible for a refund of Rs 75,000. Verify your account details at bit-ly.example/kyc8 to receive it.",suspicious,S11_tax_refund_link
+S11_tax_refund_link-0-0055,"Income Tax Dept: You are eligible for a refund of Rs 1,250. Verify your account details at secure-update-bank.example/login to receive it.",suspicious,S11_tax_refund_link
+S11_tax_refund_link-0-0056,"Income Tax Dept: You are eligible for a refund of Rs 49,999. Verify your account details at bnb-kyc-verify.example/u to receive it.",suspicious,S11_tax_refund_link
+S11_tax_refund_link-1-0057,"ITR refund of Rs 7,500 approved. Your account number is incorrect, please update it here bit-ly.example/kyc8 before 12-Oct-26.",suspicious,S11_tax_refund_link
+S11_tax_refund_link-1-0058,"ITR refund of Rs 12,500 approved. Your account number is incorrect, please update it here refund-claim-now.example/r before 12-Oct-26.",suspicious,S11_tax_refund_link
+S11_tax_refund_link-1-0059,"ITR refund of Rs 1,250 approved. Your account number is incorrect, please update it here secure-update-bank.example/login before 07/10/2026.",suspicious,S11_tax_refund_link
+S12_ceo_gift_cards-0-0060,"Hi Priya, I'm in a meeting and can't talk. Need you to buy 5 Amazon gift cards of Rs 2,000 each for a client. Keep this between us, send me the codes.",suspicious,S12_ceo_gift_cards
+S12_ceo_gift_cards-0-0061,"Hi Rahul, I'm in a meeting and can't talk. Need you to buy 5 Amazon gift cards of Rs 75,000 each for a client. Keep this between us, send me the codes.",suspicious,S12_ceo_gift_cards
+S12_ceo_gift_cards-1-0062,"Are you at your desk? I need a quick favour, purchase Google Play cards worth Rs 25,000 and scratch the codes and send photos. Don't tell anyone in the office yet.",suspicious,S12_ceo_gift_cards
+S13_crypto_doubling-0-0063,"Invest Rs 49,999 in our crypto trading plan and get double returns in 7 days. Send USDT to the wallet address shared on Telegram.",suspicious,S13_crypto_doubling
+S13_crypto_doubling-1-0064,"Guaranteed 40% weekly profit with bitcoin mining. Minimum deposit Rs 75,000. Join now, offer ends tonight.",suspicious,S13_crypto_doubling
+S14_remote_access_refund-0-0065,"To process your refund of Rs 75,000, please install AnyDesk and share the 9 digit code with our support executive.",suspicious,S14_remote_access_refund
+S14_remote_access_refund-1-0066,"Customer care here. Download the screen sharing app from the link and open your banking app so we can credit your cashback of Rs 12,500.",suspicious,S14_remote_access_refund
+S15_instant_loan_fee-0-0067,"Congratulations Fatima! Your personal loan of Rs 5,00,000 is pre approved. Pay file charge Rs 1,250 to kavya.s@ggb to get disbursal in 10 minutes.",suspicious,S15_instant_loan_fee
+S15_instant_loan_fee-0-0068,"Congratulations John! Your personal loan of Rs 5,00,000 is pre approved. Pay file charge Rs 12,500 to anil.pay@dfb to get disbursal in 10 minutes.",suspicious,S15_instant_loan_fee
+S15_instant_loan_fee-0-0069,"Congratulations Lakshmi! Your personal loan of Rs 5,00,000 is pre approved. Pay file charge Rs 2,000 to meena22@ccb to get disbursal in 10 minutes.",suspicious,S15_instant_loan_fee
+S15_instant_loan_fee-1-0070,"Instant loan without documents. Pay GST and insurance fee of Rs 49,999 first, loan amount will be credited today.",suspicious,S15_instant_loan_fee
+S16_reward_points_card-0-0071,"Your Unity Bank credit card reward points worth Rs 7,500 expire today. Redeem now at secure-update-bank.example/login by entering your card number, expiry and CVV.",suspicious,S16_reward_points_card
+S16_reward_points_card-0-0072,"Your Ganga Gramin Bank credit card reward points worth Rs 75,000 expire today. Redeem now at bit-ly.example/kyc8 by entering your card number, expiry and CVV.",suspicious,S16_reward_points_card
+S16_reward_points_card-0-0073,"Your Sahyadri Bank credit card reward points worth Rs 1,250 expire today. Redeem now at bnb-kyc-verify.example/u by entering your card number, expiry and CVV.",suspicious,S16_reward_points_card
+S16_reward_points_card-1-0074,"Dear cardholder, 2,000 reward points are about to lapse. Claim cash value at bnb-kyc-verify.example/u.",suspicious,S16_reward_points_card
+S16_reward_points_card-1-0075,"Dear cardholder, 12,500 reward points are about to lapse. Claim cash value at secure-update-bank.example/login.",suspicious,S16_reward_points_card
+S17_family_new_number-0-0076,"Hi mum, this is my new number, my phone broke. Can you send Rs 7,500 to shop.fresh@bnb for an urgent bill? I'll explain later.",suspicious,S17_family_new_number
+S17_family_new_number-0-0077,"Hi mum, this is my new number, my phone broke. Can you send Rs 12,500 to rahul.k@unitybank for an urgent bill? I'll explain later.",suspicious,S17_family_new_number
+S17_family_new_number-0-0078,"Hi mum, this is my new number, my phone broke. Can you send Rs 4,999 to kavya.s@ggb for an urgent bill? I'll explain later.",suspicious,S17_family_new_number
+S17_family_new_number-1-0079,"Papa it's John, I lost my phone. Please transfer 7,500 to my friend's account, very urgent, don't call the old number.",suspicious,S17_family_new_number
+S17_family_new_number-1-0080,"Papa it's Suresh, I lost my phone. Please transfer 4,999 to my friend's account, very urgent, don't call the old number.",suspicious,S17_family_new_number
+S17_family_new_number-1-0081,"Papa it's Fatima, I lost my phone. Please transfer 4,999 to my friend's account, very urgent, don't call the old number.",suspicious,S17_family_new_number
+S18_vendor_account_change-0-0082,"Dear Accounts, please note our bank details have changed. Kindly pay invoice INV-2026-0412 to our new account mentioned below, effective immediately.",suspicious,S18_vendor_account_change
+S18_vendor_account_change-1-0083,"From Orbit Tech Pvt Ltd: due to an audit our old account is on hold. Use this account for the pending payment of Rs 1,20,000 and keep this confidential until the audit ends.",suspicious,S18_vendor_account_change
+S18_vendor_account_change-1-0084,"From Nila Textiles: due to an audit our old account is on hold. Use this account for the pending payment of Rs 7,500 and keep this confidential until the audit ends.",suspicious,S18_vendor_account_change
+S18_vendor_account_change-1-0085,From Skyline Logistics: due to an audit our old account is on hold. Use this account for the pending payment of Rs 499 and keep this confidential until the audit ends.,suspicious,S18_vendor_account_change
+S19_sim_deactivation-0-0086,Your SIM card will be deactivated in 2 hours as KYC is not verified. Call 90000 11111 now to avoid service closure.,suspicious,S19_sim_deactivation
+S19_sim_deactivation-1-0087,"Dear user, your mobile number will be blocked today due to e-KYC failure. Share the code sent to you with our executive to continue services.",suspicious,S19_sim_deactivation
+S20_qr_receive_money-0-0088,I am sending you Rs 499 advance for the sofa. Scan this QR code and enter your UPI PIN to receive the money.,suspicious,S20_qr_receive_money
+S20_qr_receive_money-1-0089,"To receive your cashback of Rs 75,000, accept the collect request and enter your PIN.",suspicious,S20_qr_receive_money
+S21_insurance_bonus_release-0-0090,"Your old insurance policy bonus of Rs 75,000 is pending release. Pay a one time processing charge to the officer to receive full amount.",suspicious,S21_insurance_bonus_release
+S21_insurance_bonus_release-1-0091,"IRDA notice: unclaimed policy maturity amount found in your name. Deposit TDS of Rs 75,000 to release funds.",suspicious,S21_insurance_bonus_release
+S22_stock_tips_group-0-0092,"Join our VIP stock tips group, 300% returns guaranteed. Pay membership Rs 1,250 to rahul.k@unitybank and get insider calls.",suspicious,S22_stock_tips_group
+S22_stock_tips_group-0-0093,"Join our VIP stock tips group, 300% returns guaranteed. Pay membership Rs 499 to shop.fresh@bnb and get insider calls.",suspicious,S22_stock_tips_group
+S22_stock_tips_group-0-0094,"Join our VIP stock tips group, 300% returns guaranteed. Pay membership Rs 7,500 to kavya.s@ggb and get insider calls.",suspicious,S22_stock_tips_group
+S22_stock_tips_group-1-0095,"Our analyst recommends this IPO allotment through a special account. Transfer Rs 12,500 today to secure guaranteed listing gains.",suspicious,S22_stock_tips_group
+S23_fake_customer_care_pin-0-0096,"Thank you for contacting CityPower Electricity support. To get your refund, open the payment app and enter your UPI PIN when prompted.",suspicious,S23_fake_customer_care_pin
+S23_fake_customer_care_pin-0-0097,"Thank you for contacting QuickCab support. To get your refund, open the payment app and enter your UPI PIN when prompted.",suspicious,S23_fake_customer_care_pin
+S23_fake_customer_care_pin-1-0098,"Refund team here. Your amount of Rs 49,999 is stuck. Share your card number and the OTP you receive so we can reverse it.",suspicious,S23_fake_customer_care_pin
+S24_romance_travel_money-0-0099,"My love, I am stuck at the airport customs with gifts for you. Please send Rs 1,250 for the clearance, I will repay as soon as I land.",suspicious,S24_romance_travel_money
+S24_romance_travel_money-1-0100,"Dear, I am an army doctor on deployment and cannot access my account. Kindly send Rs 1,20,000 via gift card so I can book my flight to meet you.",suspicious,S24_romance_travel_money
+S25_army_buyer_advance-0-0101,"I am army officer posted at the base, want to buy your bike. First you send Rs 1 to verify, then I will send full Rs 1,250.",suspicious,S25_army_buyer_advance
+S25_army_buyer_advance-1-0102,"Sir I will pay you Rs 75,000 for the room advance through army account, please pay the transfer charge first to kavya.s@ggb.",suspicious,S25_army_buyer_advance
+S25_army_buyer_advance-1-0103,"Sir I will pay you Rs 7,500 for the room advance through army account, please pay the transfer charge first to meena22@ccb.",suspicious,S25_army_buyer_advance
+S26_telecom_deactivation-0-0104,TRAI: your number will be disconnected in 2 hours due to illegal activity. Press 9 to speak to an officer.,suspicious,S26_telecom_deactivation
+S26_telecom_deactivation-1-0105,"Your mobile services will stop today. Pay pending charge of Rs 4,999 at secure-update-bank.example/login immediately.",suspicious,S26_telecom_deactivation
+S26_telecom_deactivation-1-0106,"Your mobile services will stop today. Pay pending charge of Rs 4,999 at rewards-redeem.example/pts immediately.",suspicious,S26_telecom_deactivation
+S26_telecom_deactivation-1-0107,"Your mobile services will stop today. Pay pending charge of Rs 75,000 at refund-claim-now.example/r immediately.",suspicious,S26_telecom_deactivation
+S27_fake_donation-0-0108,"Flood relief: children need food urgently. Donate any amount to meena22@ccb. Every rupee counts, act now.",suspicious,S27_fake_donation
+S27_fake_donation-0-0109,"Flood relief: children need food urgently. Donate any amount to kavya.s@ggb. Every rupee counts, act now.",suspicious,S27_fake_donation
+S27_fake_donation-0-0110,"Flood relief: children need food urgently. Donate any amount to anil.pay@dfb. Every rupee counts, act now.",suspicious,S27_fake_donation
+S27_fake_donation-1-0111,"Help a cancer patient today. Surgery in 3 hours, send Rs 7,500 to this personal account, God bless you.",suspicious,S27_fake_donation
+S28_scholarship_fee-0-0112,"Your child is selected for a government scholarship of Rs 48,000. Pay verification fee of Rs 1,250 to meena22@ccb to receive it.",suspicious,S28_scholarship_fee
+S28_scholarship_fee-0-0113,"Your child is selected for a government scholarship of Rs 48,000. Pay verification fee of Rs 2,000 to kavya.s@ggb to receive it.",suspicious,S28_scholarship_fee
+S28_scholarship_fee-1-0114,"Education dept: scholarship amount pending for your ward. Share the OTP sent to your phone to credit Rs 7,500.",suspicious,S28_scholarship_fee
+S29_pension_otp-0-0115,"Pension office: your life certificate is expiring. Tell the OTP you receive to update it, otherwise pension will be stopped.",suspicious,S29_pension_otp
+S29_pension_otp-1-0116,"Dear pensioner, your Aadhaar linked benefit of Rs 4,999 is on hold. Verify by sharing the code sent to your mobile.",suspicious,S29_pension_otp
+S30_fake_challan-0-0117,"Traffic e-challan of Rs 12,500 pending on your vehicle. Pay immediately at rewards-redeem.example/pts to avoid court summons.",suspicious,S30_fake_challan
+S30_fake_challan-0-0118,"Traffic e-challan of Rs 7,500 pending on your vehicle. Pay immediately at bnb-kyc-verify.example/u to avoid court summons.",suspicious,S30_fake_challan
+S30_fake_challan-0-0119,"Traffic e-challan of Rs 75,000 pending on your vehicle. Pay immediately at refund-claim-now.example/r to avoid court summons.",suspicious,S30_fake_challan
+S30_fake_challan-1-0120,FASTag blocked due to unpaid toll. Recharge at refund-claim-now.example/r within 30 minutes or penalty will be applied.,suspicious,S30_fake_challan
+S30_fake_challan-1-0121,FASTag blocked due to unpaid toll. Recharge at rewards-redeem.example/pts within 45 minutes or penalty will be applied.,suspicious,S30_fake_challan
+S30_fake_challan-1-0122,FASTag blocked due to unpaid toll. Recharge at bit-ly.example/kyc8 within 10 minutes or penalty will be applied.,suspicious,S30_fake_challan
+S31_hinglish_otp_threat-0-0123,Aapka Deccan Finance Bank account aaj band ho jayega. Abhi OTP bhejo warna paisa wapas nahi milega.,suspicious,S31_hinglish_otp_threat
+S31_hinglish_otp_threat-0-0124,Aapka Bharat National Bank account aaj band ho jayega. Abhi OTP bhejo warna paisa wapas nahi milega.,suspicious,S31_hinglish_otp_threat
+S31_hinglish_otp_threat-0-0125,Aapka Coastal Co-op Bank account aaj band ho jayega. Abhi OTP bhejo warna paisa wapas nahi milega.,suspicious,S31_hinglish_otp_threat
+S31_hinglish_otp_threat-1-0126,"Bank se bol raha hoon, aapka ATM block ho gaya hai. Card ke peeche wala number aur OTP batao.",suspicious,S31_hinglish_otp_threat
+S32_identity_confirm_card-0-0127,We noticed an unusual login on your Deccan Finance Bank profile. Confirm your identity by replying with your full card number and expiry date.,suspicious,S32_identity_confirm_card
+S32_identity_confirm_card-1-0128,UNTY Security: reply with your netbanking user ID and password to confirm you are the account holder.,suspicious,S32_identity_confirm_card
+S32_identity_confirm_card-1-0129,SHYB Security: reply with your netbanking user ID and password to confirm you are the account holder.,suspicious,S32_identity_confirm_card
+S33_hotel_rating_task-0-0130,"Rate hotels on our app and earn Rs 150 per review. To withdraw earnings, complete a prepaid merchant task of Rs 4,999.",suspicious,S33_hotel_rating_task
+S33_hotel_rating_task-1-0131,"Your task commission of Rs 7,500 is frozen. Pay the unlocking fee to withdraw, otherwise all earnings will be lost.",suspicious,S33_hotel_rating_task
+S34_inheritance-0-0132,"I am a lawyer representing a late client who shares your surname. An inheritance of USD 2.5 million awaits you. Send Rs 25,000 for documentation.",suspicious,S34_inheritance
+S34_inheritance-1-0133,"Unclaimed foreign fund in your name. Pay the clearance certificate fee of Rs 12,500 to release the transfer.",suspicious,S34_inheritance
+S35_cod_refund_link-0-0134,"Your cash on delivery order was cancelled. Click rewards-redeem.example/pts and enter your UPI PIN to get Rs 4,999 refunded.",suspicious,S35_cod_refund_link
+S35_cod_refund_link-0-0135,"Your cash on delivery order was cancelled. Click refund-claim-now.example/r and enter your UPI PIN to get Rs 75,000 refunded.",suspicious,S35_cod_refund_link
+S35_cod_refund_link-0-0136,"Your cash on delivery order was cancelled. Click bit-ly.example/kyc8 and enter your UPI PIN to get Rs 1,250 refunded.",suspicious,S35_cod_refund_link
+S35_cod_refund_link-1-0137,Delivery failed. Pay Rs 5 re-delivery charge at secure-update-bank.example/login using your debit card details.,suspicious,S35_cod_refund_link
+S35_cod_refund_link-1-0138,Delivery failed. Pay Rs 5 re-delivery charge at refund-claim-now.example/r using your debit card details.,suspicious,S35_cod_refund_link
+S36_electricity_meter_app-0-0139,Your smart meter update is pending. Install the meter app from the link sent by the lineman and enter your card details to avoid disconnection.,suspicious,S36_electricity_meter_app
+S36_electricity_meter_app-1-0140,Officer from FreshMart here. Download our support app and grant all permissions so I can update your bill payment.,suspicious,S36_electricity_meter_app
+S36_electricity_meter_app-1-0141,Officer from CityPower Electricity here. Download our support app and grant all permissions so I can update your bill payment.,suspicious,S36_electricity_meter_app
+L01_otp_do_not_share-0-0142,"774820 is your OTP for transaction of Rs 12,500 at MetroGas on your Coastal Co-op Bank card XX9087. Valid for 45 mins. Do not share it with anyone.",legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-0-0143,"390151 is your OTP for transaction of Rs 12,500 at FreshMart on your Unity Bank card XX5521. Valid for 15 mins. Do not share it with anyone.",legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-0-0144,"105377 is your OTP for transaction of Rs 7,500 at HomeFibre Broadband on your Coastal Co-op Bank card XX3310. Valid for 15 mins. Do not share it with anyone.",legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-1-0145,662048 is the One Time Password for your Sahyadri Bank netbanking login. Deccan Finance Bank never asks for your OTP. Do not share it.,legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-1-0146,662048 is the One Time Password for your Deccan Finance Bank netbanking login. Coastal Co-op Bank never asks for your OTP. Do not share it.,legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-1-0147,482913 is the One Time Password for your Unity Bank netbanking login. Unity Bank never asks for your OTP. Do not share it.,legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-2-0148,"Use OTP 482913 to complete your UPI registration. Never share this code with anyone, including bank staff. -SHYB",legitimate,L01_otp_do_not_share
+L01_otp_do_not_share-2-0149,"Use OTP 105377 to complete your UPI registration. Never share this code with anyone, including bank staff. -CCB",legitimate,L01_otp_do_not_share
+L02_debit_alert-0-0150,"Rs 49,999 debited from A/c XX7764 on 28-Aug-26 to FreshMart. Avl bal Rs 18,240. Not you? Call Ganga Gramin Bank on 1800 000 0000. -SHYB",legitimate,L02_debit_alert
+L02_debit_alert-0-0151,"Rs 49,999 debited from A/c XX7764 on 12-Oct-26 to CityPower Electricity. Avl bal Rs 18,240. Not you? Call Coastal Co-op Bank on 90000 11111. -SHYB",legitimate,L02_debit_alert
+L02_debit_alert-0-0152,"Rs 2,000 debited from A/c XX9087 on 03/11/2026 to MetroGas. Avl bal Rs 18,240. Not you? Call Coastal Co-op Bank on 1800 000 0000. -CCB",legitimate,L02_debit_alert
+L02_debit_alert-1-0153,"Your Bharat National Bank a/c XX9087 is debited for Rs 499 on 07/10/2026 by UPI ref 411820935566. If not done by you, report via the official app.",legitimate,L02_debit_alert
+L02_debit_alert-1-0154,"Your Coastal Co-op Bank a/c XX1234 is debited for Rs 4,999 on 12-Oct-26 by UPI ref 411820935566. If not done by you, report via the official app.",legitimate,L02_debit_alert
+L02_debit_alert-1-0155,"Your Sahyadri Bank a/c XX3310 is debited for Rs 2,000 on 21-Sep-26 by UPI ref 629104837251. If not done by you, report via the official app.",legitimate,L02_debit_alert
+L03_salary_credit-0-0156,"Rs 49,999 credited to your A/c XX7764 on 07/10/2026 by SALARY Nila Textiles. Avl bal Rs 62,410. -DFB",legitimate,L03_salary_credit
+L03_salary_credit-0-0157,"Rs 4,999 credited to your A/c XX1234 on 07/10/2026 by SALARY Greenleaf Traders. Avl bal Rs 62,410. -BNB",legitimate,L03_salary_credit
+L03_salary_credit-0-0158,"Rs 49,999 credited to your A/c XX7764 on 12-Oct-26 by SALARY Nila Textiles. Avl bal Rs 62,410. -CCB",legitimate,L03_salary_credit
+L03_salary_credit-1-0159,"Dear customer, your account XX9087 has been credited with Rs 49,999 on 21-Sep-26 (NEFT from Orbit Tech Pvt Ltd).",legitimate,L03_salary_credit
+L03_salary_credit-1-0160,"Dear customer, your account XX1234 has been credited with Rs 2,000 on 07/10/2026 (NEFT from Orbit Tech Pvt Ltd).",legitimate,L03_salary_credit
+L04_upi_success-0-0161,"Paid Rs 1,250 to FreshMart via UPI. UPI Ref No 411820935566. Thank you for paying with Ganga Gramin Bank.",legitimate,L04_upi_success
+L04_upi_success-0-0162,"Paid Rs 75,000 to HomeFibre Broadband via UPI. UPI Ref No 508812374901. Thank you for paying with Bharat National Bank.",legitimate,L04_upi_success
+L04_upi_success-0-0163,"Paid Rs 7,500 to CityPower Electricity via UPI. UPI Ref No 629104837251. Thank you for paying with Deccan Finance Bank.",legitimate,L04_upi_success
+L04_upi_success-1-0164,"You have successfully paid Rs 7,500 to shop.fresh@bnb on 07/10/2026 at 18:05. Ref 735019284460.",legitimate,L04_upi_success
+L04_upi_success-1-0165,"You have successfully paid Rs 12,500 to rahul.k@unitybank on 21-Sep-26 at 13:42. Ref 508812374901.",legitimate,L04_upi_success
+L04_upi_success-1-0166,"You have successfully paid Rs 49,999 to shop.fresh@bnb on 28-Aug-26 at 18:05. Ref 508812374901.",legitimate,L04_upi_success
+L05_vendor_invoice-0-0167,"Hi Kavya, please find attached invoice INV-2026-0877 for the October consignment. Amount Rs 499, payable to our usual account within 30 days.",legitimate,L05_vendor_invoice
+L05_vendor_invoice-0-0168,"Hi Suresh, please find attached invoice INV-2026-0877 for the October consignment. Amount Rs 7,500, payable to our usual account within 30 days.",legitimate,L05_vendor_invoice
+L05_vendor_invoice-0-0169,"Hi Fatima, please find attached invoice INV-2026-0412 for the October consignment. Amount Rs 25,000, payable to our usual account within 30 days.",legitimate,L05_vendor_invoice
+L05_vendor_invoice-1-0170,"Dear team, invoice INV-2026-0877 from Skyline Logistics for Rs 7,500 has been uploaded to the vendor portal. Payment terms are net 45 as per contract.",legitimate,L05_vendor_invoice
+L05_vendor_invoice-1-0171,"Dear team, invoice INV-2026-1093 from Nila Textiles for Rs 1,20,000 has been uploaded to the vendor portal. Payment terms are net 45 as per contract.",legitimate,L05_vendor_invoice
+L06_card_statement-0-0172,"Your Unity Bank credit card statement for XX9087 is generated. Total due Rs 25,000, minimum due Rs 1,250, payment due date 21-Sep-26.",legitimate,L06_card_statement
+L06_card_statement-0-0173,"Your Sahyadri Bank credit card statement for XX1234 is generated. Total due Rs 2,000, minimum due Rs 1,250, payment due date 28-Aug-26.",legitimate,L06_card_statement
+L06_card_statement-0-0174,"Your Ganga Gramin Bank credit card statement for XX3310 is generated. Total due Rs 7,500, minimum due Rs 1,250, payment due date 03/11/2026.",legitimate,L06_card_statement
+L06_card_statement-1-0175,"Statement alert: Deccan Finance Bank card XX7764 total amount due Rs 12,500. Pay via the Ganga Gramin Bank app or www.sahyadribank.example by 21-Sep-26.",legitimate,L06_card_statement
+L06_card_statement-1-0176,"Statement alert: Coastal Co-op Bank card XX7764 total amount due Rs 2,000. Pay via the Ganga Gramin Bank app or www.sahyadribank.example by 03/11/2026.",legitimate,L06_card_statement
+L06_card_statement-1-0177,"Statement alert: Deccan Finance Bank card XX3310 total amount due Rs 75,000. Pay via the Coastal Co-op Bank app or www.bharatbank.example by 28-Aug-26.",legitimate,L06_card_statement
+L07_emi_reminder-0-0178,"Reminder: EMI of Rs 2,000 for loan a/c XX1234 will be auto-debited on 07/10/2026. Please keep sufficient balance. -UNTY",legitimate,L07_emi_reminder
+L07_emi_reminder-0-0179,"Reminder: EMI of Rs 25,000 for loan a/c XX7764 will be auto-debited on 12-Oct-26. Please keep sufficient balance. -UNTY",legitimate,L07_emi_reminder
+L07_emi_reminder-0-0180,"Reminder: EMI of Rs 49,999 for loan a/c XX5521 will be auto-debited on 21-Sep-26. Please keep sufficient balance. -BNB",legitimate,L07_emi_reminder
+L07_emi_reminder-1-0181,"Your home loan EMI of Rs 7,500 is due on 12-Oct-26. Ignore if already paid.",legitimate,L07_emi_reminder
+L07_emi_reminder-1-0182,"Your home loan EMI of Rs 2,000 is due on 21-Sep-26. Ignore if already paid.",legitimate,L07_emi_reminder
+L08_split_dinner-0-0183,"Hey John, dinner came to Rs 7,500 for the four of us, your share is a quarter. UPI me whenever, no rush.",legitimate,L08_split_dinner
+L08_split_dinner-0-0184,"Hey Anil, dinner came to Rs 7,500 for the four of us, your share is a quarter. UPI me whenever, no rush.",legitimate,L08_split_dinner
+L08_split_dinner-0-0185,"Hey Priya, dinner came to Rs 25,000 for the four of us, your share is a quarter. UPI me whenever, no rush.",legitimate,L08_split_dinner
+L08_split_dinner-1-0186,"Thanks for last night! I paid the bill, can you send your part to anil.pay@dfb sometime this week?",legitimate,L08_split_dinner
+L08_split_dinner-1-0187,"Thanks for last night! I paid the bill, can you send your part to shop.fresh@bnb sometime this week?",legitimate,L08_split_dinner
+L09_rent_reminder-0-0188,"Hi Kavya, gentle reminder that rent of Rs 4,999 for this month is due on the 5th. Same account as usual. Thanks!",legitimate,L09_rent_reminder
+L09_rent_reminder-0-0189,"Hi Arjun, gentle reminder that rent of Rs 25,000 for this month is due on the 5th. Same account as usual. Thanks!",legitimate,L09_rent_reminder
+L09_rent_reminder-0-0190,"Hi Suresh, gentle reminder that rent of Rs 1,250 for this month is due on the 5th. Same account as usual. Thanks!",legitimate,L09_rent_reminder
+L09_rent_reminder-1-0191,"Hello, this is your landlord. Please transfer the November rent to the usual account by 21-Sep-26.",legitimate,L09_rent_reminder
+L09_rent_reminder-1-0192,"Hello, this is your landlord. Please transfer the November rent to the usual account by 28-Aug-26.",legitimate,L09_rent_reminder
+L10_electricity_bill_official-0-0193,"FreshMart: Bill of Rs 1,20,000 generated for consumer no 4410382. Due date 03/11/2026. Pay via the official app or website.",legitimate,L10_electricity_bill_official
+L10_electricity_bill_official-0-0194,"HomeFibre Broadband: Bill of Rs 2,000 generated for consumer no 4410382. Due date 07/10/2026. Pay via the official app or website.",legitimate,L10_electricity_bill_official
+L10_electricity_bill_official-1-0195,"Dear consumer, your electricity bill for October is Rs 25,000. Pay before 21-Sep-26 to avoid late fee. Ignore if paid.",legitimate,L10_electricity_bill_official
+L10_electricity_bill_official-1-0196,"Dear consumer, your electricity bill for October is Rs 4,999. Pay before 07/10/2026 to avoid late fee. Ignore if paid.",legitimate,L10_electricity_bill_official
+L10_electricity_bill_official-1-0197,"Dear consumer, your electricity bill for October is Rs 12,500. Pay before 28-Aug-26 to avoid late fee. Ignore if paid.",legitimate,L10_electricity_bill_official
+L11_security_advisory-0-0198,"Unity Bank will NEVER ask for your OTP, PIN, CVV or password over call, SMS or email. Do not share them with anyone. Report fraud at 80000 22222.",legitimate,L11_security_advisory
+L11_security_advisory-0-0199,"Ganga Gramin Bank will NEVER ask for your OTP, PIN, CVV or password over call, SMS or email. Do not share them with anyone. Report fraud at 70000 33333.",legitimate,L11_security_advisory
+L11_security_advisory-1-0200,Beware of fraudsters posing as bank officials asking you to install screen sharing apps or share OTP. Unity Bank never makes such requests.,legitimate,L11_security_advisory
+L11_security_advisory-1-0201,Beware of fraudsters posing as bank officials asking you to install screen sharing apps or share OTP. Deccan Finance Bank never makes such requests.,legitimate,L11_security_advisory
+L11_security_advisory-1-0202,Beware of fraudsters posing as bank officials asking you to install screen sharing apps or share OTP. Ganga Gramin Bank never makes such requests.,legitimate,L11_security_advisory
+L11_security_advisory-2-0203,Stay safe: do not click on links in unknown messages promising refunds or rewards. Use only www.bharatbank.example for Coastal Co-op Bank services.,legitimate,L11_security_advisory
+L11_security_advisory-2-0204,Stay safe: do not click on links in unknown messages promising refunds or rewards. Use only www.unitybank.example for Ganga Gramin Bank services.,legitimate,L11_security_advisory
+L12_merchant_refund-0-0205,"Refund of Rs 1,250 for your HomeFibre Broadband order has been processed to your original payment method. It may take 5-7 working days.",legitimate,L12_merchant_refund
+L12_merchant_refund-0-0206,"Refund of Rs 1,250 for your CityPower Electricity order has been processed to your original payment method. It may take 5-7 working days.",legitimate,L12_merchant_refund
+L12_merchant_refund-0-0207,Refund of Rs 499 for your BookNest order has been processed to your original payment method. It may take 5-7 working days.,legitimate,L12_merchant_refund
+L12_merchant_refund-1-0208,"Your return is complete. Rs 2,000 refunded to your Deccan Finance Bank card XX9087. Ref 735019284460.",legitimate,L12_merchant_refund
+L12_merchant_refund-1-0209,"Your return is complete. Rs 49,999 refunded to your Ganga Gramin Bank card XX3310. Ref 411820935566.",legitimate,L12_merchant_refund
+L12_merchant_refund-1-0210,"Your return is complete. Rs 1,20,000 refunded to your Sahyadri Bank card XX3310. Ref 629104837251.",legitimate,L12_merchant_refund
+L13_fd_maturity-0-0211,"Your fixed deposit XX7764 of Rs 7,500 matures on 07/10/2026. It will be auto-renewed for the same tenure unless you instruct otherwise.",legitimate,L13_fd_maturity
+L13_fd_maturity-0-0212,"Your fixed deposit XX5521 of Rs 49,999 matures on 21-Sep-26. It will be auto-renewed for the same tenure unless you instruct otherwise.",legitimate,L13_fd_maturity
+L13_fd_maturity-1-0213,"FD XX7764 matured and Rs 75,000 credited to your savings account on 07/10/2026. -UNTY",legitimate,L13_fd_maturity
+L13_fd_maturity-1-0214,"FD XX9087 matured and Rs 12,500 credited to your savings account on 21-Sep-26. -UNTY",legitimate,L13_fd_maturity
+L13_fd_maturity-1-0215,"FD XX1234 matured and Rs 75,000 credited to your savings account on 07/10/2026. -DFB",legitimate,L13_fd_maturity
+L14_insurance_premium-0-0216,"Premium of Rs 1,20,000 for your health policy is due on 21-Sep-26. Renew via our app or website to stay covered.",legitimate,L14_insurance_premium
+L14_insurance_premium-0-0217,"Premium of Rs 12,500 for your health policy is due on 12-Oct-26. Renew via our app or website to stay covered.",legitimate,L14_insurance_premium
+L14_insurance_premium-0-0218,"Premium of Rs 49,999 for your health policy is due on 07/10/2026. Renew via our app or website to stay covered.",legitimate,L14_insurance_premium
+L14_insurance_premium-1-0219,"Thank you! We have received your premium of Rs 1,250. Your policy is renewed till next year.",legitimate,L14_insurance_premium
+L15_payslip_hr-0-0220,"Hi Arjun, your payslip for October is available on the HR portal. Reach out to payroll for any discrepancy.",legitimate,L15_payslip_hr
+L15_payslip_hr-0-0221,"Hi Lakshmi, your payslip for October is available on the HR portal. Reach out to payroll for any discrepancy.",legitimate,L15_payslip_hr
+L15_payslip_hr-0-0222,"Hi Fatima, your payslip for October is available on the HR portal. Reach out to payroll for any discrepancy.",legitimate,L15_payslip_hr
+L15_payslip_hr-1-0223,Payroll update: salaries for this month will be credited on 28-Aug-26. Tax declarations are due next week.,legitimate,L15_payslip_hr
+L15_payslip_hr-1-0224,Payroll update: salaries for this month will be credited on 12-Oct-26. Tax declarations are due next week.,legitimate,L15_payslip_hr
+L15_payslip_hr-1-0225,Payroll update: salaries for this month will be credited on 03/11/2026. Tax declarations are due next week.,legitimate,L15_payslip_hr
+L16_sip_confirmation-0-0226,"Your SIP of Rs 12,500 in the Flexi Cap Fund has been processed on 28-Aug-26. Units will be allotted at the applicable NAV.",legitimate,L16_sip_confirmation
+L16_sip_confirmation-0-0227,"Your SIP of Rs 2,000 in the Flexi Cap Fund has been processed on 12-Oct-26. Units will be allotted at the applicable NAV.",legitimate,L16_sip_confirmation
+L16_sip_confirmation-1-0228,"SIP instalment of Rs 49,999 debited from a/c XX3310 on 21-Sep-26. Statement will be emailed to you.",legitimate,L16_sip_confirmation
+L16_sip_confirmation-1-0229,SIP instalment of Rs 499 debited from a/c XX1234 on 12-Oct-26. Statement will be emailed to you.,legitimate,L16_sip_confirmation
+L16_sip_confirmation-1-0230,SIP instalment of Rs 499 debited from a/c XX5521 on 03/11/2026. Statement will be emailed to you.,legitimate,L16_sip_confirmation
+L17_itr_acknowledgement-0-0231,Your income tax return for AY 2026-27 has been filed successfully. Acknowledgement no 3410927785. Please e-verify within 30 days on the official portal.,legitimate,L17_itr_acknowledgement
+L17_itr_acknowledgement-1-0232,"Refund of Rs 75,000 for AY 2025-26 has been credited to your pre-validated bank account XX3310.",legitimate,L17_itr_acknowledgement
+L18_login_alert-0-0233,"New login to Unity Bank mobile banking on a Samsung device at 13:42 on 12-Oct-26. If this was you, no action needed. If not, call the number on the back of your card.",legitimate,L18_login_alert
+L18_login_alert-0-0234,"New login to Sahyadri Bank mobile banking on a Samsung device at 21:37 on 21-Sep-26. If this was you, no action needed. If not, call the number on the back of your card.",legitimate,L18_login_alert
+L18_login_alert-0-0235,"New login to Deccan Finance Bank mobile banking on a Samsung device at 21:37 on 28-Aug-26. If this was you, no action needed. If not, call the number on the back of your card.",legitimate,L18_login_alert
+L18_login_alert-1-0236,"You logged in to netbanking at 13:42. If you did not do this, block access from the official app immediately. -CCB",legitimate,L18_login_alert
+L18_login_alert-1-0237,"You logged in to netbanking at 13:42. If you did not do this, block access from the official app immediately. -DFB",legitimate,L18_login_alert
+L18_login_alert-1-0238,"You logged in to netbanking at 21:37. If you did not do this, block access from the official app immediately. -BNB",legitimate,L18_login_alert
+L19_cheque_cleared-0-0239,"Cheque no 004512 for Rs 25,000 deposited in your A/c XX7764 has been cleared on 07/10/2026.",legitimate,L19_cheque_cleared
+L19_cheque_cleared-0-0240,"Cheque no 004512 for Rs 2,000 deposited in your A/c XX7764 has been cleared on 28-Aug-26.",legitimate,L19_cheque_cleared
+L19_cheque_cleared-1-0241,"Your cheque of Rs 7,500 issued to Greenleaf Traders has been paid on 28-Aug-26. -CCB",legitimate,L19_cheque_cleared
+L19_cheque_cleared-1-0242,"Your cheque of Rs 1,20,000 issued to Orbit Tech Pvt Ltd has been paid on 28-Aug-26. -BNB",legitimate,L19_cheque_cleared
+L19_cheque_cleared-1-0243,"Your cheque of Rs 1,250 issued to Orbit Tech Pvt Ltd has been paid on 07/10/2026. -SHYB",legitimate,L19_cheque_cleared
+L20_family_sent_money-0-0244,"Beta, sent you Rs 12,500 for your books and hostel fees. Let me know once you get it.",legitimate,L20_family_sent_money
+L20_family_sent_money-1-0245,"Lakshmi, I've transferred the money for Diwali shopping to your account. Call me in the evening.",legitimate,L20_family_sent_money
+L20_family_sent_money-1-0246,"Priya, I've transferred the money for Diwali shopping to your account. Call me in the evening.",legitimate,L20_family_sent_money
+L20_family_sent_money-1-0247,"Fatima, I've transferred the money for Diwali shopping to your account. Call me in the evening.",legitimate,L20_family_sent_money
+L21_order_confirmation-0-0248,"Your order from BookNest for Rs 2,000 is confirmed and will be delivered by 03/11/2026. Paid via UPI.",legitimate,L21_order_confirmation
+L21_order_confirmation-0-0249,"Your order from HomeFibre Broadband for Rs 25,000 is confirmed and will be delivered by 12-Oct-26. Paid via UPI.",legitimate,L21_order_confirmation
+L21_order_confirmation-0-0250,"Your order from FreshMart for Rs 49,999 is confirmed and will be delivered by 12-Oct-26. Paid via UPI.",legitimate,L21_order_confirmation
+L21_order_confirmation-1-0251,Order shipped! Your package with CityPower Electricity items is out for delivery today. No payment due.,legitimate,L21_order_confirmation
+L21_order_confirmation-1-0252,Order shipped! Your package with QuickCab items is out for delivery today. No payment due.,legitimate,L21_order_confirmation
+L22_loan_emi_paid-0-0253,"Received EMI of Rs 2,000 for loan XX3310 on 21-Sep-26. Outstanding principal is Rs 3,42,100. Thank you.",legitimate,L22_loan_emi_paid
+L22_loan_emi_paid-0-0254,"Received EMI of Rs 499 for loan XX9087 on 07/10/2026. Outstanding principal is Rs 3,42,100. Thank you.",legitimate,L22_loan_emi_paid
+L22_loan_emi_paid-1-0255,"Your car loan instalment of Rs 12,500 was successfully debited. Next EMI date 03/11/2026.",legitimate,L22_loan_emi_paid
+L22_loan_emi_paid-1-0256,"Your car loan instalment of Rs 1,20,000 was successfully debited. Next EMI date 21-Sep-26.",legitimate,L22_loan_emi_paid
+L22_loan_emi_paid-1-0257,"Your car loan instalment of Rs 25,000 was successfully debited. Next EMI date 28-Aug-26.",legitimate,L22_loan_emi_paid
+L23_wallet_topup-0-0258,"Rs 75,000 added to your wallet successfully on 03/11/2026. Wallet balance Rs 1,840.",legitimate,L23_wallet_topup
+L23_wallet_topup-0-0259,"Rs 75,000 added to your wallet successfully on 21-Sep-26. Wallet balance Rs 1,840.",legitimate,L23_wallet_topup
+L23_wallet_topup-1-0260,"Wallet recharge of Rs 1,250 via Deccan Finance Bank card XX5521 is successful. Txn id 629104837251.",legitimate,L23_wallet_topup
+L23_wallet_topup-1-0261,"Wallet recharge of Rs 1,250 via Ganga Gramin Bank card XX1234 is successful. Txn id 629104837251.",legitimate,L23_wallet_topup
+L23_wallet_topup-1-0262,"Wallet recharge of Rs 49,999 via Unity Bank card XX5521 is successful. Txn id 411820935566.",legitimate,L23_wallet_topup
+L24_colleague_reimbursement-0-0263,"Hi Fatima, finance approved your travel claim of Rs 25,000; it will be paid with this month's salary.",legitimate,L24_colleague_reimbursement
+L24_colleague_reimbursement-0-0264,"Hi Rahul, finance approved your travel claim of Rs 7,500; it will be paid with this month's salary.",legitimate,L24_colleague_reimbursement
+L24_colleague_reimbursement-0-0265,"Hi Lakshmi, finance approved your travel claim of Rs 25,000; it will be paid with this month's salary.",legitimate,L24_colleague_reimbursement
+L24_colleague_reimbursement-1-0266,"I've reimbursed you Rs 49,999 for the team lunch, check your account. Thanks for arranging it!",legitimate,L24_colleague_reimbursement
+L25_kyc_branch_official-0-0267,"Dear customer, your periodic KYC update is due. Please visit your nearest Deccan Finance Bank branch or update through the official app. We never ask for OTP or PIN.",legitimate,L25_kyc_branch_official
+L25_kyc_branch_official-0-0268,"Dear customer, your periodic KYC update is due. Please visit your nearest Unity Bank branch or update through the official app. We never ask for OTP or PIN.",legitimate,L25_kyc_branch_official
+L25_kyc_branch_official-0-0269,"Dear customer, your periodic KYC update is due. Please visit your nearest Sahyadri Bank branch or update through the official app. We never ask for OTP or PIN.",legitimate,L25_kyc_branch_official
+L25_kyc_branch_official-1-0270,KYC reminder from Unity Bank: submit updated address proof at any branch before 21-Sep-26. Ignore if already done. We will not call you for this.,legitimate,L25_kyc_branch_official
+L25_kyc_branch_official-1-0271,KYC reminder from Ganga Gramin Bank: submit updated address proof at any branch before 07/10/2026. Ignore if already done. We will not call you for this.,legitimate,L25_kyc_branch_official
+L25_kyc_branch_official-1-0272,KYC reminder from Unity Bank: submit updated address proof at any branch before 12-Oct-26. Ignore if already done. We will not call you for this.,legitimate,L25_kyc_branch_official
+L26_hinglish_personal-0-0273,"Bhai 25,000 bhej diya, check kar le. Kal milte hain.",legitimate,L26_hinglish_personal
+L26_hinglish_personal-1-0274,"Mummy ne bola tha fees ke liye paise bhejne, maine 49,999 transfer kar diye hain.",legitimate,L26_hinglish_personal
+L27_txn_declined-0-0275,"Your transaction of Rs 4,999 at BookNest on card XX1234 was declined due to insufficient balance.",legitimate,L27_txn_declined
+L27_txn_declined-0-0276,"Your transaction of Rs 75,000 at HomeFibre Broadband on card XX9087 was declined due to insufficient balance.",legitimate,L27_txn_declined
+L27_txn_declined-0-0277,"Your transaction of Rs 49,999 at QuickCab on card XX5521 was declined due to insufficient balance.",legitimate,L27_txn_declined
+L27_txn_declined-1-0278,"UPI payment of Rs 4,999 to anil.pay@dfb failed. Any amount debited will be reversed within 48 hours.",legitimate,L27_txn_declined
+L27_txn_declined-1-0279,"UPI payment of Rs 4,999 to shop.fresh@bnb failed. Any amount debited will be reversed within 48 hours.",legitimate,L27_txn_declined
+L28_standing_instruction-0-0280,"Standing instruction executed: Rs 2,000 transferred from XX3310 to your RD account on 21-Sep-26.",legitimate,L28_standing_instruction
+L28_standing_instruction-0-0281,"Standing instruction executed: Rs 7,500 transferred from XX1234 to your RD account on 03/11/2026.",legitimate,L28_standing_instruction
+L28_standing_instruction-1-0282,"Auto-pay of Rs 75,000 to QuickCab completed as per your mandate. Ref 508812374901.",legitimate,L28_standing_instruction
+L28_standing_instruction-1-0283,"Auto-pay of Rs 1,20,000 to BookNest completed as per your mandate. Ref 508812374901.",legitimate,L28_standing_instruction
+L29_maintenance_notice-0-0284,Coastal Co-op Bank netbanking will be unavailable from 2 AM to 4 AM on 28-Aug-26 due to scheduled maintenance. Regret the inconvenience.,legitimate,L29_maintenance_notice
+L29_maintenance_notice-0-0285,Sahyadri Bank netbanking will be unavailable from 2 AM to 4 AM on 28-Aug-26 due to scheduled maintenance. Regret the inconvenience.,legitimate,L29_maintenance_notice
+L29_maintenance_notice-1-0286,Scheduled upgrade: UPI services may be intermittent tonight between 1 AM and 3 AM. -DFB,legitimate,L29_maintenance_notice
+L29_maintenance_notice-1-0287,Scheduled upgrade: UPI services may be intermittent tonight between 1 AM and 3 AM. -UNTY,legitimate,L29_maintenance_notice
+L30_gas_booking-0-0288,"BookNest: Your LPG cylinder booking is confirmed. Amount Rs 49,999 payable on delivery or online via the official app.",legitimate,L30_gas_booking
+L30_gas_booking-0-0289,CityPower Electricity: Your LPG cylinder booking is confirmed. Amount Rs 499 payable on delivery or online via the official app.,legitimate,L30_gas_booking
+L30_gas_booking-1-0290,Your gas cylinder will be delivered by 07/10/2026. Booking ref 77810.,legitimate,L30_gas_booking
+L30_gas_booking-1-0291,Your gas cylinder will be delivered by 28-Aug-26. Booking ref 77810.,legitimate,L30_gas_booking
+L31_limit_increase-0-0292,Good news! Your Bharat National Bank credit card XX5521 limit has been increased. No action is needed from your side.,legitimate,L31_limit_increase
+L31_limit_increase-0-0293,Good news! Your Ganga Gramin Bank credit card XX3310 limit has been increased. No action is needed from your side.,legitimate,L31_limit_increase
+L31_limit_increase-1-0294,"Your card XX3310 is now enabled for contactless payments up to Rs 5,000. Manage limits in the Deccan Finance Bank app.",legitimate,L31_limit_increase
+L31_limit_increase-1-0295,"Your card XX3310 is now enabled for contactless payments up to Rs 5,000. Manage limits in the Ganga Gramin Bank app.",legitimate,L31_limit_increase
+L31_limit_increase-1-0296,"Your card XX3310 is now enabled for contactless payments up to Rs 5,000. Manage limits in the Bharat National Bank app.",legitimate,L31_limit_increase
+L32_interest_credit-0-0297,"Interest of Rs 12,500 credited to your savings A/c XX5521 for the quarter ending 03/11/2026. -UNTY",legitimate,L32_interest_credit
+L32_interest_credit-0-0298,"Interest of Rs 12,500 credited to your savings A/c XX3310 for the quarter ending 28-Aug-26. -GGB",legitimate,L32_interest_credit
+L32_interest_credit-0-0299,"Interest of Rs 7,500 credited to your savings A/c XX3310 for the quarter ending 03/11/2026. -DFB",legitimate,L32_interest_credit
+L32_interest_credit-1-0300,Quarterly interest has been credited to your account. View details in your passbook.,legitimate,L32_interest_credit
+L33_society_maintenance-0-0301,"Dear residents, society maintenance of Rs 75,000 for Q3 is due by 12-Oct-26. Pay to the society account or at the office.",legitimate,L33_society_maintenance
+L33_society_maintenance-1-0302,Reminder from the RWA: maintenance dues can be paid via the community app. Receipts will be emailed.,legitimate,L33_society_maintenance
+L34_client_payment_received-0-0303,"Hi Suresh, we've released payment of Rs 4,999 against invoice INV-2026-1550. UTR 411820935566. Please confirm receipt.",legitimate,L34_client_payment_received
+L34_client_payment_received-0-0304,"Hi Anil, we've released payment of Rs 25,000 against invoice INV-2026-1550. UTR 508812374901. Please confirm receipt.",legitimate,L34_client_payment_received
+L34_client_payment_received-0-0305,"Hi Lakshmi, we've released payment of Rs 1,20,000 against invoice INV-2026-0877. UTR 508812374901. Please confirm receipt.",legitimate,L34_client_payment_received
+L34_client_payment_received-1-0306,Payment for invoice INV-2026-1550 has been processed today through NEFT to your registered account.,legitimate,L34_client_payment_received
+L35_pension_credit-0-0307,"Pension for October Rs 7,500 credited to your A/c XX1234 on 03/11/2026. -GGB",legitimate,L35_pension_credit
+L35_pension_credit-0-0308,"Pension for October Rs 1,250 credited to your A/c XX3310 on 28-Aug-26. -CCB",legitimate,L35_pension_credit
+L35_pension_credit-0-0309,Pension for October Rs 499 credited to your A/c XX5521 on 12-Oct-26. -SHYB,legitimate,L35_pension_credit
+L35_pension_credit-1-0310,"Dear pensioner, your life certificate has been accepted. Pension will continue without interruption.",legitimate,L35_pension_credit
+L36_autopay_scheduled-0-0311,"Autopay scheduled: Rs 75,000 to QuickCab will be debited on 12-Oct-26. Cancel anytime from the app.",legitimate,L36_autopay_scheduled
+L36_autopay_scheduled-0-0312,"Autopay scheduled: Rs 4,999 to MetroGas will be debited on 28-Aug-26. Cancel anytime from the app.",legitimate,L36_autopay_scheduled
+L36_autopay_scheduled-0-0313,"Autopay scheduled: Rs 7,500 to FreshMart will be debited on 28-Aug-26. Cancel anytime from the app.",legitimate,L36_autopay_scheduled
+L36_autopay_scheduled-1-0314,Your broadband bill of Rs 499 will be paid automatically on 03/11/2026 via your saved mandate.,legitimate,L36_autopay_scheduled
+L36_autopay_scheduled-1-0315,"Your broadband bill of Rs 2,000 will be paid automatically on 28-Aug-26 via your saved mandate.",legitimate,L36_autopay_scheduled
+L36_autopay_scheduled-1-0316,"Your broadband bill of Rs 75,000 will be paid automatically on 21-Sep-26 via your saved mandate.",legitimate,L36_autopay_scheduled
+L37_internal_urgent_approval-0-0317,"Hi team, urgent: please approve purchase order PO-5521 in the finance portal before end of day so the vendor payment goes out on time.",legitimate,L37_internal_urgent_approval
+L37_internal_urgent_approval-1-0318,"Reminder: quarter close is today, submit all pending expense claims in the portal by 6 PM.",legitimate,L37_internal_urgent_approval

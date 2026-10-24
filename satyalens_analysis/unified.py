@@ -2,8 +2,9 @@
 unified.py — Unified Analysis Interface for SatyaLens
 ======================================================
 Provides run_analysis(), the single entry point that Person 2's FastAPI
-backend calls.  This function orchestrates all three analysis components
-(audio, payment, context) and returns a single AnalysisResult dict.
+backend calls.  This function orchestrates all four analysis components
+(audio, payment, context, text_classifier) and returns a single
+AnalysisResult dict.
 
 Calling convention (for FastAPI integration)
 --------------------------------------------
@@ -48,10 +49,12 @@ from satyalens_analysis.schema import (
     audio_failed,
     payment_failed,
     context_failed,
+    text_classifier_failed,
     ComponentStatus,
     AudioResult,
     PaymentResult,
     ContextResult,
+    TextClassifierResult,
 )
 
 logger = logging.getLogger(__name__)
@@ -65,7 +68,7 @@ def run_analysis(
     expected_payment_fields: Optional[Dict[str, str]] = None,
 ) -> Dict[str, Any]:
     """
-    Run all three analysis components and return a unified JSON-compatible dict.
+    Run all four analysis components and return a unified JSON-compatible dict.
 
     Parameters
     ----------
@@ -79,8 +82,9 @@ def run_analysis(
         Path to a payment screenshot image for OCR analysis.
         If None, payment component returns status='not_applicable'.
     message_text : str, optional
-        Text of the suspicious message / scenario for context analysis.
-        If None, context component returns status='not_applicable'.
+        Text of the suspicious message / scenario for context analysis and
+        ML text classification.
+        If None, context and text_classifier return status='not_applicable'.
     expected_payment_fields : dict, optional
         Expected field values to compare against OCR output.
         Keys: 'amount', 'transaction_id', 'date', 'payee_name',
@@ -164,6 +168,29 @@ def run_analysis(
         result.context = ContextResult(
             status=ComponentStatus.NOT_APPLICABLE,
             limitations=["No message text provided."],
+        )
+
+    # ------------------------------------------------------------------
+    # Component 4: ML text classifier (same text as context — correlated,
+    # not an independent confirmation; isolated from context failures)
+    # ------------------------------------------------------------------
+    if message_text:
+        try:
+            from satyalens_analysis.text_classifier import classify_text
+            result.text_classifier = classify_text(message_text)
+            logger.info(
+                "unified: text classification complete — status=%s",
+                result.text_classifier.status.value,
+            )
+        except Exception as exc:  # noqa: BLE001
+            err = f"Text classifier component unexpected error: {exc}"
+            logger.exception("unified: %s", err)
+            global_errors.append(err)
+            result.text_classifier = text_classifier_failed(err)
+    else:
+        result.text_classifier = TextClassifierResult(
+            status=ComponentStatus.NOT_APPLICABLE,
+            reason="No message text provided.",
         )
 
     result.errors = global_errors

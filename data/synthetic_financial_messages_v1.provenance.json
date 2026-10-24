@@ -1,0 +1,26 @@
+{
+  "name": "satyalens-synthetic-financial-messages",
+  "version": "1",
+  "synthetic": true,
+  "source": "Hand-written templates in scripts/generate_synthetic_dataset.py, slot-filled with fictional values. No real messages or personal data.",
+  "licence": "Created for this project; no third-party data. Distributed under the repository's licence (pyproject.toml declares MIT).",
+  "generator_seed": 20261024,
+  "rows": 319,
+  "groups": 73,
+  "label_counts": {
+    "suspicious": 142,
+    "legitimate": 177
+  },
+  "label_definitions": {
+    "suspicious": "Template written to exhibit a known financial social-engineering pattern.",
+    "legitimate": "Template written to resemble routine financial communication."
+  },
+  "intended_use": "Pipeline development and functional testing ONLY.",
+  "limitations": [
+    "Synthetic, template-generated text; vocabulary and style are narrow and author-biased.",
+    "Labels reflect the template author's intent, not verified real-world outcomes.",
+    "Metrics on this data do NOT indicate real-world scam-detection performance.",
+    "English and a little romanised Hindi only."
+  ],
+  "csv_sha256": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840"
+}
