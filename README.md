@@ -14,12 +14,12 @@
 | Audio detection (ML deps) | Not installed | torch/torchaudio/huggingface_hub absent |
 | Audio detection (model loader) | Integration blocker | AASIST requires custom loader; not yet built |
 
-**Test results (final verified run, 2026-10-23):**
+**Test results (verified runs, 2026-10-25):**
 ```
-96 passed  |  4 skipped  |  0 failed  |  0 warnings
-Coverage: 85%
+Working tree (local data/models present): 893 collected | 889 passed | 4 skipped  | 0 failed | 0 warnings | coverage 96%
+Clean checkout of the committed tree:     811 collected | 792 passed | 19 skipped | 0 failed | 0 warnings | coverage 92%
 Command: python -m pytest tests/ -v --cov=satyalens_analysis --cov-report=term-missing -W error::DeprecationWarning
-Exit code: 0
+Exit code: 0 (both)
 ```
 
 ---
@@ -276,35 +276,40 @@ repo_path = snapshot_download("SpeechAntiSpoofingBenchmarks/AASIST")
 
 ---
 
-## Test Results (Final, 2026-10-23)
+## Test Results (2026-10-25)
 
 **Command:**
 ```
-C:\Users\HP\Python311\python.exe -m pytest tests/ -v --tb=short \
-    --cov=satyalens_analysis --cov-report=term-missing \
-    -W error::DeprecationWarning
+python -m pytest tests/ -v --cov=satyalens_analysis --cov-report=term-missing -W error::DeprecationWarning
 ```
 
 **Exit code:** 0
 
-| Result | Count |
-|--------|-------|
-| **Passed** | **96** |
-| Skipped | 4 |
-| **Failed** | **0** |
-| Warnings | 0 |
+| Result | Working tree | Clean checkout |
+|--------|-------|-------|
+| Collected | 893 | 811 |
+| **Passed** | **889** | **792** |
+| Skipped | 4 | 19 |
+| **Failed** | **0** | **0** |
+| Warnings | 0 | 0 |
+
+The clean checkout is a `git archive` export of the committed tree. It has fewer tests because
+some test files are not yet committed, and more skips because gitignored local data and model
+artifacts are absent (see the skip breakdown).
 
 **Coverage:**
 
-| Module | Stmts | Coverage | Notes |
-|--------|-------|----------|-------|
-| `__init__.py` | 4 | **100%** | |
-| `schema.py` | 94 | **99%** | Line 93: unreachable default branch |
-| `context_analyser.py` | 60 | 92% | Lines 266-268, 292-293: error-handling branches |
-| `payment_ocr.py` | 122 | 80% | Unavailable-deps and error paths |
-| `audio_detector.py` | 53 | 77% | Torch-dep paths (skipped without torch) |
-| `unified.py` | 44 | 66% | Component-error paths (require injecting exceptions) |
-| **Total** | **377** | **85%** | |
+| Module | Stmts | Working tree | Clean checkout | Notes |
+|--------|-------|-------|-------|-------|
+| `__init__.py` | 4 | **100%** | **100%** | |
+| `schema.py` | 121 | **99%** | **99%** | |
+| `unified.py` | 55 | **100%** | **100%** | |
+| `text_classifier.py` | 728 | 98% | 93% | Clean checkout lacks local-only evaluation tests and data |
+| `anonymise.py` | 55 | 96% | 96% | |
+| `context_analyser.py` | 70 | 93% | 93% | Error-handling branches |
+| `payment_ocr.py` | 167 | 87% | 87% | Unavailable-deps and error paths |
+| `audio_detector.py` | 53 | 79% | 79% | Torch-dep paths (skipped without torch) |
+| **Total** | **1253** | **96%** | **92%** | |
 
 ### Skip breakdown (all legitimate)
 
@@ -313,6 +318,10 @@ C:\Users\HP\Python311\python.exe -m pytest tests/ -v --tb=short \
 | `TestAnalyseAudioWithDeps` | 3 | `torch`, `torchaudio`, `huggingface_hub` not installed |
 | `test_fixture_image_analysed` | 1 | `tests/fixtures/sample_payment.png` does not exist (intentional) |
 | `TestPaymentWithSyntheticImage` | **0** | Previously skipped; **now pass** after Tesseract install |
+
+Clean checkout only (15 further skips): 12 preserved-artifact hash checks, 1 Mendeley loader test,
+1 R115 selection test and 1 benchmark-reproduction test skip because the gitignored local datasets,
+models and benchmark report are not part of the committed tree.
 
 ---
 
