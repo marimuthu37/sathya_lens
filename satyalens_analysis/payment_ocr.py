@@ -158,12 +158,12 @@ _FIELD_PATTERNS: Dict[str, List[str]] = {
     ],
     "transaction_id": [
         # Explicit label then alphanumeric body (6-30 chars)
-        # Separators between keyword and value: colon, dash, space, comma, period
+        # Separators between keyword and value: colon, dash, space, comma, period, hash
         r"(?:utr|transaction\s*(?:id|no|number|ref)|ref(?:erence)?\s*(?:id|no|number)?"
-        r"|txn\s*(?:id|no)|order\s*(?:id|no)|neft\s*ref|imps\s*ref|rtgs\s*ref)"
-        r"\s*[:\-,\.]?\s*([A-Za-z0-9]{6,30})",
-        # Short keyword + optional # separator
-        r"(?:ref|txn|utr)\s*#?\s*([A-Za-z0-9]{6,30})",
+        r"|txn\s*(?:id|no|number)?|order\s*(?:id|no|number)?|neft\s*ref|imps\s*ref|rtgs\s*ref)"
+        r"[\s:\-,\.#]*([A-Za-z0-9]{6,30})",
+        # Short keyword + optional separator + alphanumeric body
+        r"(?:ref|txn|utr)[\s:\-,\.#]*([A-Za-z0-9]{6,30})",
     ],
     "date": [
         r"\b(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})\b",
@@ -207,7 +207,7 @@ _TXNID_FIELDS = frozenset({"transaction_id"})
 
 # Keyword prefixes OCR may include in a captured transaction-ID group
 _TXNID_PREFIX_RE = re.compile(
-    r"^(?:utr|txn|ref|neft|imps|rtgs|transaction|reference|order)\s*",
+    r"^(?:(?:utr|txn|ref(?:erence)?|neft|imps|rtgs|transaction|order)[\s\-_:#]*)+",
     re.IGNORECASE,
 )
 
@@ -281,10 +281,26 @@ def _normalise_amount(value: str) -> str:
     """
     # Remove known currency symbols and words
     cleaned = re.sub(r"[₹\$€£]", "", value)
-    cleaned = re.sub(r"\b(?:rs\.?|inr|usd|eur|gbp)\b", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"(?:\b(?:inr|usd|eur|gbp)\b|\brs\.?)", "", cleaned, flags=re.IGNORECASE)
     # Remove commas and whitespace
     cleaned = re.sub(r"[,\s]", "", cleaned)
     return cleaned.strip()
+
+
+_CURRENCY_MARKERS = (
+    (re.compile(r"₹|\brs\.?|\binr\b", re.IGNORECASE), "INR"),
+    (re.compile(r"\$|\busd\b", re.IGNORECASE), "USD"),
+    (re.compile(r"€|\beur\b", re.IGNORECASE), "EUR"),
+    (re.compile(r"£|\bgbp\b", re.IGNORECASE), "GBP"),
+)
+
+
+def _currency(value: str) -> Optional[str]:
+    """Currency code stated in a monetary string, None if none, 'MIXED' if several."""
+    found = {code for rx, code in _CURRENCY_MARKERS if rx.search(value)}
+    if len(found) > 1:
+        return "MIXED"
+    return found.pop() if found else None
 
 
 def _amounts_equal(extracted: str, expected: str) -> bool:
@@ -292,11 +308,19 @@ def _amounts_equal(extracted: str, expected: str) -> bool:
     Compare two monetary strings using Python Decimal arithmetic.
 
     "5000", "5000.00", "5,000.00", "Rs. 5,000" all compare equal.
+    If BOTH strings state a currency and the currencies differ ("₹500" vs "$500"),
+    they are never equal; a string with conflicting markers ("₹500 USD") never
+    matches anything; a single currency on one side only is ignored.
     Falls back to case-insensitive string comparison if Decimal parsing fails.
 
     The original extracted string is never mutated; comparison is performed on
     normalised copies only.
     """
+    cur_extracted, cur_expected = _currency(extracted), _currency(expected)
+    if "MIXED" in (cur_extracted, cur_expected):
+        return False
+    if cur_extracted and cur_expected and cur_extracted != cur_expected:
+        return False
     norm_extracted = _normalise_amount(extracted)
     norm_expected = _normalise_amount(expected)
     try:
@@ -359,6 +383,11 @@ def _compare_field(field_name: str, extracted: str, expected: str) -> Tuple[bool
             f"Decimal comparison: normalised extracted={_normalise_amount(extracted)!r}, "
             f"normalised expected={_normalise_amount(expected)!r}"
         )
+        cur_x, cur_e = _currency(extracted), _currency(expected)
+        if "MIXED" in (cur_x, cur_e):
+            note += f"; conflicting currency markers: extracted={cur_x}, expected={cur_e}"
+        elif cur_x and cur_e and cur_x != cur_e:
+            note += f"; currency differs: extracted={cur_x}, expected={cur_e}"
         return match, note
 
     if field_name in _TXNID_FIELDS:
@@ -410,6 +439,9 @@ def analyse_payment(
         ---------------------------------
         amount         : Decimal comparison after stripping currency symbols and
                          commas. "5000", "5000.00", "5,000.00" compare equal.
+                         Explicitly different currencies ("₹500" vs "$500") never match,
+                         nor does an amount with conflicting markers ("₹500 USD").
+                         A currency on one side only is ignored ("500" == "₹500").
         transaction_id : Case-insensitive after stripping keyword prefixes (UTR,
                          TXN, REF) and non-alphanumeric chars. "UTR123" == "123".
         all others     : Case-insensitive string match.
