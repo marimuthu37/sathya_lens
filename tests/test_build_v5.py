@@ -294,3 +294,97 @@ class TestRepeatedSealRefused:
         body = src[src.index("def build(seal: bool)"):src.index("def _write_outputs(")]
         assert body.index("_refuse_if_sealed()") < body.index("load_protocol()")
         assert body.rindex("_refuse_if_sealed()") < body.index("REPORT_DIR.mkdir")
+
+
+# ---------------------------------------------------------------------------
+# Pool provenance: licence/attribution supplement (R115) without changing selection
+# ---------------------------------------------------------------------------
+
+class TestProvenanceAttribution:
+    def test_r115_gets_declared_licence_attribution_and_unverified_note(self, b5):
+        s = b5.provenance_sources(b5.load_protocol())["R115"]
+        assert s["licence"].startswith("CC BY 4.0") and "creativecommons.org/licenses/by/4.0" in s["licence"]
+        assert s["attribution"].startswith('Ridham115, "Indian Scam SMS (synthetic, audited)"')
+        assert "45e92c38ba20e973ef3ff5d1893a0a710f622018" in s["attribution"]
+        assert "Modified by SatyaLens" in s["attribution"] and "groq/openai/gpt-oss-120b" in s["attribution"]
+        assert s["upstream_generator_terms"].startswith("NOT VERIFIED")
+        assert "not legal clearance" in s["upstream_generator_terms"]
+        assert "PROVENANCE_SUPPLEMENT" in s["metadata_origin"]
+        assert s["title"] == b5.load_protocol()["sources"]["R115"]["title"] and s["real"] is False
+
+    def test_protocol_sourced_entries_unchanged(self, b5):
+        p = b5.load_protocol()
+        out = b5.provenance_sources(p)
+        for name, src in p["sources"].items():
+            if name in b5.PROVENANCE_SUPPLEMENT:
+                continue
+            assert out[name] == {k: src.get(k) for k in b5.PROVENANCE_FIELDS}, name
+        assert out["IMC25"]["attribution"] == p["sources"]["IMC25"]["attribution"]
+        assert out["MENDELEY"]["licence"] == p["sources"]["MENDELEY"]["licence"]
+
+    @pytest.mark.parametrize("change", [{"revision": "f" * 40}, {"file_sha256": "0" * 64},
+                                        {"revision": "f" * 40, "file_sha256": "0" * 64}])
+    def test_supplement_requires_both_pinned_revision_and_hash(self, b5, change):
+        import copy
+        p = copy.deepcopy(b5.load_protocol())
+        p["sources"]["R115"].update(change)
+        s = b5.provenance_sources(p)["R115"]
+        assert s["licence"] is None and s["attribution"] is None
+        assert "upstream_generator_terms" not in s and "metadata_origin" not in s
+
+    def test_protocol_values_win_and_origin_is_accurate(self, b5):
+        import copy
+        p = copy.deepcopy(b5.load_protocol())
+        p["sources"]["R115"]["licence"] = "licence from protocol"
+        s = b5.provenance_sources(p)["R115"]
+        assert s["licence"] == "licence from protocol"
+        assert s["attribution"] == b5.PROVENANCE_SUPPLEMENT["R115"]["attribution"]
+        assert s["metadata_origin"].startswith("attribution added by")
+        p["sources"]["R115"]["attribution"] = "attribution from protocol"
+        s = b5.provenance_sources(p)["R115"]
+        assert (s["licence"], s["attribution"]) == ("licence from protocol", "attribution from protocol")
+        assert s["metadata_origin"].startswith("licence/attribution taken from the protocol")
+        assert s["upstream_generator_terms"].startswith("NOT VERIFIED")
+        assert b5.provenance_sources(b5.load_protocol())["R115"]["metadata_origin"].startswith(
+            "licence/attribution added by")
+
+    def test_written_pool_provenance_carries_attribution(self, b5, tmp_path, monkeypatch):
+        (tmp_path / "data").mkdir()
+        (tmp_path / "reports").mkdir()
+        for name, val in (("REPO", tmp_path), ("POOL_OUT", tmp_path / "data" / "training_pool_v5.csv"),
+                          ("EXCLUDED_OUT", tmp_path / "data" / "v5_build.excluded.csv"),
+                          ("MANIFEST", tmp_path / "reports" / "frozen_test_v5_manifest.json")):
+            monkeypatch.setattr(b5, name, val)
+        p = b5.load_protocol()
+        row = lambda t, lab, s: {"text": t, "label": lab, "group": f"{s}:1", "source": s, "key": "k",  # noqa: E731
+                                 "category": "c", "india_linked": False, "donor": ""}
+        b5._write_outputs(p, b5.sealing_paths(p), [row("a b c", "legitimate", "R115")],
+                          [row("x y z", "suspicious", "IMC25")], [],
+                          {"test_counts": {}, "test_units": 1, "coverage": {"met": False}, "pool_counts": {}})
+        prov = json.loads((tmp_path / "data" / "training_pool_v5.provenance.json").read_text(encoding="utf-8"))
+        r115 = prov["sources"]["R115"]
+        # the serializer writes every field built in memory, unchanged
+        assert r115 == b5.provenance_sources(p)["R115"]
+        assert {"licence", "attribution", "upstream_generator_terms", "metadata_origin"} <= set(r115)
+        assert r115["licence"] == b5.PROVENANCE_SUPPLEMENT["R115"]["licence"]
+        assert r115["attribution"] == b5.PROVENANCE_SUPPLEMENT["R115"]["attribution"]
+        assert r115["upstream_generator_terms"].startswith("NOT VERIFIED")
+        assert prov["sources"]["IMC25"] == {k: p["sources"]["IMC25"].get(k) for k in b5.PROVENANCE_FIELDS}
+        assert prov["protocol_sha256"] == PIN
+        assert check_seal_state(REPO) in ("clean", "sealed")        # the tmp write never touched the real repo
+
+    def test_attribution_text_matches_the_review_document(self, b5):
+        import re
+        doc = (REPO / "docs" / "R115_GENERATOR_TERMS_REVIEW.md").read_text(encoding="utf-8")
+        flat = re.sub(r"\s+", " ", re.sub(r"(?m)^\s*>\s?", "", doc))
+        assert b5.PROVENANCE_SUPPLEMENT["R115"]["attribution"] in flat
+
+    def test_r115_selection_rules_unchanged(self, b5):
+        p = b5.load_protocol()
+        assert p["sources"]["R115"]["generators_used"] == ["groq/openai/gpt-oss-120b"]
+        assert p["sources"]["R115"]["roles"] == ["train"] and "R115" not in b5.v4.TEST_ELIGIBLE
+        if not b5.v3.R115_CSV.is_file():
+            pytest.skip("R115 raw file not present")
+        ex = []
+        rows = b5.v3.load_r115(p, ex)
+        assert len(rows) == 700 and sum(1 for e in ex if e["outcome"] == "excluded_generator") == 880

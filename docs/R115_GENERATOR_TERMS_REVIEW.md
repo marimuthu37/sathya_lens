@@ -46,11 +46,13 @@ established from available evidence; **[decision]** a project decision.
 - **[source]** Creator: Hugging Face account `Ridham115`. No copyright notice is supplied. Citation
   request: "please link the repository and the AI Scam & Phishing Message Detector project that
   produced it". No URL is given for that project.
-- **[repo] Gap.** Protocol v5's R115 entry has `title` ("… (CC BY 4.0)"), `revision` and
-  `file_sha256`, but no `licence` or `attribution` field (IMC25 and MENDELEY have both). The v5 pool
-  provenance therefore records R115 with `licence: null` and `attribution: null`. The older
-  `data/training_pool_v2.provenance.json` holds a full attribution string; it is not carried into
-  v5. This review does not change the protocol or builder.
+- **[repo] Protocol gap, closed in the provenance output.** Protocol v5's R115 entry has `title`
+  ("… (CC BY 4.0)"), `revision` and `file_sha256`, but no `licence` or `attribution` field (IMC25
+  and MENDELEY have both); the pinned protocol is unchanged. The v5 builder
+  (`scripts/build_pool_and_test_v5.py`, `PROVENANCE_SUPPLEMENT`) adds the licence, the attribution
+  below and an explicit "NOT VERIFIED" note on upstream generator terms to the pool provenance,
+  only while the protocol entry matches the pinned revision and file hash. Source selection and
+  the pool are unaffected (tests: `tests/test_build_v5.py::TestProvenanceAttribution`).
 - **[repo]** SatyaLens does not currently share R115 records: the training pool is gitignored and
   committed reports contain counts only.
 - **Attribution to use whenever R115 material is shared** (proposed text):
@@ -91,10 +93,11 @@ established from available evidence; **[decision]** a project decision.
 - **U2, historical terms.** Which Agreement/AUP versions governed the author: the generation date
   is unknown, no archived AUP exists, the archive has no version-to-date mapping, and any offline
   agreement is unknown. **[unverifiable]**
-- **U3, attribution and sharing.** The v5 records do not carry the attribution in §2. Whether
-  distributing a model trained on R115 counts as "Sharing" modified Licensed Material under CC BY
-  4.0 is a legal question not answered here. The URL of the "AI Scam & Phishing Message Detector
-  project" named in the citation request is unknown. **[unverifiable]**
+- **U3, attribution and sharing.** The v5 protocol entry itself still lacks the attribution (only
+  the pool provenance carries it, §2). Whether distributing a model trained on R115 counts as
+  "Sharing" modified Licensed Material under CC BY 4.0 is a legal question not answered here. The
+  URL of the "AI Scam & Phishing Message Detector project" named in the citation request is
+  unknown. **[unverifiable]**
 - **U4.** Third-party summaries (ConductAtlas) appeared in search results and were **not relied on**.
 
 ## 6. Decision and residual risks
@@ -109,7 +112,8 @@ Residual risks accepted with this decision:
   generation may have breached the provider's AUP. Removing it would need protocol v6, a new pool
   and a reseal, and would remove 28.5 % of the legitimate training rows.
 - U2 cannot be closed from published material.
-- Attribution in the v5 records is incomplete (U3) until a future protocol or release adds it.
+- The protocol v5 R115 entry has no attribution field (U3); attribution is carried by the pool
+  provenance and this document.
 - Data-quality limits stated by the dataset card (AI-assisted labels, mostly unread rows, label
   shortcuts) apply.
 
@@ -120,8 +124,8 @@ Residual risks accepted with this decision:
 2. Ask Groq which AUP version applied on the generation date, if the author cannot answer.
 3. Before any external release (dataset, pool or model trained on R115): obtain legal review of
    U1 and U3, and include the §2 attribution in the release notes.
-4. In the next protocol version, add `licence` and `attribution` fields to `sources.R115` so the
-   pool provenance carries them.
+4. In the next protocol version, add `licence` and `attribution` fields to `sources.R115` (and to
+   the other sources that lack them) and retire the builder's `PROVENANCE_SUPPLEMENT`.
 5. If U1 resolves unfavourably, prepare protocol v6 without R115 (training pool and reseal only;
    frozen-test membership would not change, since R115 is never test-eligible).
 
