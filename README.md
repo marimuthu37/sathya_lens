@@ -13,6 +13,8 @@
 | Payment OCR (Tesseract binary) | **Operational** | Tesseract 5.5.3 via Scoop, auto-detected |
 | Audio detection (ML deps) | Not installed | torch/torchaudio/huggingface_hub absent |
 | Audio detection (model loader) | Integration blocker | AASIST requires custom loader; not yet built |
+| ML text classifier | **Advisory only; not validated** | Not reliable on real SMS (see below); never a sole basis for a fraud verdict |
+| Genuine financial-alert coverage | **NOT EVALUABLE** | 0 donated genuine messages, 0 donors |
 
 **Test results (verified runs, 2026-10-25):**
 ```
@@ -21,6 +23,21 @@ Clean checkout of the committed tree:     811 collected | 792 passed | 19 skippe
 Command: python -m pytest tests/ -v --cov=satyalens_analysis --cov-report=term-missing -W error::DeprecationWarning
 Exit code: 0 (both)
 ```
+
+**Validation status (read before use):**
+- **Genuine Indian financial-alert coverage is NOT EVALUABLE: there are zero donated genuine messages
+  (0 donors).** Protocol v5 needs at least 150 donated test messages from at least 5 donors, with at least
+  3 categories of 25 or more. False positives on genuine bank/UPI alerts are therefore not validated.
+- Protocol v5 (`docs/protocol_v5.json`) is **unsealed**: no frozen test exists and no model has been
+  evaluated under it. Without donations its best possible verdict is "PARTIALLY EVALUATED - not
+  validated for genuine financial alerts".
+- The ML text classifier is **advisory only**. On an independent real SMS set the deployed v1 model
+  flagged 67% of legitimate messages (macro-F1 0.33 vs 0.48 for a majority-class baseline); candidate v2
+  (not deployed) had 1.3% false positives but missed 63% of smishing (`INTEGRATION_CONTRACT.md`).
+- Results on synthetic data (`data/dev/`, the dev-synth-v1 benchmark) are development checks only and
+  do **not** demonstrate real-world fraud-detection performance.
+- Payment OCR extracts text; a matching screenshot is **not** proof of payment settlement. Audio
+  detection is unavailable (no model loader). Webpage-screenshot (Phish360) detection is not built.
 
 ---
 
@@ -122,6 +139,9 @@ See [`integration_example.py`](integration_example.py) for the complete FastAPI 
 ---
 
 ## Response Schema (v1.0)
+
+> `run_analysis()` returns seven top-level keys: the six below plus the additive `text_classifier`
+> object. `INTEGRATION_CONTRACT.md` is the authoritative field reference.
 
 ```json
 {
