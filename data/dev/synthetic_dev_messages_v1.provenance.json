@@ -1,0 +1,69 @@
+{
+  "name": "satyalens-synthetic-dev-messages",
+  "version": "1",
+  "generator_version": "dev-synth-v1",
+  "synthetic": true,
+  "provenance": "synthetic",
+  "source_marker": "SYN_DEV",
+  "generator": "scripts/generate_dev_synthetic_messages.py",
+  "generator_seed": 20261101,
+  "files": {
+    "synthetic_dev_messages_v1.csv": {
+      "rows": 168,
+      "sha256": "f53e57d1b71d2baab7ae3b6a67c63e029846cba63ecb8e9afcabaff747e62190"
+    },
+    "synthetic_dev_edge_cases_v1.csv": {
+      "rows": 17,
+      "sha256": "8d32d58a13c432fda0e412e617cde92a3cde81c30f5d59f16cea8f467e988834"
+    }
+  },
+  "label_counts": {
+    "legitimate": 78,
+    "suspicious": 90
+  },
+  "category_counts": {
+    "delivery_parcel_scam": 12,
+    "everyday_message": 18,
+    "fake_payment_confirmation": 18,
+    "fee_payment_request": 18,
+    "impersonation_urgent_money": 18,
+    "legit_bill_reminder": 12,
+    "legit_delivery_update": 18,
+    "legit_otp_delivery": 6,
+    "legit_transaction_notification": 24,
+    "suspicious_link_credential_request": 24
+  },
+  "language_counts": {
+    "en": 138,
+    "hinglish": 30
+  },
+  "edge_case_counts": {
+    "ambiguous_no_reference_label": 10,
+    "inconclusive_out_of_vocabulary": 6,
+    "not_applicable_blank": 1
+  },
+  "groups": 28,
+  "label_definitions": {
+    "suspicious": "Template written to exhibit a financial social-engineering pattern.",
+    "legitimate": "Template written to resemble routine, benign communication."
+  },
+  "intended_use": "Development, demonstration and functional/integration testing ONLY.",
+  "separation": "Not a Protocol v5 source; never a donated genuine alert (source SYN_DEV, never DONATION); not part of any training pool, frozen test set, exclusion log or sealed manifest.",
+  "limitations": [
+    "Synthetic, template-generated text written by the project author; narrow, author-biased style.",
+    "Does NOT represent the distribution of Indian financial alerts or of real scam traffic.",
+    "Labels reflect template intent, not verified real-world outcomes.",
+    "Metrics on this data are synthetic-only and must not be used to claim real-world performance or to select a model against the frozen test set.",
+    "Edge-case 'expected_text_classifier_status' values depend on the model vocabulary."
+  ],
+  "validation": {
+    "labelled_rows": 168,
+    "edge_rows": 17,
+    "duplicates": 0,
+    "missing_values": 0,
+    "label_category_consistent": true,
+    "placeholders_only": true,
+    "no_4plus_digit_runs": true
+  },
+  "licence": "Created for this project; no third-party data (repository licence, MIT per pyproject.toml)."
+}

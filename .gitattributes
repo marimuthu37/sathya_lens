@@ -12,3 +12,4 @@ tests/test_protocol_v4_draft.py -text
 reports/** -text
 data/*.csv -text
 data/*.json -text
+data/dev/** -text
