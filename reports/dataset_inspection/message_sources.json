@@ -1,0 +1,211 @@
+{
+  "inspection_only": true,
+  "anonymiser": "anon-v1",
+  "protocol_v3_sha256": "e97171dadedf57083265fc6bb38306942da5df41df32d079439bc11331d79e7e",
+  "IMC25": {
+    "file": "dataset\\message_detection\\final_dataset_output.csv",
+    "sha256": "1bbd1e9e82c3ea023112207b80da268a5c4a07d2353c2b0898360ab037fa9a64",
+    "matches_protocol_v3_pinned_file": true,
+    "source": "https://github.com/reportsmishing/Smishing-Dataset-IMC25",
+    "commit": "a6175560b57387199871e51fbef6bc523d2516b4",
+    "licence": "CC BY 4.0 (LICENSE.txt sha256 7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661; README; paper Appendix B)",
+    "attribution": "Agarwal, S., Papasavva, A., Suarez-Tangil, G., Vasek, M. (2025). Fishing for Smishing: Understanding SMS Phishing Infrastructure and Strategies by Mining Public User Reports. IMC '25. Dataset: github.com/reportsmishing/Smishing-Dataset-IMC25 (CC BY 4.0). Modified: anonymised (anon-v1), filtered, deduplicated.",
+    "real": true,
+    "rows_after_protocol_policy": 20309,
+    "label_counts": {
+      "suspicious": 20309
+    },
+    "scam_type_counts": {
+      "banking": 10495,
+      "others": 4586,
+      "delivery": 1676,
+      "government": 1922,
+      "telecom": 1630
+    },
+    "india_linked_rows": 7639,
+    "excluded_by_reason": {
+      "excluded_language: non-English (protocol language filter)": 11174,
+      "ambiguous: scam_type 'wrong number' excluded as ambiguous": 332,
+      "ambiguous: scam_type 'hey mum/dad' excluded as ambiguous": 263,
+      "ambiguous: scam_type 'spam' excluded as ambiguous": 1710,
+      "ambiguous: scam_type '<empty>' excluded as ambiguous": 81
+    },
+    "long_digit_investigation": {
+      "rows_with_10plus_digit_runs": 191,
+      "runs_by_kind": {
+        "zero_prefixed_landline_or_uk_mobile": 68,
+        "other_id_or_number": 124,
+        "plus_country_code": 1,
+        "indian_mobile_10_digit": 19
+      }
+    },
+    "duplicates": {
+      "exact_duplicate_rows": 6234,
+      "normalised_duplicate_rows": 6454,
+      "skeleton_duplicate_rows": 6937
+    },
+    "privacy": {
+      "rows_with_10plus_digit_runs_before": 191,
+      "rows_with_4plus_digit_runs_before": 2737,
+      "rows_changed_by_anonymiser": 17297,
+      "rows_with_4plus_digit_runs_after": 0,
+      "rows_with_at_sign_after": 227,
+      "placeholder_tokens_added": {
+        "numtoken": 5840,
+        "urltoken": 9958,
+        "datetoken": 11700,
+        "phonetoken": 2528,
+        "emailtoken": 356,
+        "upitoken": 37
+      }
+    },
+    "template_clusters": {
+      "rows": 20309,
+      "groups": 7771,
+      "template_links": 12538,
+      "largest_cluster": 4097,
+      "singleton_clusters": 5758
+    },
+    "overlap": {
+      "retired_benchmark_v1": {
+        "exact_normalised": 1,
+        "skeleton": 6,
+        "token_jaccard": 165,
+        "total": 172
+      },
+      "challenge_suite_v1": {
+        "exact_normalised": 0,
+        "skeleton": 0,
+        "token_jaccard": 0,
+        "total": 0
+      },
+      "synthetic_v1": {
+        "exact_normalised": 0,
+        "skeleton": 0,
+        "token_jaccard": 0,
+        "total": 0
+      },
+      "training_pool_v2": {
+        "exact_normalised": 0,
+        "skeleton": 31,
+        "token_jaccard": 3,
+        "total": 34
+      }
+    }
+  },
+  "MENDELEY": {
+    "file": "Financial scams detection dataset.csv",
+    "sha256": "58ec802e4de8768643e3be0badbaedb3ae5017a273e8f3898e72f6a29cbc96ad",
+    "title": "Financial scams detection dataset",
+    "authors": [
+      "Al Rafi Ahmed",
+      "Gazi Faizul Islam"
+    ],
+    "institution": "International University of Business Agriculture and Technology (Bangladesh)",
+    "url": "https://data.mendeley.com/datasets/znsk27yk3h/2",
+    "doi": "10.17632/znsk27yk3h.2 (v1 10.17632/znsk27yk3h.1 contains the identical file)",
+    "licence": "CC BY 4.0 (Mendeley public API data_licence, v1 and v2)",
+    "attribution": "Ahmed, A. R., Islam, G. F. (2025). Financial scams detection dataset. Mendeley Data, V2. doi:10.17632/znsk27yk3h.2. CC BY 4.0.",
+    "collection_as_described": "Real messages from university students and general people via Google Forms, handwritten submissions and direct observation of SMS/chat/e-mail, with consent; personal details removed by the authors; manually labelled scam/ham.",
+    "in_protocol_v3": false,
+    "real": "claimed real by the authors (forms, handwritten submissions, observation); not independently verifiable",
+    "rows_valid": 523,
+    "label_counts": {
+      "scam": 310,
+      "ham": 213
+    },
+    "excluded_by_reason": {},
+    "script_by_label": {
+      "scam": {
+        "latin_only": 250,
+        "bengali_script": 60
+      },
+      "ham": {
+        "latin_only": 172,
+        "bengali_script": 41
+      }
+    },
+    "region_cues_by_label": {
+      "scam": {
+        "none": 298,
+        "bangladesh_cues": 11,
+        "india_cues": 1
+      },
+      "ham": {
+        "none": 194,
+        "bangladesh_cues": 19
+      }
+    },
+    "ham_kind_heuristic": {
+      "financial_notification_like": 56,
+      "non_financial": 99,
+      "financial_other": 58
+    },
+    "ham_kind_note": "Keyword heuristic, not ground truth. 'financial_notification_like' = transaction/OTP/bill notification wording; the dataset does not label message type.",
+    "duplicates": {
+      "exact_duplicate_rows": 4,
+      "normalised_duplicate_rows": 5,
+      "skeleton_duplicate_rows": 20
+    },
+    "privacy": {
+      "rows_with_10plus_digit_runs_before": 1,
+      "rows_with_4plus_digit_runs_before": 69,
+      "rows_changed_by_anonymiser": 83,
+      "rows_with_4plus_digit_runs_after": 0,
+      "rows_with_at_sign_after": 0,
+      "placeholder_tokens_added": {
+        "numtoken": 72,
+        "urltoken": 7,
+        "datetoken": 1
+      }
+    },
+    "template_clusters": {
+      "rows": 523,
+      "groups": 465,
+      "template_links": 58,
+      "largest_cluster": 10,
+      "singleton_clusters": 436
+    },
+    "overlap": {
+      "retired_benchmark_v1": {
+        "exact_normalised": 2,
+        "skeleton": 1,
+        "token_jaccard": 2,
+        "total": 5
+      },
+      "challenge_suite_v1": {
+        "exact_normalised": 0,
+        "skeleton": 0,
+        "token_jaccard": 0,
+        "total": 0
+      },
+      "synthetic_v1": {
+        "exact_normalised": 0,
+        "skeleton": 0,
+        "token_jaccard": 0,
+        "total": 0
+      },
+      "training_pool_v2": {
+        "exact_normalised": 1,
+        "skeleton": 8,
+        "token_jaccard": 1,
+        "total": 10
+      },
+      "IMC25_after_policy": {
+        "exact_normalised": 0,
+        "skeleton": 5,
+        "token_jaccard": 1,
+        "total": 6
+      }
+    }
+  },
+  "outputs_created": [
+    "message_sources.json",
+    "message_exclusions.csv"
+  ],
+  "not_created": [
+    "training pool",
+    "test set",
+    "models"
+  ]
+}

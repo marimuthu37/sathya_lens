@@ -1,0 +1,23 @@
+{
+  "protocol": "payment_pipeline_eval_v1",
+  "registered_at": "2026-10-25T05:00:00+00:00",
+  "registered_before_test_split_generated_or_run": true,
+  "config_hash": "22ffa36732a493604aad51d9674b0c10914687e9b74f2463791a78408928e212",
+  "frozen_code_sha256": {
+    "scripts/evaluate_payment_pipeline.py": "7A8815E8B9C91BDAF97F4AD594290A5C751635288DA5B7B04BDE9F42B4D27643",
+    "satyalens_analysis/payment_ocr.py": "D011E34D208820FFF6B45A7A4241666B2B435AEF28D9D08000B103D9F6819350",
+    "person 2/person2_app/backend/app/services/payment_checks.py": "01BA59D96A6C720D51B801317C6F7507A75C5CDEA6F365ED998BFA5ED522808D"
+  },
+  "data": "Synthetic screenshots rendered by the script; labels by construction. Not real-world data.",
+  "dev_usage": "The dev split (seed 1001) was run twice: once to find errors, once after fixing them (amount extractor dropped ISO codes; OCR O/0 confusion in references; explanation for the rupee sign read as a digit). No held-out output had been seen.",
+  "held_out": {
+    "seed": 2002,
+    "fonts_unseen_in_dev_and_calibration": ["calibri", "segoeui", "georgia", "trebuc"],
+    "layout_unseen_in_dev": "stacked",
+    "recipient_names": "list B, disjoint from dev list A",
+    "run_policy": "Run once. The script refuses to overwrite an existing test result or to run if the config hash changes. Results are reported as observed, failures included; no fix made after the run may be described as evaluated on this split."
+  },
+  "primary_metric": "review-needed detection on legible images: precision, recall, F1, FPR, FNR with positive = conflicts with user expectation or placeholder recipient; predicted positive = decision verify_first or high_risk",
+  "secondary_metrics": ["per-field comparison status agreement", "false mismatches", "extraction exact-match per field", "high-confidence-but-wrong reads", "severe-warning rate on degraded vs legible images", "mismatch findings raised on degraded images", "decisions on unreadable images", "low_concern count (must be 0)"],
+  "no_acceptance_threshold": "No pass/fail threshold is pre-registered; this is a measurement, not a gate."
+}

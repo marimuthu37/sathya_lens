@@ -1,0 +1,1922 @@
+{
+  "selection_rule": "max pooled OOF macro-F1; ties within 0.005 -> lower legitimate FPR",
+  "validation": {
+    "pool": "training_pool_v2.csv",
+    "pool_sha256": "deb9be285df68e8e709bfab44b47480388a517c84bd2f0df830f8d2ab06da88d",
+    "rows": 1614,
+    "groups": 415,
+    "class_counts": {
+      "suspicious": 499,
+      "legitimate": 1115
+    },
+    "by_source": {
+      "MWOZ": {
+        "legitimate": 595
+      },
+      "R115": {
+        "suspicious": 357,
+        "legitimate": 343
+      },
+      "SYN": {
+        "suspicious": 142,
+        "legitimate": 177
+      }
+    },
+    "cv": "StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)",
+    "challenge_suite": "challenge_suite_v1.csv",
+    "challenge_sha256": "dff63186ccdc2bc9bf03f46b5c61ec93972122eb454e8d9e1edffc09a85d7bcc",
+    "challenge_rows": 42
+  },
+  "frozen_test_used": false,
+  "selected": "G_char_wb_3_5",
+  "results": {
+    "baseline_majority": {
+      "kind": "baseline",
+      "predicts": "legitimate",
+      "oof": {
+        "accuracy": 0.6908,
+        "legitimate": {
+          "precision": 0.6908,
+          "recall": 1.0,
+          "f1": 0.8171,
+          "support": 1115
+        },
+        "suspicious": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.3454,
+          "recall": 0.5,
+          "f1": 0.4086
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              1115,
+              0
+            ],
+            [
+              499,
+              0
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 1.0,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1614,
+        "inconclusive": 0
+      },
+      "challenge": {
+        "accuracy": 0.619,
+        "legitimate": {
+          "precision": 0.619,
+          "recall": 1.0,
+          "f1": 0.7647,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.3095,
+          "recall": 0.5,
+          "f1": 0.3824
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              26,
+              0
+            ],
+            [
+              16,
+              0
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 1.0,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.0,
+          "recall_suspicious": 0.0
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        }
+      }
+    },
+    "baseline_rules": {
+      "kind": "baseline",
+      "description": "context_analyser: any flag -> suspicious",
+      "oof": {
+        "accuracy": 0.7491,
+        "legitimate": {
+          "precision": 0.7657,
+          "recall": 0.9175,
+          "f1": 0.8348,
+          "support": 1115
+        },
+        "suspicious": {
+          "precision": 0.6691,
+          "recall": 0.3727,
+          "f1": 0.4788,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.7174,
+          "recall": 0.6451,
+          "f1": 0.6568
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              1023,
+              92
+            ],
+            [
+              313,
+              186
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.6273,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0825,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1614,
+        "inconclusive": 0
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 0,
+          "accuracy": 0.9983,
+          "recall_legitimate": 0.9983
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.5614,
+          "recall_legitimate": 0.7988,
+          "recall_suspicious": 0.3333
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.6959,
+          "recall_legitimate": 0.8757,
+          "recall_suspicious": 0.4718
+        }
+      },
+      "challenge": {
+        "accuracy": 0.5952,
+        "legitimate": {
+          "precision": 0.6364,
+          "recall": 0.8077,
+          "f1": 0.7119,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.4444,
+          "recall": 0.25,
+          "f1": 0.32,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.5404,
+          "recall": 0.5288,
+          "f1": 0.5159
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              21,
+              5
+            ],
+            [
+              12,
+              4
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.75,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1923,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.25,
+          "recall_suspicious": 0.25
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.1667,
+          "recall_legitimate": 0.1667
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        }
+      }
+    },
+    "current_artifact": {
+      "kind": "current",
+      "model_version": "tfidf-logreg-v1-66bab05fd245",
+      "note": "Trained on SYN only; scored on pool rows from R115 and MWOZ (never seen) and the challenge suite.",
+      "unseen_pool": {
+        "accuracy": 0.5821,
+        "legitimate": {
+          "precision": 0.9289,
+          "recall": 0.4634,
+          "f1": 0.6184,
+          "support": 930
+        },
+        "suspicious": {
+          "precision": 0.3832,
+          "recall": 0.9038,
+          "f1": 0.5382,
+          "support": 343
+        },
+        "macro_avg": {
+          "precision": 0.656,
+          "recall": 0.6836,
+          "f1": 0.5783
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              431,
+              499
+            ],
+            [
+              33,
+              310
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.0962,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.5366,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1273,
+        "inconclusive": 22
+      },
+      "unseen_pool_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 0,
+          "accuracy": 0.3916,
+          "recall_legitimate": 0.3916
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 22,
+          "accuracy": 0.7493,
+          "recall_legitimate": 0.591,
+          "recall_suspicious": 0.9038
+        }
+      },
+      "vocabulary_coverage_unseen_pool": {
+        "rows_with_any_known_feature": 0.983,
+        "feature_token_coverage": 0.3726
+      },
+      "challenge": {
+        "accuracy": 0.6905,
+        "legitimate": {
+          "precision": 0.9333,
+          "recall": 0.5385,
+          "f1": 0.6829,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.5556,
+          "recall": 0.9375,
+          "f1": 0.6977,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.7444,
+          "recall": 0.738,
+          "f1": 0.6903
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              14,
+              12
+            ],
+            [
+              1,
+              15
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.0625,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.4615,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 0.4,
+          "recall_legitimate": 0.4
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.9375,
+          "recall_suspicious": 0.9375
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 0.2222,
+          "recall_legitimate": 0.2222
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.5775
+      }
+    },
+    "A_v1_config": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            2
+          ],
+          "min_df": 1,
+          "sublinear_tf": true
+        },
+        "logistic_regression": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.8804,
+        "legitimate": {
+          "precision": 0.952,
+          "recall": 0.8709,
+          "f1": 0.9096,
+          "support": 1115
+        },
+        "suspicious": {
+          "precision": 0.7576,
+          "recall": 0.9018,
+          "f1": 0.8234,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8548,
+          "recall": 0.8863,
+          "f1": 0.8665
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              971,
+              144
+            ],
+            [
+              49,
+              450
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.0982,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1291,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1614,
+        "inconclusive": 0
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.7971,
+          "recall_legitimate": 0.6356,
+          "recall_suspicious": 0.9524
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8401,
+          "recall_legitimate": 0.8927,
+          "recall_suspicious": 0.7746
+        }
+      },
+      "fold_macro_f1": [
+        0.8594,
+        0.8424,
+        0.8526,
+        0.878,
+        0.8994
+      ],
+      "fold_macro_f1_mean": 0.8664,
+      "fold_macro_f1_std": 0.0202,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.7454
+      },
+      "challenge": {
+        "accuracy": 0.8571,
+        "legitimate": {
+          "precision": 0.8333,
+          "recall": 0.9615,
+          "f1": 0.8929,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.9167,
+          "recall": 0.6875,
+          "f1": 0.7857,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.875,
+          "recall": 0.8245,
+          "f1": 0.8393
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              25,
+              1
+            ],
+            [
+              5,
+              11
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.3125,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0385,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.6875,
+          "recall_suspicious": 0.6875
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.7406
+      }
+    },
+    "B_stopwords": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            2
+          ],
+          "min_df": 1,
+          "sublinear_tf": true,
+          "stop_words": "english"
+        },
+        "logistic_regression": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.8766,
+        "legitimate": {
+          "precision": 0.9489,
+          "recall": 0.8679,
+          "f1": 0.9066,
+          "support": 1113
+        },
+        "suspicious": {
+          "precision": 0.7525,
+          "recall": 0.8958,
+          "f1": 0.8179,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8507,
+          "recall": 0.8819,
+          "f1": 0.8623
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              966,
+              147
+            ],
+            [
+              52,
+              447
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1042,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1321,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1612,
+        "inconclusive": 2
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 2,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.7871,
+          "recall_legitimate": 0.6327,
+          "recall_suspicious": 0.9356
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8433,
+          "recall_legitimate": 0.8814,
+          "recall_suspicious": 0.7958
+        }
+      },
+      "fold_macro_f1": [
+        0.851,
+        0.8622,
+        0.8398,
+        0.8791,
+        0.8791
+      ],
+      "fold_macro_f1_mean": 0.8622,
+      "fold_macro_f1_std": 0.0155,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 0.9988,
+        "feature_token_coverage": 0.6657
+      },
+      "challenge": {
+        "accuracy": 0.881,
+        "legitimate": {
+          "precision": 0.8889,
+          "recall": 0.9231,
+          "f1": 0.9057,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.8667,
+          "recall": 0.8125,
+          "f1": 0.8387,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8778,
+          "recall": 0.8678,
+          "f1": 0.8722
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              24,
+              2
+            ],
+            [
+              3,
+              13
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1875,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0769,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8125,
+          "recall_suspicious": 0.8125
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.6019
+      }
+    },
+    "C_stopwords_unigram": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            1
+          ],
+          "min_df": 1,
+          "sublinear_tf": true,
+          "stop_words": "english"
+        },
+        "logistic_regression": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.8859,
+        "legitimate": {
+          "precision": 0.9345,
+          "recall": 0.8976,
+          "f1": 0.9157,
+          "support": 1113
+        },
+        "suspicious": {
+          "precision": 0.7901,
+          "recall": 0.8597,
+          "f1": 0.8234,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8623,
+          "recall": 0.8786,
+          "f1": 0.8695
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              999,
+              114
+            ],
+            [
+              70,
+              429
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1403,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1024,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1612,
+        "inconclusive": 2
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 2,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8086,
+          "recall_legitimate": 0.7114,
+          "recall_suspicious": 0.902
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8433,
+          "recall_legitimate": 0.9153,
+          "recall_suspicious": 0.7535
+        }
+      },
+      "fold_macro_f1": [
+        0.8507,
+        0.8786,
+        0.8441,
+        0.875,
+        0.9002
+      ],
+      "fold_macro_f1_mean": 0.8697,
+      "fold_macro_f1_std": 0.0203,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 0.9988,
+        "feature_token_coverage": 0.8941
+      },
+      "challenge": {
+        "accuracy": 0.8571,
+        "legitimate": {
+          "precision": 0.8571,
+          "recall": 0.9231,
+          "f1": 0.8889,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.8571,
+          "recall": 0.75,
+          "f1": 0.8,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8571,
+          "recall": 0.8365,
+          "f1": 0.8444
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              24,
+              2
+            ],
+            [
+              4,
+              12
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.25,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0769,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.75,
+          "recall_suspicious": 0.75
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.888
+      }
+    },
+    "D_stopwords_C0.3": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            2
+          ],
+          "min_df": 1,
+          "sublinear_tf": true,
+          "stop_words": "english"
+        },
+        "logistic_regression": {
+          "C": 0.3,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.8672,
+        "legitimate": {
+          "precision": 0.9482,
+          "recall": 0.8544,
+          "f1": 0.8989,
+          "support": 1113
+        },
+        "suspicious": {
+          "precision": 0.734,
+          "recall": 0.8958,
+          "f1": 0.8069,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8411,
+          "recall": 0.8751,
+          "f1": 0.8529
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              951,
+              162
+            ],
+            [
+              52,
+              447
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1042,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1456,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1612,
+        "inconclusive": 2
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 2,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.7757,
+          "recall_legitimate": 0.6006,
+          "recall_suspicious": 0.944
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8213,
+          "recall_legitimate": 0.8588,
+          "recall_suspicious": 0.7746
+        }
+      },
+      "fold_macro_f1": [
+        0.8262,
+        0.8525,
+        0.8307,
+        0.8791,
+        0.8759
+      ],
+      "fold_macro_f1_mean": 0.8529,
+      "fold_macro_f1_std": 0.022,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 0.9988,
+        "feature_token_coverage": 0.6657
+      },
+      "challenge": {
+        "accuracy": 0.8333,
+        "legitimate": {
+          "precision": 0.8276,
+          "recall": 0.9231,
+          "f1": 0.8727,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.8462,
+          "recall": 0.6875,
+          "f1": 0.7586,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8369,
+          "recall": 0.8053,
+          "f1": 0.8157
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              24,
+              2
+            ],
+            [
+              5,
+              11
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.3125,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0769,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.6875,
+          "recall_suspicious": 0.6875
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.6019
+      }
+    },
+    "E_stopwords_C3": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            2
+          ],
+          "min_df": 1,
+          "sublinear_tf": true,
+          "stop_words": "english"
+        },
+        "logistic_regression": {
+          "C": 3.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.8914,
+        "legitimate": {
+          "precision": 0.9475,
+          "recall": 0.8922,
+          "f1": 0.919,
+          "support": 1113
+        },
+        "suspicious": {
+          "precision": 0.7872,
+          "recall": 0.8898,
+          "f1": 0.8354,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8674,
+          "recall": 0.891,
+          "f1": 0.8772
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              993,
+              120
+            ],
+            [
+              55,
+              444
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1102,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1078,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1612,
+        "inconclusive": 2
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 2,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8129,
+          "recall_legitimate": 0.6968,
+          "recall_suspicious": 0.9244
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8621,
+          "recall_legitimate": 0.9096,
+          "recall_suspicious": 0.8028
+        }
+      },
+      "fold_macro_f1": [
+        0.8668,
+        0.8614,
+        0.8712,
+        0.8833,
+        0.9022
+      ],
+      "fold_macro_f1_mean": 0.877,
+      "fold_macro_f1_std": 0.0145,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 0.9988,
+        "feature_token_coverage": 0.6657
+      },
+      "challenge": {
+        "accuracy": 0.881,
+        "legitimate": {
+          "precision": 0.8889,
+          "recall": 0.9231,
+          "f1": 0.9057,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.8667,
+          "recall": 0.8125,
+          "f1": 0.8387,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8778,
+          "recall": 0.8678,
+          "f1": 0.8722
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              24,
+              2
+            ],
+            [
+              3,
+              13
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1875,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0769,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8125,
+          "recall_suspicious": 0.8125
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8889,
+          "recall_legitimate": 0.8889
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.6019
+      }
+    },
+    "F_maxdf0.3": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "token_pattern": "(?u)\\b[^\\W\\d_][^\\W\\d_]+\\b",
+          "ngram_range": [
+            1,
+            2
+          ],
+          "min_df": 1,
+          "sublinear_tf": true,
+          "max_df": 0.3
+        },
+        "logistic_regression": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.881,
+        "legitimate": {
+          "precision": 0.9494,
+          "recall": 0.8744,
+          "f1": 0.9104,
+          "support": 1115
+        },
+        "suspicious": {
+          "precision": 0.7615,
+          "recall": 0.8958,
+          "f1": 0.8232,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.8554,
+          "recall": 0.8851,
+          "f1": 0.8668
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              975,
+              140
+            ],
+            [
+              52,
+              447
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1042,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1256,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1614,
+        "inconclusive": 0
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8,
+          "recall_legitimate": 0.6385,
+          "recall_suspicious": 0.9552
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.837,
+          "recall_legitimate": 0.9096,
+          "recall_suspicious": 0.7465
+        }
+      },
+      "fold_macro_f1": [
+        0.855,
+        0.8384,
+        0.8619,
+        0.878,
+        0.8994
+      ],
+      "fold_macro_f1_mean": 0.8665,
+      "fold_macro_f1_std": 0.0208,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.7275
+      },
+      "challenge": {
+        "accuracy": 0.8333,
+        "legitimate": {
+          "precision": 0.8065,
+          "recall": 0.9615,
+          "f1": 0.8772,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.9091,
+          "recall": 0.625,
+          "f1": 0.7407,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8578,
+          "recall": 0.7933,
+          "f1": 0.809
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              25,
+              1
+            ],
+            [
+              6,
+              10
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.375,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0385,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.625,
+          "recall_suspicious": 0.625
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.7013
+      }
+    },
+    "G_char_wb_3_5": {
+      "kind": "config",
+      "hyperparameters": {
+        "tfidf": {
+          "lowercase": true,
+          "strip_accents": "unicode",
+          "analyzer": "char_wb",
+          "ngram_range": [
+            3,
+            5
+          ],
+          "min_df": 2,
+          "sublinear_tf": true
+        },
+        "logistic_regression": {
+          "C": 1.0,
+          "class_weight": "balanced",
+          "max_iter": 1000
+        }
+      },
+      "oof": {
+        "accuracy": 0.9033,
+        "legitimate": {
+          "precision": 0.9519,
+          "recall": 0.9058,
+          "f1": 0.9283,
+          "support": 1115
+        },
+        "suspicious": {
+          "precision": 0.8101,
+          "recall": 0.8978,
+          "f1": 0.8517,
+          "support": 499
+        },
+        "macro_avg": {
+          "precision": 0.881,
+          "recall": 0.9018,
+          "f1": 0.89
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              1010,
+              105
+            ],
+            [
+              51,
+              448
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.1022,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.0942,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 1614,
+        "inconclusive": 0
+      },
+      "oof_by_source": {
+        "MWOZ": {
+          "n": 595,
+          "class_counts": {
+            "legitimate": 595
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "R115": {
+          "n": 700,
+          "class_counts": {
+            "suspicious": 357,
+            "legitimate": 343
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8414,
+          "recall_legitimate": 0.7289,
+          "recall_suspicious": 0.9496
+        },
+        "SYN": {
+          "n": 319,
+          "class_counts": {
+            "suspicious": 142,
+            "legitimate": 177
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8589,
+          "recall_legitimate": 0.9322,
+          "recall_suspicious": 0.7676
+        }
+      },
+      "fold_macro_f1": [
+        0.8816,
+        0.8641,
+        0.8613,
+        0.9174,
+        0.9257
+      ],
+      "fold_macro_f1_mean": 0.89,
+      "fold_macro_f1_std": 0.0268,
+      "vocabulary_coverage_mean": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.8771
+      },
+      "challenge": {
+        "accuracy": 0.9048,
+        "legitimate": {
+          "precision": 0.9583,
+          "recall": 0.8846,
+          "f1": 0.92,
+          "support": 26
+        },
+        "suspicious": {
+          "precision": 0.8333,
+          "recall": 0.9375,
+          "f1": 0.8824,
+          "support": 16
+        },
+        "macro_avg": {
+          "precision": 0.8958,
+          "recall": 0.9111,
+          "f1": 0.9012
+        },
+        "confusion_matrix": {
+          "labels": [
+            "legitimate",
+            "suspicious"
+          ],
+          "rows_true_cols_pred": [
+            [
+              23,
+              3
+            ],
+            [
+              1,
+              15
+            ]
+          ]
+        },
+        "suspicious_false_negative_rate": 0.0625,
+        "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+        "legitimate_false_positive_rate": 0.1154,
+        "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)",
+        "classified": 42,
+        "inconclusive": 0
+      },
+      "challenge_by_category": {
+        "delivery_notice": {
+          "n": 5,
+          "class_counts": {
+            "legitimate": 5
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8,
+          "recall_legitimate": 0.8
+        },
+        "financial_scam": {
+          "n": 16,
+          "class_counts": {
+            "suspicious": 16
+          },
+          "inconclusive": 0,
+          "accuracy": 0.9375,
+          "recall_suspicious": 0.9375
+        },
+        "genuine_otp_warning": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        },
+        "ordinary_conversation": {
+          "n": 9,
+          "class_counts": {
+            "legitimate": 9
+          },
+          "inconclusive": 0,
+          "accuracy": 1.0,
+          "recall_legitimate": 1.0
+        },
+        "payment_confirmation": {
+          "n": 6,
+          "class_counts": {
+            "legitimate": 6
+          },
+          "inconclusive": 0,
+          "accuracy": 0.8333,
+          "recall_legitimate": 0.8333
+        }
+      },
+      "vocabulary_coverage_challenge": {
+        "rows_with_any_known_feature": 1.0,
+        "feature_token_coverage": 0.9305
+      }
+    }
+  }
+}

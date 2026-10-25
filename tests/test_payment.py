@@ -278,6 +278,122 @@ class TestExtractFields:
         assert isinstance(fields, dict)
 
 
+class TestExtractRawValues:
+    """Values keep raw OCR casing/punctuation and never span OCR lines."""
+
+    LAYOUT = (
+        "Payment confirmation\n"
+        "One-time payment of €1.00\n"
+        "To Merchant Name\n"
+        "From Examplebank\n"
+        "Transaction Ref No. TID-241--\n"
+        "Description TID-241\n"
+    )
+
+    def test_casing_preserved(self):
+        fields = _extract_fields(self.LAYOUT)
+        assert fields["payee_name"] == "Merchant Name"
+        assert fields["payer_name"] == "Examplebank"
+
+    def test_names_stop_at_line_end(self):
+        fields = _extract_fields(self.LAYOUT)
+        assert "\n" not in fields["payee_name"] and "\n" not in fields["payer_name"]
+
+    def test_hyphenated_reference_kept_verbatim(self):
+        assert _extract_fields(self.LAYOUT)["transaction_id"] == "TID-241--"
+
+    def test_label_word_no_is_not_the_reference(self):
+        assert "transaction_id" not in _extract_fields("Transaction Ref No. pending")
+
+    def test_description_extracted(self):
+        assert _extract_fields(self.LAYOUT)["description"] == "TID-241"
+
+    def test_amount_keeps_currency_symbol(self):
+        assert _extract_fields(self.LAYOUT)["amount"] == "€1.00"
+
+    def test_keyword_inside_word_is_not_a_label(self):
+        assert "payee_name" not in _extract_fields("Customer support available")
+
+    @pytest.mark.parametrize("text, want", [
+        ("One-time payment of GBP 1,263.83", "GBP 1,263.83"),   # code no longer dropped
+        ("Amount: EUR 672.58", "EUR 672.58"),
+        ("Total: Rs. 5,000", "Rs. 5,000"),
+        ("Paid 500.00 INR", "500.00 INR"),
+        ("Amount: €25.00", "€25.00"),
+        ("Amount: 25.00", "25.00"),
+    ])
+    def test_amount_keeps_stated_currency_code(self, text, want):
+        assert _extract_fields(text)["amount"] == want
+
+    # Found on held-out split v1 (stacked layout, recall 0.70); fix is NOT
+    # evaluated on that split — see reports/payment_pipeline_eval_v1.
+    def test_stacked_label_then_value_line(self):
+        text = "Transfer details\nRecipient\nPeak Fitness Club\nAmount\n€4,198.97\n"
+        assert _extract_fields(text)["payee_name"] == "Peak Fitness Club"
+
+    def test_stacked_with_blank_line_as_tesseract_emits_it(self):
+        # Exact raw OCR text of held-out v2 sample test2-003 (synthetic).
+        raw = ("Transfer details\nRecipient\n\nLumen Lighting Co\nAmount\n\nGBP 54,697.27\n"
+               "Reference\nUTR641949938534\nStatus\n\nCompleted\n")
+        fields = _extract_fields(raw)
+        assert fields["payee_name"] == "Lumen Lighting Co"
+        assert fields["amount"] == "GBP 54,697.27"
+
+    def test_stacked_label_followed_by_another_label_is_not_a_name(self):
+        assert "payee_name" not in _extract_fields("Recipient\nAmount\n€5.00\n")
+
+    def test_same_line_payee_still_preferred(self):
+        assert _extract_fields("To Merchant Name\nRecipient\nOther Name\n")["payee_name"] == "Merchant Name"
+
+    def test_code_with_colon_still_normalises(self):
+        assert _normalise_amount("INR: 500") == "500"
+        assert _amounts_equal("INR: 500", "500.00")
+
+    def test_bank_name_does_not_span_lines(self):
+        fields = _extract_fields("Secure Bank Transfers\n\nPayment confirmation")
+        assert "\n" not in fields.get("bank_name", "")
+
+
+class TestFieldConfidence:
+    def test_missing_value_is_low(self):
+        from satyalens_analysis.payment_ocr import _field_confidence
+        assert _field_confidence(None, {"x": 99.0}) == "low"
+
+    def test_no_word_data_falls_back_to_medium(self):
+        from satyalens_analysis.payment_ocr import _field_confidence
+        assert _field_confidence("€1.00", None) == "medium"
+
+    def test_lowest_word_confidence_wins(self):
+        from satyalens_analysis.payment_ocr import _field_confidence
+        words = {"merchant": 96.0, "name": 52.0}
+        assert _field_confidence("Merchant Name", words) == "low"
+        assert _field_confidence("Merchant", words) == "high"
+        assert _field_confidence("Merchant", {"merchant": 70.0}) == "medium"
+
+    def test_unmatched_tokens_use_pass_mean(self):
+        from satyalens_analysis.payment_ocr import _field_confidence
+        assert _field_confidence("zzz", {"a": 90.0, "b": 92.0}) == "high"
+
+    @pytest.mark.skipif(not _DEPENDENCIES_OK, reason="Tesseract not available")
+    def test_word_data_failure_falls_back(self, monkeypatch, tmp_path):
+        """If image_to_data fails, OCR still runs and confidence degrades to 'medium'."""
+        import pytesseract
+        from PIL import Image
+        p = tmp_path / "blank.png"
+        Image.new("RGB", (60, 30), "white").save(p)
+
+        def boom(*a, **k):
+            raise RuntimeError("no word data")
+
+        monkeypatch.setattr(pytesseract, "image_to_data", boom)
+        monkeypatch.setattr(pytesseract, "image_to_string", lambda *a, **k: "Amount: Rs 500")
+        result = analyse_payment(str(p))
+        assert result.status == ComponentStatus.ANALYSED
+        amt = next(f for f in result.fields if f.field_name == "amount")
+        assert amt.confidence == "medium"
+        assert any("confidence was unavailable" in s for s in result.limitations)
+
+
 # ---------------------------------------------------------------------------
 # analyse_payment -- integration-level
 # ---------------------------------------------------------------------------
@@ -460,3 +576,106 @@ class TestPaymentWithSyntheticImage:
                 # It should contain the raw OCR output (not "5000" as a parsed Decimal)
                 # We can verify by checking it's truthy and string-typed
                 assert len(amt.extracted_value) > 0
+
+
+# ---------------------------------------------------------------------------
+# Image-quality assessment (degraded fixtures generated at test time)
+# ---------------------------------------------------------------------------
+
+_ARIAL = Path("C:/Windows/Fonts/arial.ttf")
+_QUALITY_ROWS = [("Payment Successful", ""), ("Amount", "\u20ac7.50"), ("To", "Riya Demo Stores"),
+                 ("Transaction Ref No.", "QX-518234"), ("Date", "12/10/2026")]
+
+
+def _receipt(path, blur=0.0, scale=1.0):
+    """Synthetic receipt; optionally Gaussian-blurred and/or downscaled."""
+    from PIL import Image, ImageDraw, ImageFilter, ImageFont
+    font = ImageFont.truetype(str(_ARIAL), 30)
+    img = Image.new("RGB", (900, 560), "white")
+    draw = ImageDraw.Draw(img)
+    for i, (label, value) in enumerate(_QUALITY_ROWS):
+        draw.text((40, 40 + i * 90), label, fill="black", font=font)
+        if value:
+            draw.text((480, 40 + i * 90), value, fill="black", font=font)
+    if blur:
+        img = img.filter(ImageFilter.GaussianBlur(blur))
+    if scale != 1.0:
+        img = img.resize((int(900 * scale), int(560 * scale)), Image.LANCZOS)
+    img.save(path)
+    return str(path)
+
+
+def _codes(result):
+    return {w["code"] for w in result.quality["warnings"]}
+
+
+class TestQualityAssessmentUnits:
+    def test_sharpness_is_contrast_independent(self):
+        import numpy as np
+        from satyalens_analysis.payment_ocr import _edge_sharpness
+        img = np.full((60, 60), 200, dtype=np.uint8)
+        img[20:40, 20:40] = 0
+        faint = (200 + (img.astype(float) - 200) * 0.05).astype(np.uint8)
+        assert abs(_edge_sharpness(img) - _edge_sharpness(faint)) < 0.02
+
+    def test_blank_image_has_no_sharpness(self):
+        import numpy as np
+        from satyalens_analysis.payment_ocr import _edge_sharpness
+        assert _edge_sharpness(np.full((30, 30), 255, dtype=np.uint8)) is None
+
+    def test_no_text_is_unreadable(self, tmp_path):
+        from PIL import Image
+        from satyalens_analysis.payment_ocr import _assess_quality
+        p = tmp_path / "blank.png"
+        Image.new("RGB", (300, 300), "white").save(p)
+        q = _assess_quality(str(p), "", None, [], {}, {})
+        assert q["assessment"] == "unreadable"
+        assert [w["code"] for w in q["warnings"]] == ["no_text"]
+        assert q["metrics"]["edge_sharpness"] is None
+
+    def test_critical_field_warnings_are_cautions(self, tmp_path):
+        from PIL import Image
+        from satyalens_analysis.payment_ocr import _assess_quality
+        p = tmp_path / "x.png"
+        Image.new("RGB", (300, 300), "white").save(p)
+        q = _assess_quality(str(p), "one two three four five six", {"one": 95.0}, [20.0],
+                            {"amount": "\u20ac5", "payee_name": "Riya"}, {"amount": "high", "payee_name": "low"})
+        by_code = {w["code"]: w["severity"] for w in q["warnings"]}
+        assert by_code == {"critical_field_missing": "caution", "critical_field_low_confidence": "caution"}
+        assert q["assessment"] == "limited"
+
+    def test_metrics_failure_does_not_crash(self, tmp_path):
+        from satyalens_analysis.payment_ocr import _assess_quality
+        q = _assess_quality(str(tmp_path / "missing.png"), "a b c d e f", {"a": 90.0}, [20.0],
+                            {"amount": "1", "payee_name": "R", "transaction_id": "T1"}, {})
+        assert q["metrics"]["width_px"] is None
+        assert q["assessment"] == "no_issues_detected"
+
+
+@pytest.mark.skipif(not _DEPENDENCIES_OK or not _ARIAL.exists(), reason="Tesseract or Arial not available")
+class TestQualityAssessmentRealOCR:
+    """Thresholds must flag the fixtures on which extraction was observed to degrade."""
+
+    def test_sharp_receipt_has_no_issues(self, tmp_path):
+        r = analyse_payment(_receipt(tmp_path / "sharp.png"))
+        assert r.quality["assessment"] == "no_issues_detected", r.quality["warnings"]
+        assert r.quality["metrics"]["edge_sharpness"] > 0.15
+        assert "quality" in r.to_dict()
+
+    def test_heavily_blurred_receipt_is_flagged_severe(self, tmp_path):
+        r = analyse_payment(_receipt(tmp_path / "blur.png", blur=4))
+        assert r.status == ComponentStatus.ANALYSED
+        assert r.quality["assessment"] in ("limited", "unreadable")
+        assert "blurred" in _codes(r)
+        assert any(w["severity"] == "severe" for w in r.quality["warnings"])
+
+    def test_tiny_text_is_flagged_low_resolution(self, tmp_path):
+        r = analyse_payment(_receipt(tmp_path / "tiny.png", scale=0.22))
+        assert "low_resolution" in _codes(r)
+
+    def test_raw_values_and_confidence_preserved_when_degraded(self, tmp_path):
+        r = analyse_payment(_receipt(tmp_path / "soft.png", blur=3))
+        for f in r.fields:
+            assert f.confidence in ("low", "medium", "high")
+            assert f.extracted_value is None or isinstance(f.extracted_value, str)
+        assert r.quality["metrics"]["ocr_mean_word_confidence"] is not None

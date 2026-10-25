@@ -1,0 +1,91 @@
+{
+  "name": "satyalens-training-pool",
+  "version": "2",
+  "synthetic": "partial",
+  "role": "training only; never evaluation",
+  "sources": {
+    "SYN": {
+      "file": "synthetic_financial_messages_v1.csv",
+      "synthetic": true,
+      "licence": "project-created (MIT repository)"
+    },
+    "R115": {
+      "title": "Indian Scam SMS (synthetic, audited)",
+      "url": "https://huggingface.co/datasets/Ridham115/indian-scam-sms-synthetic-audited",
+      "revision": "45e92c38ba20e973ef3ff5d1893a0a710f622018",
+      "file": "data/synthetic_audited.csv",
+      "sha256": "45bde5f156a1a42698bab209e32bcd41b3639013d772f644cc3208ed39fb61e2",
+      "retrieved": "2026-10-24",
+      "licence": "CC BY 4.0 (dataset card metadata)",
+      "attribution": "Ridham115, 'Indian Scam SMS (synthetic, audited)', Hugging Face dataset Ridham115/indian-scam-sms-synthetic-audited, revision 45e92c38ba20, CC BY 4.0.",
+      "synthetic": true,
+      "generators_used": [
+        "groq/openai/gpt-oss-120b"
+      ],
+      "label_mapping": {
+        "scam": "suspicious",
+        "safe": "legitimate"
+      },
+      "label_basis": "Source rubric (label_rubric.md): scam = deception to obtain money/OTP/credentials/risky action; safe = informational or personal incl. genuine OTP alerts. Mostly LLM-audited, partly unreviewed.",
+      "note": "Card warns generator-provider terms still apply; Gemini rows excluded."
+    },
+    "MWOZ": {
+      "title": "MultiWOZ 2.2",
+      "url": "https://github.com/budzianowski/multiwoz",
+      "commit": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+      "file": "data/MultiWOZ_2.2/train/dialogues_001.json",
+      "sha256": "895a8109bf01fa5ecf15ccdbd2dfe1628bd923f6b61dcd2e26b10ee5076a1596",
+      "retrieved": "2026-10-24",
+      "licence": "MIT — Copyright (c) 2019 Paweł Budzianowski",
+      "citation": "Budzianowski et al. 2018, EMNLP; Zang et al. 2020 (MultiWOZ 2.2)",
+      "synthetic": false,
+      "label_mapping": {
+        "*": "legitimate"
+      },
+      "label_basis": "Human-written Wizard-of-Oz booking dialogues; benign by construction.",
+      "sampling": "300 dialogues, one USER + one SYSTEM turn (>= 5 words) each, seed 20261024"
+    }
+  },
+  "independence": "No source derives from Mishra & Soni 2022, UCI SMS Spam or NUS SMS Corpus (the frozen evaluation set's sources); row-level overlap was also removed.",
+  "limitations": [
+    "Suspicious examples are entirely synthetic (SYN + LLM-generated R115); no real scam SMS with a verifiable licence and no evaluation-source contamination was found.",
+    "MWOZ is booking dialogue, not SMS; it may teach topic shortcuts (restaurants, trains).",
+    "R115 Devanagari rows are tokenised imperfectly by the letters-only token pattern.",
+    "R115 labels are LLM-audited and mostly unreviewed by humans."
+  ],
+  "candidates": {
+    "SYN": 319,
+    "R115_total_rows": 1580,
+    "R115_used": 700,
+    "MWOZ": 600
+  },
+  "pool_rows": 1614,
+  "pool_class_counts": {
+    "suspicious": 499,
+    "legitimate": 1115
+  },
+  "pool_by_source": {
+    "SYN": {
+      "suspicious": 142,
+      "legitimate": 177
+    },
+    "R115": {
+      "suspicious": 357,
+      "legitimate": 343
+    },
+    "MWOZ": {
+      "legitimate": 595
+    }
+  },
+  "groups": 415,
+  "excluded_outcomes": {
+    "excluded_generator": 880,
+    "duplicate": 5
+  },
+  "eval_overlap_by_kind": {
+    "exact_normalised": 0,
+    "skeleton": 0,
+    "token_jaccard": 0
+  },
+  "csv_sha256": "deb9be285df68e8e709bfab44b47480388a517c84bd2f0df830f8d2ab06da88d"
+}

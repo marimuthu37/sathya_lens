@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "critical": [],
+  "warnings": [],
+  "stats": {
+    "records": 518,
+    "images": 182,
+    "label_distribution": {
+      "train": {
+        "message_text": {
+          "suspicious": 48,
+          "legitimate": 48,
+          "ambiguous": 16
+        },
+        "payment_screenshot": {
+          "consistent": 16,
+          "discrepancy": 20,
+          "insufficient_evidence": 16
+        }
+      },
+      "dev": {
+        "message_text": {
+          "suspicious": 48,
+          "legitimate": 48,
+          "ambiguous": 16
+        },
+        "payment_screenshot": {
+          "consistent": 16,
+          "discrepancy": 20,
+          "insufficient_evidence": 16
+        }
+      },
+      "test": {
+        "message_text": {
+          "suspicious": 48,
+          "legitimate": 48,
+          "ambiguous": 16
+        },
+        "payment_screenshot": {
+          "consistent": 24,
+          "discrepancy": 30,
+          "insufficient_evidence": 24
+        }
+      }
+    },
+    "template_families": {
+      "train": 23,
+      "dev": 23,
+      "test": 23
+    }
+  },
+  "classifier_training_overlap": {
+    "checked": true,
+    "source": "data/synthetic_financial_messages_v1.csv",
+    "exact": 0,
+    "skeleton": 0,
+    "messages": 336
+  }
+}

@@ -130,15 +130,20 @@ class PaymentResult:
     mismatches: List[str] = field(default_factory=list)
     # Always populated: OCR, library and disclaimer caveats.
     limitations: List[str] = field(default_factory=list)
+    # Image-quality assessment; present only when OCR ran (status 'analysed').
+    quality: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        d = {
             "status": self.status.value,
             "raw_text": self.raw_text,
             "fields": [f.to_dict() for f in self.fields],
             "mismatches": self.mismatches,
             "limitations": self.limitations,
         }
+        if self.quality is not None:
+            d["quality"] = self.quality
+        return d
 
 
 @dataclass

@@ -1,0 +1,111 @@
+.consent-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.consent-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.consent-panel__icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-4);
+  filter: drop-shadow(0 0 8px rgba(0,212,255,0.4));
+}
+
+.consent-panel__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.consent-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.consent-panel__body > p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* Info grid */
+.consent-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.consent-item {
+  display: flex;
+  gap: var(--space-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.consent-item__icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.consent-item__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-1);
+}
+
+.consent-item__body {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Checkbox + label */
+.consent-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.consent-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.consent-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  accent-color: var(--color-accent-primary);
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.consent-checkbox input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .consent-info-grid {
+    grid-template-columns: 1fr;
+  }
+}

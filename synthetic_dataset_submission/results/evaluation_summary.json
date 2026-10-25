@@ -1,0 +1,903 @@
+{
+  "splits": {
+    "dev": {
+      "low_concern_decisions": 0,
+      "http_errors": 0,
+      "message_text": {
+        "binary_suspicious_vs_legitimate": {
+          "n": 96,
+          "positives": 48,
+          "negatives": 48,
+          "tp": 40,
+          "fp": 20,
+          "fn": 8,
+          "tn": 28,
+          "precision": 0.6667,
+          "recall": 0.8333,
+          "f1": 0.7407,
+          "false_positive_rate": 0.4167,
+          "false_negative_rate": 0.1667,
+          "denominators": {
+            "precision": 60,
+            "recall": 48,
+            "fpr": 48,
+            "fnr": 48
+          }
+        },
+        "ambiguous": {
+          "n": 16,
+          "decisions": {
+            "insufficient_evidence": 8,
+            "verify_first": 8
+          }
+        },
+        "per_category": {
+          "account_block_urgency": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "bill_reminder": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "delivery_update": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "everyday_money_talk": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "fake_payment_claim": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "fee_or_prize_demand": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "impersonation_money": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "kyc_link": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "otp_delivery": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 4,
+            "decisions": {
+              "insufficient_evidence": 4,
+              "verify_first": 4
+            }
+          },
+          "otp_request": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "security_advisory": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "transaction_alert": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "unclear_account_notice": {
+            "label": "ambiguous",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "unverified_payment_request": {
+            "label": "ambiguous",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          }
+        }
+      },
+      "payment_screenshot": {
+        "binary_discrepancy_vs_consistent": {
+          "n": 36,
+          "positives": 20,
+          "negatives": 16,
+          "tp": 17,
+          "fp": 0,
+          "fn": 3,
+          "tn": 16,
+          "precision": 1.0,
+          "recall": 0.85,
+          "f1": 0.9189,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.15,
+          "denominators": {
+            "precision": 17,
+            "recall": 20,
+            "fpr": 16,
+            "fnr": 20
+          }
+        },
+        "insufficient_evidence": {
+          "n": 16,
+          "flagged_verify_first": 0,
+          "low_concern": 0,
+          "with_severe_quality_warning": 12,
+          "with_any_comparison_run": 4
+        },
+        "field_status_agreement": {
+          "n_supplied_fields": 176,
+          "agree": 151,
+          "rate": 0.858,
+          "false_mismatch": 0,
+          "missed_mismatch": 3,
+          "confusions": {
+            "reference: want=match got=not_compared": 1,
+            "amount: want=mismatch got=not_compared": 1,
+            "currency: want=match got=not_compared": 9,
+            "amount: want=match got=not_compared": 11,
+            "currency: want=mismatch got=not_compared": 2,
+            "reference: want=match got=format_difference": 1
+          }
+        },
+        "severe_quality_on_legible": 0,
+        "per_category": {
+          "amount_format_only": {
+            "label": "consistent",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "amount_mismatch": {
+            "label": "discrepancy",
+            "n": 4,
+            "flagged": 3,
+            "decisions": {
+              "verify_first": 3,
+              "insufficient_evidence": 1
+            }
+          },
+          "consistent": {
+            "label": "consistent",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "currency_mismatch": {
+            "label": "discrepancy",
+            "n": 4,
+            "flagged": 2,
+            "decisions": {
+              "insufficient_evidence": 2,
+              "verify_first": 2
+            }
+          },
+          "degraded_blur": {
+            "label": "insufficient_evidence",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "degraded_lowres": {
+            "label": "insufficient_evidence",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "missing_recipient": {
+            "label": "insufficient_evidence",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "no_expected_values": {
+            "label": "consistent",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "placeholder_recipient": {
+            "label": "discrepancy",
+            "n": 4,
+            "flagged": 4,
+            "decisions": {
+              "verify_first": 4
+            }
+          },
+          "recipient_mismatch": {
+            "label": "discrepancy",
+            "n": 4,
+            "flagged": 4,
+            "decisions": {
+              "verify_first": 4
+            }
+          },
+          "reference_format_only": {
+            "label": "consistent",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          },
+          "reference_mismatch": {
+            "label": "discrepancy",
+            "n": 4,
+            "flagged": 4,
+            "decisions": {
+              "verify_first": 4
+            }
+          },
+          "unreadable": {
+            "label": "insufficient_evidence",
+            "n": 4,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 4
+            }
+          }
+        }
+      },
+      "records_evaluated": 164,
+      "limit": null,
+      "breakdowns": {
+        "screenshot_by_layout": {
+          "card": {
+            "n": 8,
+            "positives": 4,
+            "negatives": 4,
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "denominators": {
+              "precision": 4,
+              "recall": 4,
+              "fpr": 4,
+              "fnr": 4
+            }
+          },
+          "receipt": {
+            "n": 21,
+            "positives": 12,
+            "negatives": 9,
+            "tp": 10,
+            "fp": 0,
+            "fn": 2,
+            "tn": 9,
+            "precision": 1.0,
+            "recall": 0.8333,
+            "f1": 0.9091,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.1667,
+            "denominators": {
+              "precision": 10,
+              "recall": 12,
+              "fpr": 9,
+              "fnr": 12
+            }
+          },
+          "rows": {
+            "n": 4,
+            "positives": 2,
+            "negatives": 2,
+            "tp": 1,
+            "fp": 0,
+            "fn": 1,
+            "tn": 2,
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6667,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.5,
+            "denominators": {
+              "precision": 1,
+              "recall": 2,
+              "fpr": 2,
+              "fnr": 2
+            }
+          },
+          "stacked": {
+            "n": 3,
+            "positives": 2,
+            "negatives": 1,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "denominators": {
+              "precision": 2,
+              "recall": 2,
+              "fpr": 1,
+              "fnr": 2
+            }
+          }
+        },
+        "message_by_template": {
+          "msg:account_block_urgency:t2": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:bill_reminder:t0": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          },
+          "msg:delivery_update:t1": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          },
+          "msg:everyday_money_talk:t1": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 0
+          },
+          "msg:fake_payment_claim:t1": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 0
+          },
+          "msg:fee_or_prize_demand:t2": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:impersonation_money:t1": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:kyc_link:t1": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:otp_delivery:t2": {
+            "n": 8,
+            "flagged": 4,
+            "correct": 4
+          },
+          "msg:otp_request:t0": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:security_advisory:t1": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 0
+          },
+          "msg:transaction_alert:t1": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          }
+        }
+      }
+    },
+    "test": {
+      "low_concern_decisions": 0,
+      "http_errors": 0,
+      "message_text": {
+        "binary_suspicious_vs_legitimate": {
+          "n": 96,
+          "positives": 48,
+          "negatives": 48,
+          "tp": 40,
+          "fp": 9,
+          "fn": 8,
+          "tn": 39,
+          "precision": 0.8163,
+          "recall": 0.8333,
+          "f1": 0.8247,
+          "false_positive_rate": 0.1875,
+          "false_negative_rate": 0.1667,
+          "denominators": {
+            "precision": 49,
+            "recall": 48,
+            "fpr": 48,
+            "fnr": 48
+          }
+        },
+        "ambiguous": {
+          "n": 16,
+          "decisions": {
+            "insufficient_evidence": 8,
+            "verify_first": 8
+          }
+        },
+        "per_category": {
+          "account_block_urgency": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "bill_reminder": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "delivery_update": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "everyday_money_talk": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "fake_payment_claim": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "fee_or_prize_demand": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "impersonation_money": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "kyc_link": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "otp_delivery": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "otp_request": {
+            "label": "suspicious",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          },
+          "security_advisory": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 1,
+            "decisions": {
+              "insufficient_evidence": 7,
+              "verify_first": 1
+            }
+          },
+          "transaction_alert": {
+            "label": "legitimate",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "unclear_account_notice": {
+            "label": "ambiguous",
+            "n": 8,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 8
+            }
+          },
+          "unverified_payment_request": {
+            "label": "ambiguous",
+            "n": 8,
+            "flagged": 8,
+            "decisions": {
+              "verify_first": 8
+            }
+          }
+        }
+      },
+      "payment_screenshot": {
+        "binary_discrepancy_vs_consistent": {
+          "n": 54,
+          "positives": 30,
+          "negatives": 24,
+          "tp": 29,
+          "fp": 0,
+          "fn": 1,
+          "tn": 24,
+          "precision": 1.0,
+          "recall": 0.9667,
+          "f1": 0.9831,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0333,
+          "denominators": {
+            "precision": 29,
+            "recall": 30,
+            "fpr": 24,
+            "fnr": 30
+          }
+        },
+        "insufficient_evidence": {
+          "n": 24,
+          "flagged_verify_first": 0,
+          "low_concern": 0,
+          "with_severe_quality_warning": 18,
+          "with_any_comparison_run": 6
+        },
+        "field_status_agreement": {
+          "n_supplied_fields": 264,
+          "agree": 239,
+          "rate": 0.9053,
+          "false_mismatch": 1,
+          "missed_mismatch": 1,
+          "confusions": {
+            "amount: want=match got=not_compared": 10,
+            "currency: want=match got=not_compared": 12,
+            "amount: want=mismatch got=not_compared": 1,
+            "reference: want=match got=format_difference": 1,
+            "amount: want=match got=mismatch": 1
+          }
+        },
+        "severe_quality_on_legible": 0,
+        "per_category": {
+          "amount_format_only": {
+            "label": "consistent",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "amount_mismatch": {
+            "label": "discrepancy",
+            "n": 6,
+            "flagged": 5,
+            "decisions": {
+              "verify_first": 5,
+              "insufficient_evidence": 1
+            }
+          },
+          "consistent": {
+            "label": "consistent",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "currency_mismatch": {
+            "label": "discrepancy",
+            "n": 6,
+            "flagged": 6,
+            "decisions": {
+              "verify_first": 6
+            }
+          },
+          "degraded_blur": {
+            "label": "insufficient_evidence",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "degraded_lowres": {
+            "label": "insufficient_evidence",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "missing_recipient": {
+            "label": "insufficient_evidence",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "no_expected_values": {
+            "label": "consistent",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "placeholder_recipient": {
+            "label": "discrepancy",
+            "n": 6,
+            "flagged": 6,
+            "decisions": {
+              "verify_first": 6
+            }
+          },
+          "recipient_mismatch": {
+            "label": "discrepancy",
+            "n": 6,
+            "flagged": 6,
+            "decisions": {
+              "verify_first": 6
+            }
+          },
+          "reference_format_only": {
+            "label": "consistent",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          },
+          "reference_mismatch": {
+            "label": "discrepancy",
+            "n": 6,
+            "flagged": 6,
+            "decisions": {
+              "verify_first": 6
+            }
+          },
+          "unreadable": {
+            "label": "insufficient_evidence",
+            "n": 6,
+            "flagged": 0,
+            "decisions": {
+              "insufficient_evidence": 6
+            }
+          }
+        }
+      },
+      "records_evaluated": 190,
+      "limit": null,
+      "breakdowns": {
+        "screenshot_by_layout": {
+          "card": {
+            "n": 10,
+            "positives": 6,
+            "negatives": 4,
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "denominators": {
+              "precision": 6,
+              "recall": 6,
+              "fpr": 4,
+              "fnr": 6
+            }
+          },
+          "receipt": {
+            "n": 7,
+            "positives": 3,
+            "negatives": 4,
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "denominators": {
+              "precision": 3,
+              "recall": 3,
+              "fpr": 4,
+              "fnr": 3
+            }
+          },
+          "rows": {
+            "n": 26,
+            "positives": 15,
+            "negatives": 11,
+            "tp": 15,
+            "fp": 0,
+            "fn": 0,
+            "tn": 11,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "denominators": {
+              "precision": 15,
+              "recall": 15,
+              "fpr": 11,
+              "fnr": 15
+            }
+          },
+          "stacked": {
+            "n": 11,
+            "positives": 6,
+            "negatives": 5,
+            "tp": 5,
+            "fp": 0,
+            "fn": 1,
+            "tn": 5,
+            "precision": 1.0,
+            "recall": 0.8333,
+            "f1": 0.9091,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.1667,
+            "denominators": {
+              "precision": 5,
+              "recall": 6,
+              "fpr": 5,
+              "fnr": 6
+            }
+          }
+        },
+        "message_by_template": {
+          "msg:account_block_urgency:t1": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:bill_reminder:t2": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          },
+          "msg:delivery_update:t2": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 0
+          },
+          "msg:everyday_money_talk:t0": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          },
+          "msg:fake_payment_claim:t2": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 0
+          },
+          "msg:fee_or_prize_demand:t0": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:impersonation_money:t2": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:kyc_link:t0": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:otp_delivery:t1": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          },
+          "msg:otp_request:t2": {
+            "n": 8,
+            "flagged": 8,
+            "correct": 8
+          },
+          "msg:security_advisory:t2": {
+            "n": 8,
+            "flagged": 1,
+            "correct": 7
+          },
+          "msg:transaction_alert:t2": {
+            "n": 8,
+            "flagged": 0,
+            "correct": 8
+          }
+        }
+      }
+    }
+  },
+  "synthetic_only": true,
+  "seed": 20261025,
+  "dataset_sha256": "b73ece3c97ee8b91fbaa91c7cdd567a2c1105aa80f445ef25fdef97226adc7df"
+}

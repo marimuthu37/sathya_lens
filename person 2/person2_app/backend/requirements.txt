@@ -1,0 +1,21 @@
+# ── Core framework ────────────────────────────────────────────────────────────
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+
+# ── Data validation & settings ────────────────────────────────────────────────
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.36
+
+# ── File uploads ──────────────────────────────────────────────────────────────
+python-multipart==0.0.12
+
+# ── Environment ───────────────────────────────────────────────────────────────
+python-dotenv==1.0.1
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+pytest==8.3.4
+httpx==0.27.2          # async test client for FastAPI
+anyio==4.7.0           # required by httpx async transport

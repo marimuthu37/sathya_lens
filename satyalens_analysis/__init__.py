@@ -1,13 +1,16 @@
 """
 SatyaLens Analysis Package — Person 1: AI Detection & Evidence Analysis
 =======================================================================
-Provides three analysis components:
+Provides four analysis components:
 
-  1. audio    — Audio deepfake / spoofing detection (AASIST via HuggingFace Hub)
-  2. payment  — Payment screenshot OCR and field reconciliation
-  3. context  — Financial scam-context rule analysis
+  1. audio           — Audio deepfake / spoofing detection interface
+                       (currently always 'unavailable'; no model loader yet)
+  2. payment         — Payment screenshot OCR and field reconciliation
+  3. context         — Financial scam-context rule analysis
+  4. text_classifier — TF-IDF + Logistic Regression message classifier
+                       (optional [ml] extra; trained offline)
 
-All three components return dicts that conform to AnalysisResult schema
+All components return dicts that conform to AnalysisResult schema
 (see schema.py).  Person 2's FastAPI backend imports and calls
 `run_analysis()` from this package.
 

@@ -1,0 +1,9 @@
+# Generation, validation and tests (no other dependency is needed for these):
+Pillow>=10.0
+pytest>=7.4
+
+# Evaluation additionally needs the SatyaLens application itself — install its
+# requirements rather than duplicating them here:
+#   -r "../person 2/person2_app/backend/requirements.txt"
+#   pip install -e "..[ml]"            (the satyalens_analysis package)
+# plus the Tesseract OCR binary for screenshot analysis.

@@ -1,0 +1,48 @@
+{
+  "source_rows": 5971,
+  "source_label_counts_raw": {
+    "ham": 4844,
+    "Smishing": 616,
+    "spam": 466,
+    "Spam": 23,
+    "smishing": 22
+  },
+  "outcomes": {
+    "ambiguous": 489,
+    "duplicate": 189,
+    "accepted": 5293
+  },
+  "accepted_class_counts": {
+    "legitimate": 4833,
+    "suspicious": 460
+  },
+  "accepted_by_heuristic_topic": {
+    "financial": {
+      "legitimate": 169,
+      "suspicious": 149
+    },
+    "other": {
+      "legitimate": 4664,
+      "suspicious": 311
+    }
+  },
+  "excluded_reasons": {
+    "source label 'spam' is not defined as fraud; maps to neither class": 489,
+    "normalised duplicate of source": 189
+  },
+  "training_overlap": {
+    "exact_normalised": [],
+    "skeleton": [],
+    "token_jaccard": [],
+    "total": 0,
+    "method": "normalise_text equality, skeleton_text equality, or skeleton token Jaccard >= 0.8"
+  },
+  "anonymisation": {
+    "rows_with_masked_phone_like_numbers": 353,
+    "rows_with_masked_emails": 13,
+    "near_duplicate_clusters_multi": 23,
+    "rows_in_multi_clusters": 50
+  },
+  "label_case_normalised": "Source labels 'Smishing'/'Spam' were lower-cased before mapping.",
+  "excluded_file": "real_world_test_v1.excluded.csv"
+}

@@ -103,6 +103,7 @@ audio.status == "analysed"     =>  audio.finding IS present
 | `fields` | list[PaymentField] | yes | Empty list if nothing extracted |
 | `mismatches` | list[str] | yes | Empty list if all expected fields match |
 | `limitations` | list[str] | yes | Always non-empty |
+| `quality` | object | only when `status == "analysed"` | Image-quality assessment; see below (added 2026-10-25) |
 
 ### PaymentField object
 
@@ -119,6 +120,14 @@ audio.status == "analysed"     =>  audio.finding IS present
 `extracted_value` is **always the raw OCR string**. Normalisation is applied to
 copies for comparison only. Person 2 should display `extracted_value` to the user.
 
+> Change 2026-10-25 (no key change): an amount written with a currency code now
+> keeps the code in `extracted_value` — `"GBP 1,263.83"`, `"500.00 INR"` —
+> where it was previously captured as the bare number. Found by the synthetic
+> pipeline evaluation (`reports/payment_pipeline_eval_v1`): dropping the code
+> made currency comparisons impossible. Symbol forms (`€25.00`) are unchanged.
+> A stacked layout (label on one line, payee name on the next) is now also
+> extracted for `payee_name`.
+
 ### Comparison policy (Person 2 must understand this)
 
 | Field | Policy | Example of equal pairs |
@@ -133,6 +142,52 @@ which normalised values were compared, e.g.:
 amount: expected='5000', extracted='5,000.00'
     [Decimal comparison: normalised extracted='5000.00', normalised expected='5000']
 ```
+
+### `quality` object (ADDED 2026-10-25, additive, optional)
+
+Present **only when `payment.status == "analysed"`**; absent otherwise. Code
+that validates the payment object with a strict key set must allow it.
+
+```json
+"quality": {
+  "assessment": "no_issues_detected" | "limited" | "unreadable",
+  "metrics": {
+    "width_px": 343, "height_px": 651,
+    "edge_sharpness": 0.258,            // contrast-normalised; lower = blurrier
+    "contrast_range": 232.0,            // p99 - p1 grey levels; reported only, no threshold
+    "median_text_height_px": 10.5,      // from Tesseract word boxes, original pixels
+    "ocr_word_count": 29,
+    "ocr_mean_word_confidence": 90.5    // Tesseract self-report, NOT accuracy
+  },                                    // any metric may be null if it could not be computed
+  "warnings": [{"code": "...", "severity": "caution" | "severe", "message": "..."}],
+  "note": "Quality checks are heuristics calibrated on a small synthetic fixture set..."
+}
+```
+
+| Warning code | Severity | Trigger |
+|---|---|---|
+| `no_text` | severe | OCR returned no text (`assessment: "unreadable"`) |
+| `insufficient_text` | severe | fewer than 5 OCR words |
+| `blurred` | severe | edge sharpness < 0.08 |
+| `possibly_blurred` | caution | edge sharpness < 0.15 |
+| `low_resolution` | severe | median text height < 8 px |
+| `low_ocr_confidence` | severe | mean Tesseract word confidence < 70 |
+| `critical_field_missing` | caution | amount, payee_name or transaction_id not extracted |
+| `critical_field_low_confidence` | caution | one of those fields has confidence `low` |
+
+Thresholds were set against extraction outcomes on synthetic fixtures (one
+receipt blurred / downscaled / contrast-reduced, plus five synthetic mock-up
+screenshots) — see the comment block above `_SHARPNESS_CAUTION` in
+`payment_ocr.py`. They are **not** validated on real-world screenshots.
+`no_issues_detected` does **not** mean the extracted values are correct.
+Quality warnings describe the image; they are **not** fraud signals.
+
+Person 2 treats `severe` warnings as "do not compare extracted values
+automatically". Person 2 compares user-supplied expected payment details
+itself (backend `app/services/payment_checks.py`) and does **not** pass
+`expected_payment_fields` to `run_analysis`, because this package's comparison
+records an expected-but-unread field as a mismatch and does not consider OCR
+reliability.
 
 ### Payment limitations (always in response)
 
@@ -358,3 +413,4 @@ reference pattern which demonstrates:
 | Changing comparison policy for a field type | YES — document here first |
 | Audio becoming `analysed` when model is integrated | No — schema is already defined |
 | Adding top-level `text_classifier` (2026-10-24) | No per this table — but breaks strict key-set validators; see change notice above |
+| Adding optional `payment.quality` (2026-10-25) | No — present only when `payment.status == "analysed"`; strict payment key-set validators must allow it |

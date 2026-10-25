@@ -1,0 +1,57 @@
+/* ─────────────────────────────────────────────────────────────────
+   AboutPage styles
+   ───────────────────────────────────────────────────────────────── */
+
+.about-page {
+  padding: var(--space-7) 0 var(--space-8);
+}
+
+.about-page__header { margin-bottom: var(--space-7); }
+
+.about-section { margin-bottom: var(--space-7); }
+
+.about-section h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+.about-section p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  max-width: 680px;
+  margin-bottom: var(--space-3);
+}
+
+/* ── Ownership table ── */
+.ownership-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: var(--space-3);
+}
+
+.ownership-table th,
+.ownership-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ownership-table th {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--color-bg-surface);
+}
+
+.ownership-table td { color: var(--color-text-primary); }
+.ownership-table tr:last-child td { border-bottom: none; }
+.ownership-table tr:hover td { background: var(--color-bg-raised); }

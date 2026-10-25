@@ -1,0 +1,420 @@
+{
+  "report_type": "text_classifier_evaluation",
+  "evaluated_at_utc": "2026-10-24T17:57:38+00:00",
+  "evaluation_only": true,
+  "model": {
+    "path": "C:\\Users\\HP\\Desktop\\IIT\\satyalens_analysis\\models\\text_classifier.joblib",
+    "model_version": "tfidf-logreg-v1-66bab05fd245",
+    "artifact_sha256": "66bab05fd2452b221b9c0d1a75213c1e508cad5beeaf53aa803a72c2fb0288ee",
+    "trained_with_sklearn": "1.9.1",
+    "training_data": "satyalens-synthetic-financial-messages v1 (synthetic)",
+    "artifact_unchanged_after_evaluation": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0",
+    "numpy": "2.4.6"
+  },
+  "dataset": {
+    "file": "synthetic_dev_messages_v1.csv",
+    "sha256": "f53e57d1b71d2baab7ae3b6a67c63e029846cba63ecb8e9afcabaff747e62190",
+    "provenance": {
+      "name": "satyalens-synthetic-dev-messages",
+      "version": "1",
+      "generator_version": "dev-synth-v1",
+      "synthetic": true,
+      "provenance": "synthetic",
+      "source_marker": "SYN_DEV",
+      "generator": "scripts/generate_dev_synthetic_messages.py",
+      "generator_seed": 20261101,
+      "files": {
+        "synthetic_dev_messages_v1.csv": {
+          "rows": 168,
+          "sha256": "f53e57d1b71d2baab7ae3b6a67c63e029846cba63ecb8e9afcabaff747e62190"
+        },
+        "synthetic_dev_edge_cases_v1.csv": {
+          "rows": 17,
+          "sha256": "8d32d58a13c432fda0e412e617cde92a3cde81c30f5d59f16cea8f467e988834"
+        }
+      },
+      "label_counts": {
+        "legitimate": 78,
+        "suspicious": 90
+      },
+      "category_counts": {
+        "delivery_parcel_scam": 12,
+        "everyday_message": 18,
+        "fake_payment_confirmation": 18,
+        "fee_payment_request": 18,
+        "impersonation_urgent_money": 18,
+        "legit_bill_reminder": 12,
+        "legit_delivery_update": 18,
+        "legit_otp_delivery": 6,
+        "legit_transaction_notification": 24,
+        "suspicious_link_credential_request": 24
+      },
+      "language_counts": {
+        "en": 138,
+        "hinglish": 30
+      },
+      "edge_case_counts": {
+        "ambiguous_no_reference_label": 10,
+        "inconclusive_out_of_vocabulary": 6,
+        "not_applicable_blank": 1
+      },
+      "groups": 28,
+      "label_definitions": {
+        "suspicious": "Template written to exhibit a financial social-engineering pattern.",
+        "legitimate": "Template written to resemble routine, benign communication."
+      },
+      "intended_use": "Development, demonstration and functional/integration testing ONLY.",
+      "separation": "Not a Protocol v5 source; never a donated genuine alert (source SYN_DEV, never DONATION); not part of any training pool, frozen test set, exclusion log or sealed manifest.",
+      "limitations": [
+        "Synthetic, template-generated text written by the project author; narrow, author-biased style.",
+        "Does NOT represent the distribution of Indian financial alerts or of real scam traffic.",
+        "Labels reflect template intent, not verified real-world outcomes.",
+        "Metrics on this data are synthetic-only and must not be used to claim real-world performance or to select a model against the frozen test set.",
+        "Edge-case 'expected_text_classifier_status' values depend on the model vocabulary."
+      ],
+      "validation": {
+        "labelled_rows": 168,
+        "edge_rows": 17,
+        "duplicates": 0,
+        "missing_values": 0,
+        "label_category_consistent": true,
+        "placeholders_only": true,
+        "no_4plus_digit_runs": true
+      },
+      "licence": "Created for this project; no third-party data (repository licence, MIT per pyproject.toml)."
+    },
+    "rows": 168,
+    "class_counts": {
+      "legitimate": 78,
+      "suspicious": 90
+    }
+  },
+  "data_checks": {
+    "duplicates": {
+      "exact_normalised_duplicate_sets": 0,
+      "exact_normalised_duplicate_rows": 0,
+      "exact_examples": [],
+      "near_duplicate_clusters": 11,
+      "rows_in_near_duplicate_clusters": 29,
+      "near_examples": [
+        [
+          14,
+          16,
+          17,
+          19
+        ],
+        [
+          26,
+          27,
+          28,
+          29,
+          31
+        ],
+        [
+          32,
+          35
+        ],
+        [
+          34,
+          37
+        ],
+        [
+          41,
+          43
+        ],
+        [
+          62,
+          65,
+          67
+        ],
+        [
+          86,
+          88
+        ],
+        [
+          134,
+          136,
+          137
+        ],
+        [
+          140,
+          145
+        ],
+        [
+          158,
+          160
+        ],
+        [
+          167,
+          169
+        ]
+      ],
+      "method": "exact: normalise_text(); near: skeleton_text() equality (lower-case, URLs/e-mails/digits/punctuation removed)"
+    },
+    "training_overlap": {
+      "training_file": "C:\\Users\\HP\\Desktop\\IIT\\data\\synthetic_financial_messages_v1.csv",
+      "expected_sha256": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840",
+      "actual_sha256": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840",
+      "performed": true,
+      "exact_normalised": [],
+      "skeleton": [],
+      "token_jaccard": [],
+      "total": 0,
+      "method": "normalise_text equality, skeleton_text equality, or skeleton token Jaccard >= 0.8"
+    }
+  },
+  "coverage": {
+    "classified": 168,
+    "inconclusive": 0,
+    "inconclusive_by_class": {
+      "legitimate": 0,
+      "suspicious": 0
+    }
+  },
+  "metrics": {
+    "accuracy": 0.9107,
+    "legitimate": {
+      "precision": 0.9565,
+      "recall": 0.8462,
+      "f1": 0.898,
+      "support": 78
+    },
+    "suspicious": {
+      "precision": 0.8788,
+      "recall": 0.9667,
+      "f1": 0.9206,
+      "support": 90
+    },
+    "macro_avg": {
+      "precision": 0.9177,
+      "recall": 0.9064,
+      "f1": 0.9093
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          66,
+          12
+        ],
+        [
+          3,
+          87
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 0.0333,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 0.1538,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  },
+  "majority_class_baseline": {
+    "predicts": "suspicious",
+    "accuracy": 0.5357,
+    "legitimate": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 78
+    },
+    "suspicious": {
+      "precision": 0.5357,
+      "recall": 1.0,
+      "f1": 0.6977,
+      "support": 90
+    },
+    "macro_avg": {
+      "precision": 0.2679,
+      "recall": 0.5,
+      "f1": 0.3488
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          0,
+          78
+        ],
+        [
+          0,
+          90
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 0.0,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 1.0,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  },
+  "rule_engine_baseline": {
+    "description": "context_analyser: any flag -> suspicious; all rows",
+    "rows": 168,
+    "accuracy": 0.6726,
+    "legitimate": {
+      "precision": 0.5865,
+      "recall": 1.0,
+      "f1": 0.7393,
+      "support": 78
+    },
+    "suspicious": {
+      "precision": 1.0,
+      "recall": 0.3889,
+      "f1": 0.56,
+      "support": 90
+    },
+    "macro_avg": {
+      "precision": 0.7932,
+      "recall": 0.6944,
+      "f1": 0.6497
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          78,
+          0
+        ],
+        [
+          55,
+          35
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 0.6111,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 0.0,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  },
+  "breakdowns": {
+    "source": {
+      "SYN_DEV": {
+        "n": 168,
+        "class_counts": {
+          "legitimate": 78,
+          "suspicious": 90
+        },
+        "inconclusive": 0,
+        "accuracy": 0.9107,
+        "recall_legitimate": 0.8462,
+        "recall_suspicious": 0.9667
+      }
+    },
+    "category": {
+      "delivery_parcel_scam": {
+        "n": 12,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 12
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "everyday_message": {
+        "n": 18,
+        "class_counts": {
+          "legitimate": 18,
+          "suspicious": 0
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "fake_payment_confirmation": {
+        "n": 18,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 18
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "fee_payment_request": {
+        "n": 18,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 18
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "impersonation_urgent_money": {
+        "n": 18,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 18
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "legit_bill_reminder": {
+        "n": 12,
+        "class_counts": {
+          "legitimate": 12,
+          "suspicious": 0
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "legit_delivery_update": {
+        "n": 18,
+        "class_counts": {
+          "legitimate": 18,
+          "suspicious": 0
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "legit_otp_delivery": {
+        "n": 6,
+        "class_counts": {
+          "legitimate": 6,
+          "suspicious": 0
+        },
+        "inconclusive": 0,
+        "note": "fewer than 20 classified rows; metrics not reported"
+      },
+      "legit_transaction_notification": {
+        "n": 24,
+        "class_counts": {
+          "legitimate": 24,
+          "suspicious": 0
+        },
+        "inconclusive": 0,
+        "accuracy": 1.0,
+        "recall_legitimate": 1.0,
+        "recall_suspicious": null
+      },
+      "suspicious_link_credential_request": {
+        "n": 24,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 24
+        },
+        "inconclusive": 0,
+        "accuracy": 1.0,
+        "recall_legitimate": null,
+        "recall_suspicious": 1.0
+      }
+    }
+  },
+  "notes": {
+    "denominators": "All metrics use the classified rows (coverage.classified). Rows with no in-vocabulary term are 'inconclusive' (the component returns no class) and are counted separately in coverage, not as correct or incorrect.",
+    "baseline": "Majority-class baseline always predicts the most frequent label among the classified evaluation rows; it is a reference point, not a deployable model.",
+    "score": "raw_score / predict_proba is uncalibrated and was not used for metrics beyond the default argmax decision; it is not a probability of fraud.",
+    "subgroups": "Subgroups with fewer than 20 classified rows report counts only."
+  },
+  "final_sealed_evaluation": false
+}

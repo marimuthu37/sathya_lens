@@ -1,0 +1,21 @@
+{
+  "protocol": "payment_pipeline_eval_v1 / held-out split v2 (test2)",
+  "registered_at": "2026-10-25T05:10:00+00:00",
+  "registered_before_test2_generated_or_run": true,
+  "config_hash": "6f794eb14a343ff35bdce39384ac6d0100556f609faf7cb83351cd24449f4345",
+  "frozen_code_sha256": {
+    "scripts/evaluate_payment_pipeline.py": "474170B0F828559F6A7B29898D229CCC71F511D3DDF0B5DE8C2ECBDCE15E328B",
+    "satyalens_analysis/payment_ocr.py": "248306B05674F53C1FAFC9EDC75302659D7492B8CCAC884FDCD64C56096DD7C4",
+    "person 2/person2_app/backend/app/services/payment_checks.py": "01BA59D96A6C720D51B801317C6F7507A75C5CDEA6F365ED998BFA5ED522808D"
+  },
+  "why_a_second_split": "Held-out split v1 (protocol.json) was run once and its failures were inspected: 8/11 false negatives were the stacked layout (recipient on the line below its label). The payee extractor was then extended for stacked layouts. v1 results remain the official pre-fix measurement and are not re-run. v2 measures the fixed pipeline on data no-one has seen.",
+  "independence": {
+    "seed": 3003,
+    "fonts": ["times", "timesbd", "consola"],
+    "fonts_note": "not used in dev, v1 test, or the earlier threshold calibration",
+    "recipient_names": "list C, disjoint from A (dev) and B (v1 test)",
+    "caveat": "Same generator family and layouts as v1; the stacked-layout fix was designed after seeing v1 failures, so v2 is independent data but not an independent design."
+  },
+  "metrics": "identical to protocol.json",
+  "run_policy": "Run once; the script refuses to overwrite test2 results or to run if the config hash changes."
+}

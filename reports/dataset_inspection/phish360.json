@@ -1,0 +1,182 @@
+{
+  "inspection_only": true,
+  "provenance": {
+    "title": "Phish360",
+    "project_page": "https://web.cs.hacettepe.edu.tr/~selman/phish360-dataset/",
+    "authors": [
+      "Ahmet Selman Bozkir",
+      "Ahmad H. A. Almakhamreh"
+    ],
+    "paper": "CrossPhire: Benefiting Multimodality for Robust Phishing Web Page Identification. Applied Sciences 2026, 16(2), 751. doi:10.3390/app16020751",
+    "access": "Google Form on the project page (contact selman@cs.hacettepe.edu.tr)",
+    "licence": "NOT A FORMAL LICENCE \u2014 download form states 'free for academic purposes' and requires citing the paper; project page footer 'All rights reserved'; commercial use and redistribution not addressed. The MIT licence of github.com/almakhamreh/Multimodal-Phishing-Benchmarks covers that analysis code, not the data. Academic use only; not cleared for commercial use.",
+    "version_note": "Project page describes Parquet files; this copy is a folder-per-sample zip. Exact release cannot be confirmed; integrity pinned by SHA-256.",
+    "real": "Real-world phishing and legitimate pages collected 2020-2023 (per project page)"
+  },
+  "file": "phish360.zip",
+  "sha256": "64f573e6e52a9deb486f9d07d87c56e245065545fa161e8db6f080732d5ddd5f",
+  "access": {
+    "files": 42995,
+    "encrypted_entries": 42995,
+    "aes_entries": 42995,
+    "content_readable": false,
+    "reason": "archive is encrypted; password not provided (set SATYALENS_PHISH360_PASSWORD)"
+  },
+  "index_inventory": {
+    "samples": 10748,
+    "unrecognised_folders": 0,
+    "by_split_and_class": {
+      "test|legitimate": 1499,
+      "test|phishing": 1272,
+      "trainval|legitimate": 4917,
+      "trainval|phishing": 3060
+    },
+    "labels_source": "folder-name prefix (P = phishing, L = legitimate); label.txt not readable",
+    "phishing_brand_tags": {
+      "distinct": 47,
+      "top_20": [
+        [
+          "phish",
+          1272
+        ],
+        [
+          "facebook",
+          219
+        ],
+        [
+          "paypal",
+          211
+        ],
+        [
+          "chase",
+          182
+        ],
+        [
+          "office",
+          179
+        ],
+        [
+          "boa",
+          130
+        ],
+        [
+          "orange",
+          129
+        ],
+        [
+          "wellsfargo",
+          125
+        ],
+        [
+          "dhl",
+          115
+        ],
+        [
+          "alibaba",
+          107
+        ],
+        [
+          "apple",
+          107
+        ],
+        [
+          "itau",
+          102
+        ],
+        [
+          "yahoo",
+          101
+        ],
+        [
+          "outlook",
+          93
+        ],
+        [
+          "att",
+          91
+        ],
+        [
+          "google",
+          89
+        ],
+        [
+          "adobe",
+          82
+        ],
+        [
+          "dropbox",
+          82
+        ],
+        [
+          "microsoft",
+          82
+        ],
+        [
+          "amazon",
+          77
+        ]
+      ],
+      "generic_phish_tag": 1272
+    },
+    "file_completeness": {
+      "samples_with_extra_files": 1,
+      "extra_files": 3
+    },
+    "uncompressed_size_bytes": {
+      "label": {
+        "min": 3,
+        "median": 15,
+        "max": 15,
+        "zero_byte": 0
+      },
+      "html": {
+        "min": 4003,
+        "median": 40292,
+        "max": 15590579,
+        "zero_byte": 0
+      },
+      "png": {
+        "min": 10457,
+        "median": 365338,
+        "max": 16107041,
+        "zero_byte": 0
+      },
+      "url": {
+        "min": 18,
+        "median": 48,
+        "max": 1646,
+        "zero_byte": 0
+      }
+    },
+    "duplicate_candidates_by_crc32_and_size": {
+      "html": {
+        "candidate_groups": 136,
+        "rows_in_groups": 305,
+        "groups_spanning_both_classes": 0,
+        "groups_spanning_both_splits": 11
+      },
+      "png": {
+        "candidate_groups": 8,
+        "rows_in_groups": 16,
+        "groups_spanning_both_classes": 0,
+        "groups_spanning_both_splits": 3
+      },
+      "url": {
+        "candidate_groups": 103,
+        "rows_in_groups": 216,
+        "groups_spanning_both_classes": 0,
+        "groups_spanning_both_splits": 14
+      }
+    }
+  },
+  "content_inventory": "NOT PERFORMED \u2014 archive is encrypted; password not provided (set SATYALENS_PHISH360_PASSWORD)",
+  "not_assessed_without_content": [
+    "label.txt agreement with folder names",
+    "PNG validity, dimensions and corruption",
+    "screenshot duplicates/near-duplicates",
+    "URL/domain grouping and cross-split domain leakage",
+    "HTML privacy indicators",
+    "personal data in screenshots"
+  ],
+  "supports": "Binary phishing-vs-legitimate WEBPAGE classification from screenshots (and URL/HTML), once readable. Not payment receipts, UPI screenshots, or payment settlement."
+}

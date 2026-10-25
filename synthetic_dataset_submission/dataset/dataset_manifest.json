@@ -1,0 +1,371 @@
+{
+  "category_distribution": {
+    "dev": {
+      "message_text": {
+        "account_block_urgency": 8,
+        "bill_reminder": 8,
+        "delivery_update": 8,
+        "everyday_money_talk": 8,
+        "fake_payment_claim": 8,
+        "fee_or_prize_demand": 8,
+        "impersonation_money": 8,
+        "kyc_link": 8,
+        "otp_delivery": 8,
+        "otp_request": 8,
+        "security_advisory": 8,
+        "transaction_alert": 8,
+        "unclear_account_notice": 8,
+        "unverified_payment_request": 8
+      },
+      "payment_screenshot": {
+        "amount_format_only": 4,
+        "amount_mismatch": 4,
+        "consistent": 4,
+        "currency_mismatch": 4,
+        "degraded_blur": 4,
+        "degraded_lowres": 4,
+        "missing_recipient": 4,
+        "no_expected_values": 4,
+        "placeholder_recipient": 4,
+        "recipient_mismatch": 4,
+        "reference_format_only": 4,
+        "reference_mismatch": 4,
+        "unreadable": 4
+      }
+    },
+    "test": {
+      "message_text": {
+        "account_block_urgency": 8,
+        "bill_reminder": 8,
+        "delivery_update": 8,
+        "everyday_money_talk": 8,
+        "fake_payment_claim": 8,
+        "fee_or_prize_demand": 8,
+        "impersonation_money": 8,
+        "kyc_link": 8,
+        "otp_delivery": 8,
+        "otp_request": 8,
+        "security_advisory": 8,
+        "transaction_alert": 8,
+        "unclear_account_notice": 8,
+        "unverified_payment_request": 8
+      },
+      "payment_screenshot": {
+        "amount_format_only": 6,
+        "amount_mismatch": 6,
+        "consistent": 6,
+        "currency_mismatch": 6,
+        "degraded_blur": 6,
+        "degraded_lowres": 6,
+        "missing_recipient": 6,
+        "no_expected_values": 6,
+        "placeholder_recipient": 6,
+        "recipient_mismatch": 6,
+        "reference_format_only": 6,
+        "reference_mismatch": 6,
+        "unreadable": 6
+      }
+    },
+    "train": {
+      "message_text": {
+        "account_block_urgency": 8,
+        "bill_reminder": 8,
+        "delivery_update": 8,
+        "everyday_money_talk": 8,
+        "fake_payment_claim": 8,
+        "fee_or_prize_demand": 8,
+        "impersonation_money": 8,
+        "kyc_link": 8,
+        "otp_delivery": 8,
+        "otp_request": 8,
+        "security_advisory": 8,
+        "transaction_alert": 8,
+        "unclear_account_notice": 8,
+        "unverified_payment_request": 8
+      },
+      "payment_screenshot": {
+        "amount_format_only": 4,
+        "amount_mismatch": 4,
+        "consistent": 4,
+        "currency_mismatch": 4,
+        "degraded_blur": 4,
+        "degraded_lowres": 4,
+        "missing_recipient": 4,
+        "no_expected_values": 4,
+        "placeholder_recipient": 4,
+        "recipient_mismatch": 4,
+        "reference_format_only": 4,
+        "reference_mismatch": 4,
+        "unreadable": 4
+      }
+    }
+  },
+  "config": {
+    "images": true,
+    "images_per_category": {
+      "dev": 4,
+      "test": 6,
+      "train": 4
+    },
+    "seed": 20261025,
+    "texts_per_template": {
+      "dev": 8,
+      "test": 8,
+      "train": 8
+    }
+  },
+  "dataset": "satyalens-synthetic-submission",
+  "environment": {
+    "pillow": "13.0.0",
+    "python": "3.11.9"
+  },
+  "files": {
+    "images_digest": "920520e1c88acbf5a60d81e5b18541639b1f3cdf9b6e2238118856f37325725c",
+    "synthetic_dataset.jsonl": "b73ece3c97ee8b91fbaa91c7cdd567a2c1105aa80f445ef25fdef97226adc7df"
+  },
+  "generator_sha256": "359308c108a8c8d20cc9d8e7598790f757750a2a25502aafb40e87bd6ddc45a9",
+  "image_count": 182,
+  "label_distribution": {
+    "dev": {
+      "message_text": {
+        "ambiguous": 16,
+        "legitimate": 48,
+        "suspicious": 48
+      },
+      "payment_screenshot": {
+        "consistent": 16,
+        "discrepancy": 20,
+        "insufficient_evidence": 16
+      }
+    },
+    "test": {
+      "message_text": {
+        "ambiguous": 16,
+        "legitimate": 48,
+        "suspicious": 48
+      },
+      "payment_screenshot": {
+        "consistent": 24,
+        "discrepancy": 30,
+        "insufficient_evidence": 24
+      }
+    },
+    "train": {
+      "message_text": {
+        "ambiguous": 16,
+        "legitimate": 48,
+        "suspicious": 48
+      },
+      "payment_screenshot": {
+        "consistent": 16,
+        "discrepancy": 20,
+        "insufficient_evidence": 16
+      }
+    }
+  },
+  "label_rules": {
+    "message_text": {
+      "account_block_urgency": {
+        "label": "suspicious",
+        "rationale": "Threatens imminent blocking and demands immediate action or card details."
+      },
+      "bill_reminder": {
+        "label": "legitimate",
+        "rationale": "Due-date reminder that points to the official app or counter, no link or individual."
+      },
+      "delivery_update": {
+        "label": "legitimate",
+        "rationale": "Delivery status with no payment or credential request."
+      },
+      "everyday_money_talk": {
+        "label": "legitimate",
+        "rationale": "Ordinary conversation between acquaintances that mentions money."
+      },
+      "fake_payment_claim": {
+        "label": "suspicious",
+        "rationale": "Claims a payment was made and asks for money or approval in return."
+      },
+      "fee_or_prize_demand": {
+        "label": "suspicious",
+        "rationale": "Demands an upfront fee for a prize/job, or threatens disconnection unless paid to an individual."
+      },
+      "impersonation_money": {
+        "label": "suspicious",
+        "rationale": "Impersonates family, an employer or an authority to request money or secrecy."
+      },
+      "kyc_link": {
+        "label": "suspicious",
+        "rationale": "Pressures the recipient to 'update' identity details through a link."
+      },
+      "otp_delivery": {
+        "label": "legitimate",
+        "rationale": "Delivers a code to the account holder and warns not to share it; asks for nothing."
+      },
+      "otp_request": {
+        "label": "suspicious",
+        "rationale": "Asks the recipient to disclose a one-time code."
+      },
+      "security_advisory": {
+        "label": "legitimate",
+        "rationale": "Hard negative: mentions OTPs, blocking or fraud, but only to warn or confirm a user action."
+      },
+      "transaction_alert": {
+        "label": "legitimate",
+        "rationale": "Informational debit/credit notification with no request."
+      },
+      "unclear_account_notice": {
+        "label": "ambiguous",
+        "rationale": "An account notice that could be genuine or a lure; it asks for no credential."
+      },
+      "unverified_payment_request": {
+        "label": "ambiguous",
+        "rationale": "A plausible payment request whose legitimacy cannot be judged from the text alone."
+      }
+    },
+    "payment_screenshot": {
+      "amount_format_only": {
+        "label": "consistent",
+        "rationale": "Expected amount written without grouping/decimals (1234.5 vs 1,234.50); same value."
+      },
+      "amount_mismatch": {
+        "label": "discrepancy",
+        "rationale": "Expected amount differs from the rendered amount."
+      },
+      "consistent": {
+        "label": "consistent",
+        "rationale": "All four supplied expectations equal the rendered values."
+      },
+      "currency_mismatch": {
+        "label": "discrepancy",
+        "rationale": "Expected currency differs from the rendered currency."
+      },
+      "degraded_blur": {
+        "label": "insufficient_evidence",
+        "rationale": "Consistent values, Gaussian blur sigma 2.5–3.5."
+      },
+      "degraded_lowres": {
+        "label": "insufficient_evidence",
+        "rationale": "Consistent values, downscaled to 20–25 %."
+      },
+      "missing_recipient": {
+        "label": "insufficient_evidence",
+        "rationale": "Recipient line not rendered but an expected recipient is supplied; it cannot be compared."
+      },
+      "no_expected_values": {
+        "label": "consistent",
+        "rationale": "No expectations supplied; the screenshot itself is unremarkable."
+      },
+      "placeholder_recipient": {
+        "label": "discrepancy",
+        "rationale": "Rendered recipient is a template placeholder such as 'Merchant Name'."
+      },
+      "recipient_mismatch": {
+        "label": "discrepancy",
+        "rationale": "Expected recipient differs from the rendered recipient."
+      },
+      "reference_format_only": {
+        "label": "consistent",
+        "rationale": "Expected reference differs only in separators/case."
+      },
+      "reference_mismatch": {
+        "label": "discrepancy",
+        "rationale": "Expected reference differs from the rendered one by two digits."
+      },
+      "unreadable": {
+        "label": "insufficient_evidence",
+        "rationale": "Blank or random-noise image; nothing can be read."
+      }
+    }
+  },
+  "methodology": "docs/generation_methodology.md",
+  "not_generated": {
+    "audio": "SatyaLens audio detection is unavailable",
+    "webpage": "SatyaLens webpage/phishing-page detection is not implemented"
+  },
+  "record_count": 518,
+  "schema_version": "1.0.0",
+  "seed": 20261025,
+  "split_counts": {
+    "dev": 164,
+    "test": 190,
+    "train": 164
+  },
+  "synthetic": true,
+  "template_families": {
+    "dev": [
+      "img:card:arial",
+      "img:card:segoeui",
+      "img:receipt:calibri",
+      "img:receipt:georgia",
+      "img:receipt:verdana",
+      "img:rows:times",
+      "img:stacked:calibri",
+      "img:stacked:segoeui",
+      "img:unreadable:dev",
+      "msg:account_block_urgency:t2",
+      "msg:bill_reminder:t0",
+      "msg:delivery_update:t1",
+      "msg:everyday_money_talk:t1",
+      "msg:fake_payment_claim:t1",
+      "msg:fee_or_prize_demand:t2",
+      "msg:impersonation_money:t1",
+      "msg:kyc_link:t1",
+      "msg:otp_delivery:t2",
+      "msg:otp_request:t0",
+      "msg:security_advisory:t1",
+      "msg:transaction_alert:t1",
+      "msg:unclear_account_notice:t0",
+      "msg:unverified_payment_request:t1"
+    ],
+    "test": [
+      "img:card:times",
+      "img:card:verdana",
+      "img:receipt:times",
+      "img:rows:arial",
+      "img:rows:segoeui",
+      "img:rows:verdana",
+      "img:stacked:georgia",
+      "img:stacked:verdana",
+      "img:unreadable:test",
+      "msg:account_block_urgency:t1",
+      "msg:bill_reminder:t2",
+      "msg:delivery_update:t2",
+      "msg:everyday_money_talk:t0",
+      "msg:fake_payment_claim:t2",
+      "msg:fee_or_prize_demand:t0",
+      "msg:impersonation_money:t2",
+      "msg:kyc_link:t0",
+      "msg:otp_delivery:t1",
+      "msg:otp_request:t2",
+      "msg:security_advisory:t2",
+      "msg:transaction_alert:t2",
+      "msg:unclear_account_notice:t1",
+      "msg:unverified_payment_request:t0"
+    ],
+    "train": [
+      "img:card:calibri",
+      "img:card:georgia",
+      "img:receipt:arial",
+      "img:receipt:segoeui",
+      "img:rows:calibri",
+      "img:rows:georgia",
+      "img:stacked:arial",
+      "img:stacked:times",
+      "img:unreadable:train",
+      "msg:account_block_urgency:t0",
+      "msg:bill_reminder:t1",
+      "msg:delivery_update:t0",
+      "msg:everyday_money_talk:t2",
+      "msg:fake_payment_claim:t0",
+      "msg:fee_or_prize_demand:t1",
+      "msg:impersonation_money:t0",
+      "msg:kyc_link:t2",
+      "msg:otp_delivery:t0",
+      "msg:otp_request:t1",
+      "msg:security_advisory:t0",
+      "msg:transaction_alert:t0",
+      "msg:unclear_account_notice:t2",
+      "msg:unverified_payment_request:t2"
+    ]
+  }
+}

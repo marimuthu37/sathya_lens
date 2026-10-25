@@ -1,0 +1,311 @@
+.checklist-panel {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Header */
+.cl-header { display: flex; align-items: center; gap: var(--space-3); }
+
+.cl-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.cl-title span { color: var(--color-accent); }
+.cl-title--feedback { margin-top: var(--space-2); }
+
+/* Disclaimer */
+.cl-disclaimer {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  background: rgba(240,165,0,0.07);
+  border: 1px solid rgba(240,165,0,0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.cl-disclaimer__icon { flex-shrink: 0; }
+
+/* Loading */
+.cl-loading {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* Checklist body */
+.cl-body { display: flex; flex-direction: column; gap: var(--space-5); }
+
+/* Group */
+.cl-group {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cl-group__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--color-border);
+  margin: 0;
+}
+
+/* Items */
+.cl-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cl-item {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  transition: background 0.15s ease;
+}
+
+.cl-item:last-child { border-bottom: none; }
+
+.cl-item--checked {
+  background: rgba(34,197,94,0.05);
+}
+
+.cl-item__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hide native checkbox visually */
+.cl-item__checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom checkbox box */
+.cl-item__box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #22c55e;
+  margin-top: 1px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.cl-item--checked .cl-item__box {
+  border-color: #22c55e;
+  background: rgba(34,197,94,0.15);
+}
+
+.cl-item__checkbox:focus-visible + .cl-item__box {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cl-item__text {
+  font-size: 0.84rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  transition: color 0.15s ease;
+}
+
+.cl-item--checked .cl-item__text {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(34,197,94,0.4);
+}
+
+.cl-india-badge {
+  margin-left: 6px;
+  font-size: 0.9rem;
+}
+
+.cl-item__detail {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-top: var(--space-1);
+  margin-left: calc(20px + var(--space-3));
+  font-style: italic;
+}
+
+/* Progress bar */
+.cl-progress-bar {
+  position: relative;
+  height: 6px;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  overflow: visible;
+}
+
+.cl-progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), #22c55e);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+  min-width: 0;
+}
+
+.cl-progress-bar__label {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* Spinner small */
+.spinner--sm {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+/* ── Feedback section ──────────────────────────────────────────────────────── */
+
+.cl-feedback-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.cl-feedback-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.cl-feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Tri-state field */
+.cl-tristate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.cl-tristate__label {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.cl-tristate__options {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.cl-tristate__opt {
+  padding: 4px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cl-tristate__opt:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.cl-tristate__opt--active {
+  background: rgba(0,212,255,0.12);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Note field */
+.cl-feedback-field { display: flex; flex-direction: column; gap: var(--space-1); }
+
+.cl-feedback-field__label {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.cl-optional {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.cl-feedback-field__textarea {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: 0.82rem;
+  padding: var(--space-3);
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cl-feedback-field__textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0,212,255,0.15);
+}
+
+.cl-char-count {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.cl-feedback-saved {
+  font-size: 0.82rem;
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.cl-feedback-actions { display: flex; }
+
+@media (max-width: 640px) {
+  .cl-tristate__options { flex-direction: column; }
+  .cl-tristate__opt { text-align: center; }
+}

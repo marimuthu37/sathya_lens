@@ -1,0 +1,73 @@
+# ─── Python / Backend ──────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# SQLite databases (contain case data — never commit)
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded evidence — never commit user files
+backend/uploads/
+backend/reports/
+backend/tmp/
+
+# Pytest / coverage
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.pytest_cache
+
+# MyPy / type checkers
+.mypy_cache/
+.ruff_cache/
+
+# ─── Node / Frontend ────────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+
+# Vite build output
+frontend/dist/
+frontend/.vite/
+
+# ─── Secrets & local config ─────────────────────────────────────────────────────
+# These files may contain real API keys, passwords, or tokens — never commit.
+.env
+.env.local
+.env.*.local
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# ─── OS / Editor ────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ─── Source ZIP artifacts ───────────────────────────────────────────────────────
+# Use `make package` to build a clean distributable (see Makefile).
+satyalens_release_*.zip

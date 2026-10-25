@@ -1,0 +1,383 @@
+{
+  "report_type": "text_classifier_evaluation",
+  "evaluated_at_utc": "2026-10-24T06:53:58+00:00",
+  "evaluation_only": true,
+  "model": {
+    "path": "satyalens_analysis\\models\\text_classifier.joblib",
+    "model_version": "tfidf-logreg-v1-66bab05fd245",
+    "artifact_sha256": "66bab05fd2452b221b9c0d1a75213c1e508cad5beeaf53aa803a72c2fb0288ee",
+    "trained_with_sklearn": "1.9.1",
+    "training_data": "satyalens-synthetic-financial-messages v1 (synthetic)",
+    "artifact_unchanged_after_evaluation": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0",
+    "numpy": "2.4.6"
+  },
+  "dataset": {
+    "file": "real_world_test_v1.csv",
+    "sha256": "f83b8c309d9ae508fc669ffbdc9809506c65e4729bd2b211dd9ae137969468b8",
+    "provenance": {
+      "name": "satyalens-real-world-test",
+      "version": "1",
+      "synthetic": false,
+      "evaluation_only": true,
+      "source": {
+        "title": "SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION",
+        "authors": [
+          "Sandhya Mishra",
+          "Devpriya Soni"
+        ],
+        "publisher": "Mendeley Data",
+        "version": "1 (published 2022-06-20)",
+        "doi": "10.17632/f45bkkt8pr.1",
+        "page": "https://data.mendeley.com/datasets/f45bkkt8pr/1",
+        "file": "Dataset_5971.zip",
+        "file_url": "https://data.mendeley.com/public-files/datasets/f45bkkt8pr/files/edb361de-918d-469f-9106-e84823830665/file_downloaded",
+        "file_sha256": "9bbf3188fdad81495d8e82825648b9b63b53fc86841a3d26c02629990b233cc3",
+        "retrieved": "2026-10-24",
+        "licence": "CC BY 4.0 (as stated on the Mendeley Data dataset page)",
+        "attribution": "Mishra, S., Soni, D. (2022). SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION. Mendeley Data, V1. doi:10.17632/f45bkkt8pr.1",
+        "collection_method_as_described": "Images obtained from the Internet converted to text with Python code; labelled by source and cleaned."
+      },
+      "label_mapping": {
+        "smishing": "suspicious",
+        "ham": "legitimate",
+        "spam": "excluded (ambiguous)"
+      },
+      "label_basis": "Labels are the source authors' published labels; they were not re-annotated by this project.",
+      "derived_columns": {
+        "near_duplicate_cluster": "skeleton_text() equality cluster; derived, NOT a source campaign id",
+        "heuristic_topic": "keyword heuristic ('financial'/'other'); a reporting aid, NOT ground truth"
+      },
+      "modifications": [
+        "leading/trailing whitespace stripped",
+        "digits in >=7-digit runs masked with '#'",
+        "e-mail local parts masked with '***'"
+      ],
+      "rows": 5293,
+      "limitations": [
+        "Domain mismatch: messages are largely UK/Singapore SMS from c. 2000s-2010s (a systematic review describes the dataset as a partial clone of the UCI SMS Spam Collection), not Indian financial communications like the SatyaLens use case.",
+        "'smishing' in the source includes premium-rate, prize and subscription scams, not only financial/bank fraud; 'ham' is mostly personal chat with few genuine bank alerts.",
+        "No campaign/group identifiers in the source; near-duplicate clusters are derived from text.",
+        "Labels were not independently verified; some label noise is likely (OCR-derived text).",
+        "Encoding damage in the source (e.g. the pound sign appears as '?').",
+        "No message categories in the source; heuristic_topic is keyword-based."
+      ],
+      "csv_sha256": "f83b8c309d9ae508fc669ffbdc9809506c65e4729bd2b211dd9ae137969468b8"
+    },
+    "rows": 5293,
+    "class_counts": {
+      "legitimate": 4833,
+      "suspicious": 460
+    }
+  },
+  "data_checks": {
+    "duplicates": {
+      "exact_normalised_duplicate_sets": 0,
+      "exact_normalised_duplicate_rows": 0,
+      "exact_examples": [],
+      "near_duplicate_clusters": 23,
+      "rows_in_near_duplicate_clusters": 50,
+      "near_examples": [
+        [
+          52,
+          551
+        ],
+        [
+          140,
+          206
+        ],
+        [
+          154,
+          1687
+        ],
+        [
+          174,
+          922
+        ],
+        [
+          188,
+          2888
+        ],
+        [
+          248,
+          1434
+        ],
+        [
+          806,
+          2387,
+          2894,
+          3976
+        ],
+        [
+          844,
+          1163
+        ],
+        [
+          900,
+          3575
+        ],
+        [
+          1088,
+          2652
+        ],
+        [
+          1168,
+          2372
+        ],
+        [
+          1286,
+          4277
+        ],
+        [
+          1307,
+          4268
+        ],
+        [
+          1378,
+          1641
+        ],
+        [
+          1386,
+          4307
+        ],
+        [
+          1627,
+          2067
+        ],
+        [
+          1676,
+          2982,
+          3026
+        ],
+        [
+          1980,
+          4299
+        ],
+        [
+          2480,
+          3382
+        ],
+        [
+          2512,
+          2994
+        ]
+      ],
+      "method": "exact: normalise_text(); near: skeleton_text() equality (lower-case, URLs/e-mails/digits/punctuation removed)"
+    },
+    "training_overlap": {
+      "training_file": "C:\\Users\\HP\\Desktop\\IIT\\data\\synthetic_financial_messages_v1.csv",
+      "expected_sha256": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840",
+      "actual_sha256": "c6ccc729ea0da83be90cc6715a76c262e0fe04c244d07873f8186ef1a41e5840",
+      "performed": true,
+      "exact_normalised": [],
+      "skeleton": [],
+      "token_jaccard": [],
+      "total": 0,
+      "method": "normalise_text equality, skeleton_text equality, or skeleton token Jaccard >= 0.8"
+    }
+  },
+  "coverage": {
+    "classified": 5085,
+    "inconclusive": 208,
+    "inconclusive_by_class": {
+      "legitimate": 208,
+      "suspicious": 0
+    }
+  },
+  "metrics": {
+    "accuracy": 0.3636,
+    "legitimate": {
+      "precision": 0.9212,
+      "recall": 0.3284,
+      "f1": 0.4842,
+      "support": 4625
+    },
+    "suspicious": {
+      "precision": 0.096,
+      "recall": 0.7174,
+      "f1": 0.1694,
+      "support": 460
+    },
+    "macro_avg": {
+      "precision": 0.5086,
+      "recall": 0.5229,
+      "f1": 0.3268
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          1519,
+          3106
+        ],
+        [
+          130,
+          330
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 0.2826,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 0.6716,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  },
+  "majority_class_baseline": {
+    "predicts": "legitimate",
+    "accuracy": 0.9095,
+    "legitimate": {
+      "precision": 0.9095,
+      "recall": 1.0,
+      "f1": 0.9526,
+      "support": 4625
+    },
+    "suspicious": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 460
+    },
+    "macro_avg": {
+      "precision": 0.4548,
+      "recall": 0.5,
+      "f1": 0.4763
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          4625,
+          0
+        ],
+        [
+          460,
+          0
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 1.0,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 0.0,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  },
+  "breakdowns": {
+    "source": {
+      "mishra_soni_2022_sms_phishing": {
+        "n": 5293,
+        "class_counts": {
+          "legitimate": 4833,
+          "suspicious": 460
+        },
+        "inconclusive": 208,
+        "accuracy": 0.3636,
+        "recall_legitimate": 0.3284,
+        "recall_suspicious": 0.7174
+      }
+    },
+    "source_label": {
+      "ham": {
+        "n": 4833,
+        "class_counts": {
+          "legitimate": 4833,
+          "suspicious": 0
+        },
+        "inconclusive": 208,
+        "accuracy": 0.3284,
+        "recall_legitimate": 0.3284,
+        "recall_suspicious": null
+      },
+      "smishing": {
+        "n": 460,
+        "class_counts": {
+          "legitimate": 0,
+          "suspicious": 460
+        },
+        "inconclusive": 0,
+        "accuracy": 0.7174,
+        "recall_legitimate": null,
+        "recall_suspicious": 0.7174
+      }
+    },
+    "heuristic_topic": {
+      "financial": {
+        "n": 318,
+        "class_counts": {
+          "legitimate": 169,
+          "suspicious": 149
+        },
+        "inconclusive": 0,
+        "accuracy": 0.4434,
+        "recall_legitimate": 0.3136,
+        "recall_suspicious": 0.5906
+      },
+      "other": {
+        "n": 4975,
+        "class_counts": {
+          "legitimate": 4664,
+          "suspicious": 311
+        },
+        "inconclusive": 208,
+        "accuracy": 0.3583,
+        "recall_legitimate": 0.329,
+        "recall_suspicious": 0.7781
+      }
+    }
+  },
+  "notes": {
+    "denominators": "All metrics use the classified rows (coverage.classified). Rows with no in-vocabulary term are 'inconclusive' (the component returns no class) and are counted separately in coverage, not as correct or incorrect.",
+    "baseline": "Majority-class baseline always predicts the most frequent label among the classified evaluation rows; it is a reference point, not a deployable model.",
+    "score": "raw_score / predict_proba is uncalibrated and was not used for metrics beyond the default argmax decision; it is not a probability of fraud.",
+    "subgroups": "Subgroups with fewer than 20 classified rows report counts only."
+  },
+  "near_duplicate_sensitivity": {
+    "description": "Metrics keeping only the first classified row per near_duplicate_cluster.",
+    "rows": 5061,
+    "accuracy": 0.3622,
+    "legitimate": {
+      "precision": 0.925,
+      "recall": 0.3282,
+      "f1": 0.4845,
+      "support": 4622
+    },
+    "suspicious": {
+      "precision": 0.0924,
+      "recall": 0.7198,
+      "f1": 0.1637,
+      "support": 439
+    },
+    "macro_avg": {
+      "precision": 0.5087,
+      "recall": 0.524,
+      "f1": 0.3241
+    },
+    "confusion_matrix": {
+      "labels": [
+        "legitimate",
+        "suspicious"
+      ],
+      "rows_true_cols_pred": [
+        [
+          1517,
+          3105
+        ],
+        [
+          123,
+          316
+        ]
+      ]
+    },
+    "suspicious_false_negative_rate": 0.2802,
+    "suspicious_false_negative_rate_denominator": "suspicious messages that received a class (FN + TP)",
+    "legitimate_false_positive_rate": 0.6718,
+    "legitimate_false_positive_rate_denominator": "legitimate messages that received a class (FP + TN)"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "satyalens-synthetic-submission/record/1.0.0",
+  "title": "SatyaLens synthetic dataset record",
+  "description": "One line of dataset/synthetic_dataset.jsonl. `input` is the only part an analysis system may see; `ground_truth` and `meta` are evaluation-only. Modality-specific rules (which input keys, which labels) are enforced by validate_dataset.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["record_id", "schema_version", "modality", "input", "ground_truth", "meta"],
+  "properties": {
+    "record_id": {"type": "string", "pattern": "^rec-[0-9]{5}$"},
+    "schema_version": {"type": "string", "enum": ["1.0.0"]},
+    "modality": {"type": "string", "enum": ["message_text", "payment_screenshot"]},
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["media_type"],
+      "properties": {
+        "media_type": {"type": "string", "enum": ["text/plain", "image/png"]},
+        "message_text": {"type": "string", "minLength": 10, "maxLength": 1000},
+        "image_path": {"type": "string", "pattern": "^images/[0-9a-f]{20}\\.png$"},
+        "expected_payment": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "amount": {"type": "string", "pattern": "^[0-9][0-9,]*(\\.[0-9]{1,2})?$"},
+            "currency": {"type": "string", "enum": ["EUR", "GBP", "INR", "USD"]},
+            "recipient": {"type": "string", "minLength": 1, "maxLength": 200},
+            "reference": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9 #\\-_/.:]*$"}
+          }
+        }
+      }
+    },
+    "ground_truth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "rationale"],
+      "properties": {
+        "label": {"type": "string", "enum": ["suspicious", "legitimate", "ambiguous", "discrepancy", "consistent", "insufficient_evidence"]},
+        "rationale": {"type": "string", "minLength": 10},
+        "expected_field_status": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["amount", "currency", "recipient", "reference"],
+          "properties": {
+            "amount": {"type": "string", "enum": ["match", "mismatch", "format_difference", "not_supplied", "not_compared"]},
+            "currency": {"type": "string", "enum": ["match", "mismatch", "format_difference", "not_supplied", "not_compared"]},
+            "recipient": {"type": "string", "enum": ["match", "mismatch", "format_difference", "not_supplied", "not_compared"]},
+            "reference": {"type": "string", "enum": ["match", "mismatch", "format_difference", "not_supplied", "not_compared"]}
+          }
+        },
+        "rendered": {"type": "object"}
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["split", "category", "template_family", "template_id", "scenario_id", "image_sha256"],
+      "properties": {
+        "split": {"type": "string", "enum": ["train", "dev", "test"]},
+        "category": {"type": "string", "minLength": 3},
+        "template_family": {"type": "string", "pattern": "^(msg|img):"},
+        "template_id": {"type": "string", "minLength": 3},
+        "scenario_id": {"type": "string", "minLength": 3},
+        "image_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "render": {"type": "object"}
+      }
+    }
+  }
+}

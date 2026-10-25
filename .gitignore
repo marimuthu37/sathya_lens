@@ -43,12 +43,27 @@ cover/
 
 # Environments
 .env
+.env.*
+!.env.example
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+node_modules/
+dist/
+
+# Databases, backups, uploads, evaluation workspaces, and large archives
+*.db
+*.db.*
+*.sqlite
+*.sqlite3
+*.backup*
+satyalens.db*
+uploads/
+*.zip
+.eval_workspace/
 
 # IDE / Editor files
 .vscode/
@@ -66,7 +81,7 @@ satyalens_analysis/models/**/*.meta.json
 
 # Team-supplied raw datasets (IMC25 copy, Mendeley, Phish360 5.3 GB zip) —
 # never committed; inventory hashes live in reports/dataset_inspection/
-dataset/
+/dataset/
 
 # Raw third-party downloads (re-fetched and SHA-256-verified by
 #   python scripts/prepare_real_world_test.py)

@@ -129,7 +129,9 @@ class TestPaymentResultSemantics:
                       {"amount": "500", "transaction_id": "123456789"})
         assert d["status"] == "analysed" and d["mismatches"] == []
         assert any("does NOT prove payment settlement" in s for s in d["limitations"])
-        assert set(d) == {"status", "raw_text", "fields", "mismatches", "limitations"}   # no 'verified' key
+        # 'quality' is an additive optional key (2026-10-25); there is still no 'verified' key.
+        assert set(d) == {"status", "raw_text", "fields", "mismatches", "limitations", "quality"}
+        assert "verified" not in d and "verified" not in d["quality"]
 
     def test_ocr_runtime_error_is_failed_not_analysed(self, monkeypatch, image):
         import pytesseract

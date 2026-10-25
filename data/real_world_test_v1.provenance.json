@@ -1,0 +1,49 @@
+{
+  "name": "satyalens-real-world-test",
+  "version": "1",
+  "synthetic": false,
+  "evaluation_only": true,
+  "source": {
+    "title": "SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION",
+    "authors": [
+      "Sandhya Mishra",
+      "Devpriya Soni"
+    ],
+    "publisher": "Mendeley Data",
+    "version": "1 (published 2022-06-20)",
+    "doi": "10.17632/f45bkkt8pr.1",
+    "page": "https://data.mendeley.com/datasets/f45bkkt8pr/1",
+    "file": "Dataset_5971.zip",
+    "file_url": "https://data.mendeley.com/public-files/datasets/f45bkkt8pr/files/edb361de-918d-469f-9106-e84823830665/file_downloaded",
+    "file_sha256": "9bbf3188fdad81495d8e82825648b9b63b53fc86841a3d26c02629990b233cc3",
+    "retrieved": "2026-10-24",
+    "licence": "CC BY 4.0 (as stated on the Mendeley Data dataset page)",
+    "attribution": "Mishra, S., Soni, D. (2022). SMS PHISHING DATASET FOR MACHINE LEARNING AND PATTERN RECOGNITION. Mendeley Data, V1. doi:10.17632/f45bkkt8pr.1",
+    "collection_method_as_described": "Images obtained from the Internet converted to text with Python code; labelled by source and cleaned."
+  },
+  "label_mapping": {
+    "smishing": "suspicious",
+    "ham": "legitimate",
+    "spam": "excluded (ambiguous)"
+  },
+  "label_basis": "Labels are the source authors' published labels; they were not re-annotated by this project.",
+  "derived_columns": {
+    "near_duplicate_cluster": "skeleton_text() equality cluster; derived, NOT a source campaign id",
+    "heuristic_topic": "keyword heuristic ('financial'/'other'); a reporting aid, NOT ground truth"
+  },
+  "modifications": [
+    "leading/trailing whitespace stripped",
+    "digits in >=7-digit runs masked with '#'",
+    "e-mail local parts masked with '***'"
+  ],
+  "rows": 5293,
+  "limitations": [
+    "Domain mismatch: messages are largely UK/Singapore SMS from c. 2000s-2010s (a systematic review describes the dataset as a partial clone of the UCI SMS Spam Collection), not Indian financial communications like the SatyaLens use case.",
+    "'smishing' in the source includes premium-rate, prize and subscription scams, not only financial/bank fraud; 'ham' is mostly personal chat with few genuine bank alerts.",
+    "No campaign/group identifiers in the source; near-duplicate clusters are derived from text.",
+    "Labels were not independently verified; some label noise is likely (OCR-derived text).",
+    "Encoding damage in the source (e.g. the pound sign appears as '?').",
+    "No message categories in the source; heuristic_topic is keyword-based."
+  ],
+  "csv_sha256": "f83b8c309d9ae508fc669ffbdc9809506c65e4729bd2b211dd9ae137969468b8"
+}
